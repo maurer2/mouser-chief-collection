@@ -1,0 +1,14 @@
+{
+  "name": "mouser-chief-collection",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:maurer2/mouser-chief-collection.git",
+  "author": "Martin",
+  "license": "MIT",
+  "scripts": {
+    "python:setup": "pipenv --three",
+    "python:install": "pipenv install --pre",
+    "python:info": "pipenv run python -V",
+    "python:start": "pipenv run python ./scripts/test.py"
+  }
+}
