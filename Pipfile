@@ -9,6 +9,7 @@ verify_ssl = true
 beautifulsoup4 = "*"
 black = "*"
 pylint = "*"
+requests-html = "*"
 
 [requires]
 python_version = "3.7"

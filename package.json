@@ -9,6 +9,9 @@
     "python:setup": "pipenv --three",
     "python:install": "pipenv install --pre",
     "python:info": "pipenv run python -V",
-    "python:start": "pipenv run python ./scripts/test.py"
+    "python:lint": "pipenv run pylint --rcfile=.pylintrc './scripts/'",
+    "python:format": "pipenv run black ./scripts",
+    "python:start": "pipenv run python './scripts/index.py'",
+    "python:dump": "pipenv run python './scripts/get-html-markup.py'"
   }
 }
