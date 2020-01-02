@@ -18,3 +18,10 @@ python_version = "3.7"
 
 [pipenv]
 allow_prereleases = true
+
+[scripts]
+info = "python -V"
+lint = "pylint --rcfile=.pylintrc './scripts/'"
+format = "black ./scripts"
+start = "python './scripts/index.py'"
+dump =  "python './scripts/get-html-markup.py' --url='https://en.wikipedia.org/wiki/Chief_Mouser_to_the_Cabinet_Office'"
