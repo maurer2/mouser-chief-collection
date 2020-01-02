@@ -12,6 +12,6 @@
     "python:lint": "pipenv run pylint --rcfile=.pylintrc './scripts/'",
     "python:format": "pipenv run black ./scripts",
     "python:start": "pipenv run python './scripts/index.py'",
-    "python:dump": "pipenv run python './scripts/get-html-markup.py'"
+    "python:dump": "pipenv run python './scripts/get-html-markup.py' --url='https://en.wikipedia.org/wiki/Chief_Mouser_to_the_Cabinet_Office' "
   }
 }

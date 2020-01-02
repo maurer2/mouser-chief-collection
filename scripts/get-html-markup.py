@@ -1,10 +1,12 @@
 import os
 import sys
+import argparse
+
 
 from typing import Any, IO
 from requests_html import HTMLSession
 
-URL = "https://en.wikipedia.org/wiki/Chief_Mouser_to_the_Cabinet_Office"
+# URL = "https://en.wikipedia.org/wiki/Chief_Mouser_to_the_Cabinet_Office"
 
 
 def get_markup(link: str) -> str:
@@ -23,5 +25,11 @@ def write_file(text: str) -> None:
 
 
 if __name__ == "__main__":
-    markup: str = get_markup(URL)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-url", "--url", help="url to dump", action="store")
+    parsed_args = parser.parse_args()
+
+    passed_url: str = parsed_args.url
+
+    markup: str = get_markup(passed_url)
     write_file(markup)
