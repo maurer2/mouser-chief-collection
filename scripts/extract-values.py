@@ -19,8 +19,6 @@ def extract_table(content: str) -> str:
     tables: list = parsed_content.select('table.wikitable')
     table: str = tables[0]
 
-    print(type(table))
-
     return table
 
 def extract_rows(content: Any) -> list:
@@ -32,9 +30,17 @@ def extract_values(row: Any) -> list:
     # th and td
     columns: list = row.find_all(recursive=False)
 
+    columns_without_tags: list = []
+
+    for column in columns:
+        column_text_only = column.find(text=True)
+        columns_without_tags.append(column_text_only)
+
+
+
     #columns_text_only = BeautifulSoup(columns, "html.parser")
 
-    return columns
+    return columns_without_tags
 
 
 
@@ -46,6 +52,7 @@ if __name__ == "__main__":
 
     extracted_rows: list = extract_rows(extracted_table)
 
-    extracted_values: list = extract_values(extracted_rows[1])
+    for extracted_row in extracted_rows:
+        extracted_values: list = extract_values(extracted_row)
 
-    print(extracted_values)
+        print(extracted_values)
