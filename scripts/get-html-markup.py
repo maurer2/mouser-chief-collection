@@ -30,6 +30,6 @@ if __name__ == "__main__":
     parsed_args = parser.parse_args()
 
     passed_url: str = parsed_args.url
-
     markup: str = get_markup(passed_url)
+
     write_file(markup)
