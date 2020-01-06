@@ -13,35 +13,29 @@ def get_file_contents(file_name: str) -> str:
 
     return file_contents
 
+
 def extract_table(content: str) -> str:
     parsed_content = BeautifulSoup(content, "html.parser")
 
-    tables: list = parsed_content.select('table.wikitable')
+    tables: list = parsed_content.select("table.wikitable")
     table: str = tables[0]
 
     return table
 
+
 def extract_rows(content: Any) -> list:
-    rows: list = content.find_all('tr')
+    rows: list = content.find_all("tr")
 
     return rows
+
 
 def extract_values(row: Any) -> list:
     # th and td
     columns: list = row.find_all(recursive=False)
 
-    columns_without_tags: list = []
-
-    for column in columns:
-        column_text_only = column.find(text=True)
-        columns_without_tags.append(column_text_only)
-
-
-
-    #columns_text_only = BeautifulSoup(columns, "html.parser")
+    columns_without_tags: list = [column.find(text=True) for column in columns]
 
     return columns_without_tags
-
 
 
 if __name__ == "__main__":
