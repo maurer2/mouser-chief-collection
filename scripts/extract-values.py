@@ -45,12 +45,10 @@ def get_json(values: Any) -> json:
 
 
 def print_debug_info(entries: Any) -> None:
-    for entry in entries:
-        values: list = get_values(entry)
+    parsed_entries: list = [get_values(entry) for entry in entries]
+    stringified_entries: json = get_json(parsed_entries)
 
-        stringified_entries = get_json(values)
-
-        print(stringified_entries)
+    print(stringified_entries)
 
 
 def main() -> None:
