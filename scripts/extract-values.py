@@ -30,15 +30,14 @@ def extract_rows(content: Any) -> list:
 
 
 def extract_values(row: Any) -> list:
-    # th and td
-    columns: list = row.find_all(recursive=False)
+    columns: list = row.find_all(["th", "td"])
 
-    columns_without_tags: list = [column.find(text=True) for column in columns]
+    values: list = [column.get_text(strip=True) for column in columns]
 
-    return columns_without_tags
+    return values
 
 
-if __name__ == "__main__":
+def main() -> None:
     file_name: str = "../data/raw.html"
     file_content: str = get_file_contents(file_name)
 
@@ -50,3 +49,7 @@ if __name__ == "__main__":
         extracted_values: list = extract_values(extracted_row)
 
         print(extracted_values)
+
+
+if __name__ == "__main__":
+    main()
