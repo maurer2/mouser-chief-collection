@@ -37,6 +37,11 @@ def get_values(row: Any) -> list:
 
     return values
 
+def get_entries(values_raw: Any)  -> list:
+    entries: list = [get_values(value) for value in values_raw]
+
+    return entries
+
 
 def get_json(values: Any) -> json:
     values_stringified = json.dumps(values, indent=2)
@@ -45,10 +50,15 @@ def get_json(values: Any) -> json:
 
 
 def print_debug_info(entries: Any) -> None:
-    parsed_entries: list = [get_values(entry) for entry in entries]
-    stringified_entries: json = get_json(parsed_entries)
+    stringified_entries: json = get_json(entries)
 
     print(stringified_entries)
+
+def write_values_to_file(entries: list) -> None:
+    #stringified_entries: json = get_json(entries)
+
+    with open('./data/data_unparsed.json', 'w+', encoding='utf-8') as file:
+        json.dump(entries, file, ensure_ascii=False, indent=2)
 
 
 def main() -> None:
@@ -58,7 +68,10 @@ def main() -> None:
     table: str = get_table(file_content)
     table_rows: list = get_rows(table)
 
-    print_debug_info(table_rows)
+    parsed_entries: list = get_entries(table_rows)
+
+    write_values_to_file(parsed_entries)
+    print_debug_info(parsed_entries)
 
 
 if __name__ == "__main__":
