@@ -37,7 +37,8 @@ def get_values(row: Any) -> list:
 
     return values
 
-def get_entries(values_raw: Any)  -> list:
+
+def get_entries(values_raw: Any) -> list:
     entries: list = [get_values(value) for value in values_raw]
 
     return entries
@@ -54,11 +55,16 @@ def print_debug_info(entries: Any) -> None:
 
     print(stringified_entries)
 
-def write_values_to_file(entries: list) -> None:
-    #stringified_entries: json = get_json(entries)
 
-    with open('./data/data_unparsed.json', 'w+', encoding='utf-8') as file:
-        json.dump(entries, file, ensure_ascii=False, indent=2)
+def write_values_to_file(entries: list) -> None:
+    # stringified_entries: json = get_json(entries)
+
+    nested_values = {}
+
+    nested_values["entries"] = entries
+
+    with open("./data/data_unparsed.json", "w+", encoding="utf-8") as file:
+        json.dump(nested_values, file, ensure_ascii=False, indent=2)
 
 
 def main() -> None:
@@ -71,7 +77,7 @@ def main() -> None:
     parsed_entries: list = get_entries(table_rows)
 
     write_values_to_file(parsed_entries)
-    print_debug_info(parsed_entries)
+    # print_debug_info(parsed_entries)
 
 
 if __name__ == "__main__":

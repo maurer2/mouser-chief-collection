@@ -1,91 +1,93 @@
-[
-  [
-    "Name",
-    "Began tenure",
-    "Ended tenure",
-    "Prime Minister(s)",
-    "Refs"
-  ],
-  [
-    "Rufus of England (popularly nicknamed \"Treasury Bill\")[24][25]",
-    "1924",
-    "c.1930[25]",
-    "Ramsay MacDonald",
-    "[26]"
-  ],
-  [
-    "Peter",
-    "1929[c]",
-    "1946[4]",
-    "Stanley Baldwin, Ramsay MacDonald,Neville Chamberlain,Winston Churchill,Clement Attlee",
-    "[4][8]"
-  ],
-  [
-    "Munich Mouser",
-    "1937–40",
-    "1943",
-    "Neville Chamberlain, Winston Churchill",
-    "[27][28]"
-  ],
-  [
-    "Nelson",
-    "1940s",
-    "Winston Churchill",
-    "[28][29]"
-  ],
-  [
-    "Peter II",
-    "1946",
-    "Clement Attlee",
-    "[4]"
-  ],
-  [
-    "Peter III",
-    "1946",
-    "1964",
-    "Clement Attlee, Winston Churchill,Anthony Eden,Harold Macmillan,Alec Douglas-Home",
-    "[4]"
-  ],
-  [
-    "Peta",
-    "1964",
-    "c.1976",
-    "Alec Douglas-Home,Harold Wilson,Edward Heath",
-    "[4]"
-  ],
-  [
-    "Wilberforce",
-    "1973",
-    "1986",
-    "Edward Heath, Harold Wilson,Jim Callaghan,Margaret Thatcher",
-    "[30]"
-  ],
-  [
-    "Humphrey",
-    "1989",
-    "1997",
-    "Margaret Thatcher,John Major,Tony Blair",
-    "[31]"
-  ],
-  [
-    "Sybil",
-    "2007",
-    "2009",
-    "Gordon Brown",
-    "[32][30]"
-  ],
-  [
-    "Freya",
-    "2012",
-    "2014",
-    "David Cameron",
-    "[21]"
-  ],
-  [
-    "Larry",
-    "2011",
-    "current",
-    "David Cameron,Theresa May,Boris Johnson",
-    "[33]"
+{
+  "entries": [
+    [
+      "Name",
+      "Began tenure",
+      "Ended tenure",
+      "Prime Minister(s)",
+      "Refs"
+    ],
+    [
+      "Rufus of England (popularly nicknamed \"Treasury Bill\")[24][25]",
+      "1924",
+      "c.1930[25]",
+      "Ramsay MacDonald",
+      "[26]"
+    ],
+    [
+      "Peter",
+      "1929[c]",
+      "1946[4]",
+      "Stanley Baldwin, Ramsay MacDonald,Neville Chamberlain,Winston Churchill,Clement Attlee",
+      "[4][8]"
+    ],
+    [
+      "Munich Mouser",
+      "1937–40",
+      "1943",
+      "Neville Chamberlain, Winston Churchill",
+      "[27][28]"
+    ],
+    [
+      "Nelson",
+      "1940s",
+      "Winston Churchill",
+      "[28][29]"
+    ],
+    [
+      "Peter II",
+      "1946",
+      "Clement Attlee",
+      "[4]"
+    ],
+    [
+      "Peter III",
+      "1946",
+      "1964",
+      "Clement Attlee, Winston Churchill,Anthony Eden,Harold Macmillan,Alec Douglas-Home",
+      "[4]"
+    ],
+    [
+      "Peta",
+      "1964",
+      "c.1976",
+      "Alec Douglas-Home,Harold Wilson,Edward Heath",
+      "[4]"
+    ],
+    [
+      "Wilberforce",
+      "1973",
+      "1986",
+      "Edward Heath, Harold Wilson,Jim Callaghan,Margaret Thatcher",
+      "[30]"
+    ],
+    [
+      "Humphrey",
+      "1989",
+      "1997",
+      "Margaret Thatcher,John Major,Tony Blair",
+      "[31]"
+    ],
+    [
+      "Sybil",
+      "2007",
+      "2009",
+      "Gordon Brown",
+      "[32][30]"
+    ],
+    [
+      "Freya",
+      "2012",
+      "2014",
+      "David Cameron",
+      "[21]"
+    ],
+    [
+      "Larry",
+      "2011",
+      "current",
+      "David Cameron,Theresa May,Boris Johnson",
+      "[33]"
+    ]
   ]
-]
+}
