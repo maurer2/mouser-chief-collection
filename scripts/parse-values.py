@@ -38,6 +38,10 @@ def get_entries_mapped_with_keys(keys: list, entries: list) -> Any:
 
     return mapped_key_value
 
+def write_values_to_file(entries: list) -> None:
+    with open("./data/data_parsed.json", "w+", encoding="utf-8") as file:
+        json.dump(entries, file, ensure_ascii=False, indent=2)
+
 
 def main() -> None:
     file_name: str = "../data/data_unparsed.json"
@@ -50,8 +54,11 @@ def main() -> None:
     keys: list = get_keys(entries_all)
     entries: list = get_entries(entries_all)
 
-    for entry in entries:
-        print(get_entries_mapped_with_keys(keys, entry))
+    mapped_entries = [get_entries_mapped_with_keys(keys, entry) for entry in entries]
+
+    write_values_to_file(mapped_entries)
+
+    print(mapped_entries)
 
 
 if __name__ == "__main__":
