@@ -36,6 +36,12 @@ def clean_entries(entries) -> list:
     # remove [x]
     cleaned_entries: list = [(re.sub(r'\[.*?\]', '', entry)) for entry in entries]
 
+    # split string list to list
+    cleaned_entries = [entry.split(',') if entry.count(',') > 0 else entry for entry in cleaned_entries]
+
+    # trim
+    #cleaned_entries = [entry.strip() for entry in cleaned_entries]
+
     return cleaned_entries
 
 

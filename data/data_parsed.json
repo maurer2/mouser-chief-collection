@@ -9,13 +9,22 @@
     "Name": "Peter",
     "Began tenure": "1929",
     "Ended tenure": "1946",
-    "Prime Minister(s)": "Stanley Baldwin, Ramsay MacDonald,Neville Chamberlain,Winston Churchill,Clement Attlee"
+    "Prime Minister(s)": [
+      "Stanley Baldwin",
+      " Ramsay MacDonald",
+      "Neville Chamberlain",
+      "Winston Churchill",
+      "Clement Attlee"
+    ]
   },
   {
     "Name": "Munich Mouser",
     "Began tenure": "1937–40",
     "Ended tenure": "1943",
-    "Prime Minister(s)": "Neville Chamberlain, Winston Churchill"
+    "Prime Minister(s)": [
+      "Neville Chamberlain",
+      " Winston Churchill"
+    ]
   },
   {
     "Name": "Nelson",
@@ -33,25 +42,44 @@
     "Name": "Peter III",
     "Began tenure": "1946",
     "Ended tenure": "1964",
-    "Prime Minister(s)": "Clement Attlee, Winston Churchill,Anthony Eden,Harold Macmillan,Alec Douglas-Home"
+    "Prime Minister(s)": [
+      "Clement Attlee",
+      " Winston Churchill",
+      "Anthony Eden",
+      "Harold Macmillan",
+      "Alec Douglas-Home"
+    ]
   },
   {
     "Name": "Peta",
     "Began tenure": "1964",
     "Ended tenure": "c.1976",
-    "Prime Minister(s)": "Alec Douglas-Home,Harold Wilson,Edward Heath"
+    "Prime Minister(s)": [
+      "Alec Douglas-Home",
+      "Harold Wilson",
+      "Edward Heath"
+    ]
   },
   {
     "Name": "Wilberforce",
     "Began tenure": "1973",
     "Ended tenure": "1986",
-    "Prime Minister(s)": "Edward Heath, Harold Wilson,Jim Callaghan,Margaret Thatcher"
+    "Prime Minister(s)": [
+      "Edward Heath",
+      " Harold Wilson",
+      "Jim Callaghan",
+      "Margaret Thatcher"
+    ]
   },
   {
     "Name": "Humphrey",
     "Began tenure": "1989",
     "Ended tenure": "1997",
-    "Prime Minister(s)": "Margaret Thatcher,John Major,Tony Blair"
+    "Prime Minister(s)": [
+      "Margaret Thatcher",
+      "John Major",
+      "Tony Blair"
+    ]
   },
   {
     "Name": "Sybil",
@@ -69,6 +97,10 @@
     "Name": "Larry",
     "Began tenure": "2011",
     "Ended tenure": "current",
-    "Prime Minister(s)": "David Cameron,Theresa May,Boris Johnson"
+    "Prime Minister(s)": [
+      "David Cameron",
+      "Theresa May",
+      "Boris Johnson"
+    ]
   }
 ]
