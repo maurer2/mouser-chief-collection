@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import re
 
 from typing import Any, IO
 
@@ -20,9 +21,7 @@ def get_keys(entries: list) -> list:
     keys_without_refs = keys[:]
     keys_without_refs.remove("Refs")
 
-    # return keys_without_refs
-
-    return keys
+    return keys_without_refs
 
 
 def get_entries(entries: list) -> list:
@@ -33,10 +32,19 @@ def get_entries(entries: list) -> list:
     return entries_without_keys
 
 
+def clean_entries(entries) -> list:
+    # remove [x]
+    cleaned_entries: list = [(re.sub(r'\[.*?\]', '', entry)) for entry in entries]
+
+    return cleaned_entries
+
+
+
 def get_entries_mapped_with_keys(keys: list, entries: list) -> Any:
     mapped_key_value: dict = dict(zip(keys, entries))
 
     return mapped_key_value
+
 
 def write_values_to_file(entries: list) -> None:
     with open("./data/data_parsed.json", "w+", encoding="utf-8") as file:
@@ -54,7 +62,9 @@ def main() -> None:
     keys: list = get_keys(entries_all)
     entries: list = get_entries(entries_all)
 
-    mapped_entries = [get_entries_mapped_with_keys(keys, entry) for entry in entries]
+    cleaned_entries = [clean_entries(entry) for entry in entries]
+
+    mapped_entries = [get_entries_mapped_with_keys(keys, entry) for entry in cleaned_entries]
 
     write_values_to_file(mapped_entries)
 
