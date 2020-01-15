@@ -6,8 +6,6 @@ import argparse
 from typing import Any, IO
 from requests_html import HTMLSession
 
-# URL = "https://en.wikipedia.org/wiki/Chief_Mouser_to_the_Cabinet_Office"
-
 
 def get_markup(link: str) -> str:
     session: Any = HTMLSession()

@@ -34,16 +34,17 @@ def get_entries(entries: list) -> list:
 
 def clean_entries(entries) -> list:
     # remove [x]
-    cleaned_entries: list = [(re.sub(r'\[.*?\]', '', entry)) for entry in entries]
+    cleaned_entries: list = [(re.sub(r"\[.*?\]", "", entry)) for entry in entries]
 
-    # split string list to list
-    cleaned_entries = [entry.split(',') if entry.count(',') > 0 else entry for entry in cleaned_entries]
+    # convert comma separated entries in string to real list
+    cleaned_entries = [
+        entry.split(",") if entry.count(",") > 0 else entry for entry in cleaned_entries
+    ]
 
     # trim
-    #cleaned_entries = [entry.strip() for entry in cleaned_entries]
+    # cleaned_entries = [entry.strip() for entry in cleaned_entries]
 
     return cleaned_entries
-
 
 
 def get_entries_mapped_with_keys(keys: list, entries: list) -> Any:
@@ -70,7 +71,9 @@ def main() -> None:
 
     cleaned_entries = [clean_entries(entry) for entry in entries]
 
-    mapped_entries = [get_entries_mapped_with_keys(keys, entry) for entry in cleaned_entries]
+    mapped_entries = [
+        get_entries_mapped_with_keys(keys, entry) for entry in cleaned_entries
+    ]
 
     write_values_to_file(mapped_entries)
 
