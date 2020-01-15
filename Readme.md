@@ -17,6 +17,11 @@ Wikipedia: https://en.wikipedia.org/wiki/Chief_Mouser_to_the_Cabinet_Office
  $ pipenv run extract
 ```
 
+### Parse values
+```
+ $ pipenv run parse
+```
+
 ### Formatting
 ```
  $ pipenv run format
