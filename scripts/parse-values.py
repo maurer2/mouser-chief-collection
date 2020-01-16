@@ -38,7 +38,7 @@ def clean_entries(entries) -> list:
 
     # convert comma separated entries in string to real list
     cleaned_entries = [
-        entry.split(",") if entry.count(",") > 0 else entry for entry in cleaned_entries
+        entry.replace(', ', ',').split(",") if entry.count(",") > 0 else entry for entry in cleaned_entries
     ]
 
     # trim
