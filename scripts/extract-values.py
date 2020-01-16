@@ -34,24 +34,14 @@ def get_values(row: Any) -> list:
     columns: list = row.find_all(["th", "td"])
 
     values: list = []
+    # values: list = [column.get_text(strip=True) for column in columns]
     for column in columns:
-        colspan_value: str = column.get("colspan")
-        element_type: str = column.name
-
-        column_content: str = column.get_text(strip=True)
+        column_span: int = int(column.get("colspan") or 1)
+        column_content: str = column.get_text(strip=True).strip()
 
         values.append(column_content)
 
-        if colspan_value is not None:
-            # empty_element: str = "<%s></%s>" % (element_type, element_type)
-
-            # empty_element_markup: str = empty_element * (int(colspan_value) - 1)
-
-            # values.append(empty_element_markup)
-
-            values.extend(["" for i in range(int(colspan_value) - 1)])
-
-    # values: list = [column.get_text(strip=True) for column in columns]
+        values.extend(["" for i in range(column_span - 1)])
 
     return values
 
