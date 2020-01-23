@@ -112,6 +112,7 @@ node_modules
 
 # python
 .venv/
+.mypy_cache
 
 # pycharm
 .idea

@@ -52,21 +52,19 @@ def get_entries(values_raw: Any) -> list:
     return entries
 
 
-def get_json(values: Any) -> json:
-    values_stringified = json.dumps(values, indent=2)
+def get_json(values: Any) -> str:
+    values_stringified: str = json.dumps(values, indent=2)
 
     return values_stringified
 
 
 def print_debug_info(entries: Any) -> None:
-    stringified_entries: json = get_json(entries)
+    stringified_entries: str = get_json(entries)
 
     print(stringified_entries)
 
 
 def write_values_to_file(entries: list) -> None:
-    # stringified_entries: json = get_json(entries)
-
     nested_values = {}
 
     nested_values["entries"] = entries

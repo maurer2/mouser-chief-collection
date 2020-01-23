@@ -8,10 +8,10 @@ verify_ssl = true
 [packages]
 beautifulsoup4 = "*"
 black = "*"
-pylint = "*"
 requests-html = "*"
 mypy = "*"
 argparse = "*"
+pycodestyle = "*"
 
 [requires]
 python_version = "3.7"
@@ -22,7 +22,8 @@ allow_prereleases = true
 [scripts]
 # pipenv run ....
 info    = "python -V"
-lint    = "pylint --rcfile=.pylintrc './scripts/'"
+lint    = "pycodestyle './scripts/'"
+lint-types = "mypy './scripts/'"
 format  = "black './scripts'"
 start   = "python './scripts/index.py'"
 dump    = "python './scripts/get-html-markup.py' --url='https://en.wikipedia.org/wiki/Chief_Mouser_to_the_Cabinet_Office'"

@@ -19,7 +19,7 @@ def get_entry_with_key(key: str, entry: Any) -> dict:
     return entry[key]
 
 
-def write_values_to_file(entries: list) -> None:
+def write_values_to_file(entries: dict) -> None:
     with open("./data/data_flattened.json", "w+", encoding="utf-8") as file:
         json.dump(entries, file, ensure_ascii=False, indent=2)
 
@@ -27,7 +27,7 @@ def write_values_to_file(entries: list) -> None:
 def main() -> None:
     file_name: str = "../data/data_parsed.json"
     file_content: str = get_file_contents(file_name)
-    file_parsed: json = json.loads(file_content)
+    file_parsed: str = json.loads(file_content)
 
     keyed_entries: dict = {
         get_entry_with_key("Name", item): item for item in file_parsed
