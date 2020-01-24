@@ -1,32 +1,39 @@
 <template>
   <img src="./logo.png">
-  <h1>Hello Vue 3!</h1>
-  <button @click="inc">Clicked {{ count }} times.</button>
+
+  <select-box :mouser-chiefs="mouserChiefs" />
 </template>
 
 <script>
-import { ref } from 'vue'
+
+import selectBox from './components/select-box/select-box.vue';
+// import details from './components/details/details';
 
 export default {
+  components: {
+    'select-box': selectBox,
+  },
   setup() {
-    const count = ref(0)
-    const inc = () => {
-      count.value++
-    }
+    const mouserChiefs = {
+      "Larry": {
+        "Name": "Larry",
+        "Began tenure": "2011",
+        "Ended tenure": "current",
+        "Prime Minister(s)": [
+          "David Cameron",
+          "Theresa May",
+          "Boris Johnson"
+        ]
+      }
+    };
 
     return {
-      count,
-      inc
+      mouserChiefs,
     }
   }
 }
 </script>
 
 <style scoped>
-img {
-  width: 200px;
-}
-h1 {
-  font-family: Arial, Helvetica, sans-serif;
-}
+
 </style>
