@@ -16,12 +16,12 @@ export default {
 
     const names = Object.keys(mouserChiefs);
 
-    const state = reactive({
+    const state = {
       numberOfCats: names.length
-    });
+    };
 
     return {
-      numberOfCats,
+      numberOfCats: state.numberOfCats,
     }
   }
 }
