@@ -1,34 +1,29 @@
 <template>
   <img src="./logo.png">
 
-  <select-box :mouser-chiefs="mouserChiefs" />
+  <!-- eslint-disable -->
+  <select-box :entries="entries" :active-key="activeKey" />
+  <entry :entry="activeMouserChief" />
+  <!-- eslint-enable -->
 </template>
 
 <script>
-
 import selectBox from './components/select-box/select-box.vue';
-// import details from './components/details/details';
+import entry from './components/entry/entry.vue';
+
+import entries from '../../data/data_flattened.json';
 
 export default {
   components: {
     'select-box': selectBox,
+    'entry': entry,
   },
   setup() {
-    const mouserChiefs = {
-      "Larry": {
-        "Name": "Larry",
-        "Began tenure": "2011",
-        "Ended tenure": "current",
-        "Prime Minister(s)": [
-          "David Cameron",
-          "Theresa May",
-          "Boris Johnson"
-        ]
-      }
-    };
+    const activeKey = 'Larry';
 
     return {
-      mouserChiefs,
+      entries,
+      activeKey,
     }
   }
 }

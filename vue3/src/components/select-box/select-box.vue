@@ -1,6 +1,6 @@
 <template>
   <div>
-    Selectbox {{ numberOfCats }}
+    Selectbox {{ numberOfEntries }} {{ activeKey }}
   </div>
 </template>
 
@@ -8,20 +8,20 @@
 import { ref } from 'vue'
 
 export default {
+  name: 'Selectbox',
   props: {
-    mouserChiefs: Object,
+    entries: Object,
+    activeKey: String,
   },
   setup(props) {
-    const { mouserChiefs } = props;
+    const { entries, activeKey } = props;
+    const names = Object.keys(entries);
 
-    const names = Object.keys(mouserChiefs);
-
-    const state = {
-      numberOfCats: names.length
-    };
+    console.log(entries)
 
     return {
-      numberOfCats: state.numberOfCats,
+      numberOfEntries: names.length,
+      activeKey,
     }
   }
 }
