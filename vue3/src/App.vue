@@ -3,7 +3,7 @@
 
   <!-- eslint-disable -->
   <select-box :entries="entries" :active-key="activeKey" />
-  <entry :entry="activeMouserChief" />
+  <entry :entry="entry" />
   <!-- eslint-enable -->
 </template>
 
@@ -20,9 +20,11 @@ export default {
   },
   setup() {
     const activeKey = 'Larry';
+    const entry = entries[activeKey];
 
     return {
       entries,
+      entry,
       activeKey,
     }
   }

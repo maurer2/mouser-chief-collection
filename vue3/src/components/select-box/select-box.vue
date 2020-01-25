@@ -1,7 +1,10 @@
 <template>
-  <div>
-    Selectbox {{ numberOfEntries }} {{ activeKey }}
-  </div>
+  <p>
+    Entries: {{ numberOfEntries }} 
+  </p>
+  <p>
+    Active entry: {{ activeKey }}
+  </p>
 </template>
 
 <script>
