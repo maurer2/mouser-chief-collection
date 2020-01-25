@@ -1,17 +1,21 @@
 <template>
-  <img src="./logo.png">
+  <select-box :entries="state.entries" :active-key="state.activeKey" />
+  <button type="button" @click="selectNewEntry">
+    Select Freya
+  </button>
 
-  <!-- eslint-disable -->
-  <select-box :entries="entries" :active-key="activeKey" />
-  <entry :entry="entry" />
-  <!-- eslint-enable -->
+  <hr />
+
+  <entry :entry="state.activeEntry" />
+
 </template>
 
 <script>
+import { reactive, computed } from 'vue'
+import entriesList from '../../data/data_flattened.json';
+
 import selectBox from './components/select-box/select-box.vue';
 import entry from './components/entry/entry.vue';
-
-import entries from '../../data/data_flattened.json';
 
 export default {
   components: {
@@ -19,13 +23,19 @@ export default {
     'entry': entry,
   },
   setup() {
-    const activeKey = 'Larry';
-    const entry = entries[activeKey];
+    const state = reactive({
+      activeKey: 'Larry',
+      activeEntry: computed(() => state.entries[state.activeKey]),
+      entries: entriesList,
+    });
+
+    function selectNewEntry() {
+      state.activeKey = 'Freya';
+    }
 
     return {
-      entries,
-      entry,
-      activeKey,
+      state,
+      selectNewEntry,
     }
   }
 }
