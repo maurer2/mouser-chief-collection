@@ -20,7 +20,7 @@ export default {
     const { entries, activeKey } = props;
     const names = Object.keys(entries);
 
-    console.log(entries)
+    console.log(activeKey)
 
     return {
       numberOfEntries: names.length,
