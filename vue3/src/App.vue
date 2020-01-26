@@ -4,7 +4,7 @@
     :active-key="state.activeKey"
     :key="state.activeKey"
   />
-  <button type="button" @click="selectNewEntry">
+  <button class="test" type="button" @click="selectNewEntry">
     Select Freya
   </button>
 
@@ -50,6 +50,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+  body {
+    background: #ffffff;
+  }
+</style>
 
+<style scoped lang="postcss">
+  .test {
+    background: red;
+  }
 </style>
