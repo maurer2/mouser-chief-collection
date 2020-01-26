@@ -1,4 +1,7 @@
 <template>
+  <h2 class="text-xl">
+    Nav
+  </h2>
   <p>
     Entries: {{ numberOfEntries }} 
   </p>

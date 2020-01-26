@@ -1,16 +1,22 @@
 <template>
-  <select-box
-    :entries="state.entries"
-    :active-key="state.activeKey"
-    :key="state.activeKey"
-  />
-  <button class="test" type="button" @click="selectNewEntry">
-    Select Freya
-  </button>
+  <header class="p-4 bg-gray">
+    <select-box
+      :entries="state.entries"
+      :active-key="state.activeKey"
+      :key="state.activeKey"
+    />
+    <button
+      class="bg-pink-2 hover:bg-pink-1 text-white mt-4 p-2 rounded"
+      type="button"
+      @click="selectNewEntry"
+    >
+      Select Freya
+    </button>
+  </header>
 
-  <hr />
-
-  <entry :entry="state.activeEntry" v-if="state.activeKey !== ''" />
+  <main class="p-4 bg-gray-light">
+    <entry :entry="state.activeEntry" v-if="state.activeKey !== ''" />
+  </main>
 
 </template>
 
@@ -58,6 +64,6 @@ export default {
 
 <style scoped lang="postcss">
   .test {
-    background: red;
+
   }
 </style>

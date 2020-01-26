@@ -1,12 +1,12 @@
 <template>
   <section class="entry">
-    <h2>
+    <h2 class="text-xl">
       {{ entry['Name'] }}
     </h2>
     <template v-for="(key) in fields">
-      <dl class="list" :key="key">
-        <dt>{{ key }}: </dt>
-        <dd>{{ entry[key] }}</dd>
+      <dl class="list flex" :key="key">
+        <dt class="flex-none pr-1 font-bold">{{ key }}: </dt>
+        <dd class="flex-1">{{ entry[key] }}</dd>
       </dl>
     </template>
   </section>
@@ -28,6 +28,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 
 </style>
