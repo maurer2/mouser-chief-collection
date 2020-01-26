@@ -29,7 +29,7 @@ module.exports = (env = {}) => ({
         }
       },
       {
-        test: /\.css$/,
+        test: /\.(css|postcss|pcss)$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -41,18 +41,18 @@ module.exports = (env = {}) => ({
             options: {}, 
           },
           */
-          { 
+          {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
             }
           },
-          { 
+          {
             loader: 'postcss-loader',
             options: {}, 
           },
         ]
-      }
+      },
     ]
   },
   plugins: [
