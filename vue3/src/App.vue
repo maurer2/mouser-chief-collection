@@ -4,14 +4,9 @@
       :entries="state.entries"
       :active-key="state.activeKey"
       :key="state.activeKey"
+      :entry-keys="state.entryKeys"
+      @entry-selected="handleEntrySelected"
     />
-    <button
-      class="bg-pink-2 hover:bg-pink-1 text-white mt-4 p-2 rounded"
-      type="button"
-      @click="selectNewEntry"
-    >
-      Select Freya
-    </button>
   </header>
 
   <main class="p-4 bg-gray-light">
@@ -34,14 +29,21 @@ export default {
     'entry': entry,
   },
   setup() {
+    const entryKeys = Object.keys(entriesList)
+
     const state = reactive({
       activeKey: '',
-      activeEntry: computed(() => state.entries[state.activeKey]),
+      activeEntry: computed(() => entriesList[state.activeKey]),
       entries: entriesList,
+      entryKeys,
     });
 
     function selectNewEntry() {
       state.activeKey = 'Freya';
+    }
+
+    function handleEntrySelected(value) {
+      console.log(value)
     }
 
     onMounted(() => {
@@ -51,6 +53,7 @@ export default {
     return {
       state,
       selectNewEntry,
+      handleEntrySelected,
     }
   }
 }
@@ -63,7 +66,5 @@ export default {
 </style>
 
 <style scoped lang="postcss">
-  .test {
 
-  }
 </style>

@@ -1,33 +1,66 @@
 <template>
-  <h2 class="text-xl">
-    Nav
-  </h2>
-  <p>
-    Entries: {{ numberOfEntries }} 
-  </p>
-  <p>
-    Active entry: {{ activeKey }}
-  </p>
+  <form @submit.prevent="handleSubmit">
+    <h2 class="text-xl">
+      Navigation
+    </h2>
+
+    <p>
+      Active entry: {{ state.activeKey }}
+    </p>
+
+    <select v-model="state.activeKey" @change.prevent="handleChange">
+      <option
+        v-for="(entryKey, index) in state.entryKeys"
+        :key="entryKey"
+        :value="index">
+          {{ entryKey }}
+      </option>
+    </select>
+
+    <button
+      class="bg-pink-2 hover:bg-pink-1 text-white mt-4 ml-4 p-2 rounded"
+      type="submit"
+    >
+      Select
+    </button>
+  </form>
+
 </template>
 
 <script>
-import { ref } from 'vue'
+import { reactive, watch } from 'vue'
 
 export default {
   name: 'Selectbox',
   props: {
     entries: Object,
     activeKey: String,
+    entryKeys: Array,
   },
-  setup(props) {
-    const { entries, activeKey } = props;
-    const names = Object.keys(entries);
+  setup(props, { emit }) {
+    const state = reactive({
+      entries: props.entries,
+      activeKey: props.activeKey,
+      entryKeys: props.entryKeys,
+    });
 
-    console.log(activeKey)
+    function handleSubmit(){
+      console.log('handleSubmit', state.activeKey);
+    }
+
+    function handleChange(){
+      console.log('handleChange', state.activeKey);
+    }
+
+    watch(() => {
+      console.log('change');
+      emit('entrySelected', state);
+    })
 
     return {
-      numberOfEntries: names.length,
-      activeKey,
+      state,
+      handleSubmit,
+      handleChange,
     }
   }
 }
