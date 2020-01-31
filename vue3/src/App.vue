@@ -64,12 +64,7 @@ export default {
 </script>
 
 <style lang="postcss">
-  .root {
-    display: flex;
-    flex-direction: column;
-  }
 </style>
 
 <style scoped lang="postcss">
-
 </style>

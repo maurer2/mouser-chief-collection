@@ -10,7 +10,7 @@
 
     <div class="row flex items-stretch mt-4">
       <select
-        class="flex-1"
+        class="flex-1 min-w-0"
         v-model="state.activeKey"
         @change.prevent="handleChange"
       >
