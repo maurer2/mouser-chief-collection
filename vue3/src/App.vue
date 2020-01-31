@@ -1,16 +1,20 @@
 <template>
-  <header class="p-4 bg-gray">
-    <select-box
-      :entries="state.entries"
-      :active-key="state.activeKey"
-      :key="state.activeKey"
-      :entry-keys="state.entryKeys"
-      @entry-selected="handleEntrySelected"
-    />
+  <header class="p-4 bg-gray flex-initial">
+    <div class="wrapper w-6/12 m-auto min-w-full md:min-w-0">
+      <select-box
+        :entries="state.entries"
+        :active-key="state.activeKey"
+        :key="state.activeKey"
+        :entry-keys="state.entryKeys"
+        @entry-selected="handleEntrySelected"
+      />
+    </div>
   </header>
 
-  <main class="p-4 bg-gray-light">
-    <entry :entry="state.activeEntry" v-if="state.activeKey !== ''" />
+  <main class="p-4 bg-gray-light flex-1">
+    <div class="wrapper w-6/12 m-auto min-w-full md:min-w-0">
+      <entry :entry="state.activeEntry" v-if="state.activeKey !== ''" />
+    </div>
   </main>
 
 </template>
@@ -60,8 +64,9 @@ export default {
 </script>
 
 <style lang="postcss">
-  body {
-    background: #ffffff;
+  .root {
+    display: flex;
+    flex-direction: column;
   }
 </style>
 

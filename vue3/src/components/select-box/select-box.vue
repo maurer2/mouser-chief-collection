@@ -8,21 +8,26 @@
       Active entry: {{ state.activeKey }}
     </p>
 
-    <select v-model="state.activeKey" @change.prevent="handleChange">
-      <option
-        v-for="(entryKey, index) in state.entryKeys"
-        :key="entryKey"
-        :value="index">
-          {{ entryKey }}
-      </option>
-    </select>
-
-    <button
-      class="bg-pink-2 hover:bg-pink-1 text-white mt-4 ml-4 p-2 rounded"
-      type="submit"
-    >
-      Select
-    </button>
+    <div class="row flex items-stretch mt-4">
+      <select
+        class="flex-1"
+        v-model="state.activeKey"
+        @change.prevent="handleChange"
+      >
+        <option
+          v-for="(entryKey, index) in state.entryKeys"
+          :key="entryKey"
+          :value="index">
+            {{ entryKey }}
+        </option>
+      </select>
+      <button
+        class="bg-pink-2 hover:bg-pink-1 text-white p-2 rounded flex-initial"
+        type="submit"
+      >
+        Select
+      </button>
+    </div>
   </form>
 
 </template>
