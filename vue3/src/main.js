@@ -3,4 +3,5 @@ import App from './App.vue'
 
 import './global.css';
 
-createApp().mount(App, '#root')
+const vueApp = createApp(App)
+vueApp.mount('#root')
