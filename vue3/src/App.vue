@@ -1,27 +1,24 @@
 <template>
-  <header class="p-4 bg-gray flex-initial">
-    <div>
-      <pre>
-        {{ JSON.stringify(activeKey) }}
-      </pre>
-    </div>
-    <div class="wrapper w-6/12 m-auto min-w-full md:min-w-0">
-      <select-box
-        :entries="state.entries"
-        :active-entry="state.activeEntry"
-        @entry-selected="handleEntrySelected"
-      />
-    </div>
-  </header>
+  <div class="useless-wrapper-class-for-eslint-that-is-not-needed-anymore">
+    <header class="p-4 bg-gray flex-initial">
+      <div class="wrapper w-6/12 m-auto min-w-full md:min-w-0">
+        <select-box
+          :entries="state.entries"
+          :active-entry="state.activeEntry"
+          @entry-selected="handleEntrySelected"
+        />
+      </div>
+    </header>
 
-  <main class="p-4 bg-gray-light flex-1">
-    <div
-      class="wrapper w-6/12 m-auto min-w-full md:min-w-0"
-      v-if="activeKey !== ''"
-    >
-      <entry :entry="state.activeEntry" />
-    </div>
-  </main>
+    <main class="p-4 bg-gray-light flex-1">
+      <div
+        class="wrapper w-6/12 m-auto min-w-full md:min-w-0"
+        v-if="activeKey !== ''"
+      >
+        <entry :entry="state.activeEntry" />
+      </div>
+    </main>
+  </div>
 
 </template>
 
@@ -49,7 +46,7 @@ export default {
 
     function handleEntrySelected(value) {
       console.log('handleEntrySelected', value)
-      activeKey.value = value;
+      // activeKey.value = value;
     }
 
     onMounted(() => {
@@ -69,4 +66,7 @@ export default {
 </style>
 
 <style scoped lang="postcss">
+  .useless-wrapper-class-for-eslint-that-is-not-needed-anymore {
+    display: contents;
+  }
 </style>
