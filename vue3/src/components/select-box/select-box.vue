@@ -1,18 +1,16 @@
 <template>
-  <form @submit.prevent="handleUpdate">
+  <form @submit.prevent="handleSubmit">
     <h2 class="text-xl">
       Navigation
     </h2>
-
     <p>
       Active entry: {{ activeEntry }}
     </p>
-
     <div class="row flex items-stretch mt-4">
       <select
         class="flex-1 min-w-0"
         v-model="activeEntry"
-        @change.prevent="handleUpdate"
+        @change.prevent="handleChange"
       >
         <option value="" disabled>Entries</option>
         <option
@@ -41,7 +39,7 @@ export default {
   props: {
     entries: JSON,
   },
-  setup(props, { emit }) {
+  setup(props, context) {
     const { entries } = props
     const activeEntry = ref('');
 
@@ -49,15 +47,23 @@ export default {
       entries,
     });
 
-    function handleUpdate(event){
+    function handleChange(event){
       const newValue = event.target.value;
+      // activeEntry.value contains stale value
 
-      emit('entry-selected', newValue);
+      context.emit('entry-selected', newValue);
+    }
+
+    function handleSubmit(){
+      const newValue = activeEntry.value;
+
+      context.emit('entry-selected', newValue);
     }
 
     return {
       state,
-      handleUpdate,
+      handleChange,
+      handleSubmit,
       activeEntry,
     }
   }
