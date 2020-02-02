@@ -4,7 +4,6 @@
       <div class="wrapper w-6/12 m-auto min-w-full md:min-w-0">
         <select-box
           :entries="state.entries"
-          :active-entry="state.activeEntry"
           @entry-selected="handleEntrySelected"
         />
       </div>
@@ -13,7 +12,7 @@
     <main class="p-4 bg-gray-light flex-1">
       <div
         class="wrapper w-6/12 m-auto min-w-full md:min-w-0"
-        v-if="activeKey !== ''"
+        v-if="state.activeEntry !== ''"
       >
         <entry :entry="state.activeEntry" />
       </div>
@@ -23,7 +22,7 @@
 </template>
 
 <script>
-import { reactive, computed , onMounted, ref } from 'vue'
+import { reactive, computed, ref } from 'vue'
 import entriesList from '../../data/data_flattened.json';
 
 import selectBox from './components/select-box/select-box.vue';
@@ -36,34 +35,26 @@ export default {
     'entry': entry,
   },
   setup(props, context) {
-    const activeKey = ref('')
+    const activeKey = ref('');
 
     const state = reactive({
       activeEntry: computed(() => entriesList[activeKey.value] || '' ),
       entries: entriesList,
     });
 
-
     function handleEntrySelected(value) {
-      console.log('handleEntrySelected', value)
-      // activeKey.value = value;
+      activeKey.value = value;
     }
-
-    onMounted(() => {
-      // activeKey.value = 'Larry';
-    })
 
     return {
       state,
-      activeKey,
       handleEntrySelected,
     }
   }
 }
 </script>
 
-<style lang="postcss">
-</style>
+<style lang="postcss"></style>
 
 <style scoped lang="postcss">
   .useless-wrapper-class-for-eslint-that-is-not-needed-anymore {

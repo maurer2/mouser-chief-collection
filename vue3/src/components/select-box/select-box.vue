@@ -5,13 +5,13 @@
     </h2>
 
     <p>
-      Active entry: {{ state.activeEntry }}
+      Active entry: {{ activeEntry }}
     </p>
 
     <div class="row flex items-stretch mt-4">
       <select
         class="flex-1 min-w-0"
-        v-model="state.activeEntry"
+        v-model="activeEntry"
         @change.prevent="handleUpdate"
       >
         <option value="" disabled>Entries</option>
@@ -34,19 +34,19 @@
 </template>
 
 <script>
-import { reactive, watch } from 'vue'
+import { reactive, watch, ref } from 'vue';
 
 export default {
   name: 'Selectbox',
   props: {
     entries: JSON,
-    activeEntry: Object,
   },
   setup(props, { emit }) {
-    const { entries, activeEntry } = props 
+    const { entries } = props
+    const activeEntry = ref('');
+
     const state = reactive({
       entries,
-      activeEntry,
     });
 
     function handleUpdate(event){
@@ -58,6 +58,7 @@ export default {
     return {
       state,
       handleUpdate,
+      activeEntry,
     }
   }
 }
