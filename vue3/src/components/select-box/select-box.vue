@@ -1,31 +1,32 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleUpdate">
     <h2 class="text-xl">
       Navigation
     </h2>
 
     <p>
-      Active entry: {{ state.activeKey }}
+      Active entry: {{ state.activeEntry }}
     </p>
 
     <div class="row flex items-stretch mt-4">
       <select
         class="flex-1 min-w-0"
-        v-model="state.activeKey"
-        @change.prevent="handleChange"
+        v-model="state.activeEntry"
+        @change.prevent="handleUpdate"
       >
+        <option value="" disabled>Entries</option>
         <option
-          v-for="(entryKey, index) in state.entryKeys"
+          v-for="(entryKey, index) in state.entries"
           :key="entryKey"
           :value="index">
-            {{ entryKey }}
+            {{ entryKey.Name }}
         </option>
       </select>
       <button
         class="bg-pink-2 hover:bg-pink-1 text-white p-2 rounded flex-initial"
         type="submit"
       >
-        Select
+        Select an entry
       </button>
     </div>
   </form>
@@ -38,34 +39,25 @@ import { reactive, watch } from 'vue'
 export default {
   name: 'Selectbox',
   props: {
-    entries: Object,
-    activeKey: String,
-    entryKeys: Array,
+    entries: JSON,
+    activeEntry: Object,
   },
   setup(props, { emit }) {
+    const { entries, activeEntry } = props 
     const state = reactive({
-      entries: props.entries,
-      activeKey: props.activeKey,
-      entryKeys: props.entryKeys,
+      entries,
+      activeEntry,
     });
 
-    function handleSubmit(){
-      console.log('handleSubmit', state.activeKey);
-    }
+    function handleUpdate(event){
+      const newValue = event.target.value;
 
-    function handleChange(){
-      console.log('handleChange', state.activeKey);
+      emit('entry-selected', newValue);
     }
-
-    watch(() => {
-      console.log('change');
-      emit('entrySelected', state);
-    })
 
     return {
       state,
-      handleSubmit,
-      handleChange,
+      handleUpdate,
     }
   }
 }
