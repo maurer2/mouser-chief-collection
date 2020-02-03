@@ -19,7 +19,7 @@ export default {
     entry: Object,
   },
   setup() {
-    const fields = ['Name', 'Began tenure', 'Ended tenure'];
+    const fields = ['Name', 'Began tenure', 'Ended tenure', 'Prime Minister(s)'];
 
     return {
       fields,

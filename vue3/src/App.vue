@@ -22,7 +22,7 @@
 
 <script>
 import { reactive, computed, ref } from 'vue'
-import entriesList from '../../data/data_flattened.json';
+import entries from '../../data/data_flattened.json';
 
 import selectBox from './components/select-box/select-box.vue';
 import entry from './components/entry/entry.vue';
@@ -37,8 +37,8 @@ export default {
     const activeKey = ref('');
 
     const state = reactive({
-      activeEntry: computed(() => entriesList[activeKey.value] || '' ),
-      entries: entriesList,
+      activeEntry: computed(() => entries[activeKey.value] || '' ),
+      entries,
     });
 
     function handleEntrySelected(value) {
