@@ -1,14 +1,14 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <h2 class="text-xl">
+    <h2 class="title">
       Navigation
     </h2>
     <p>
       Active entry: {{ activeEntry }}
     </p>
-    <div class="row flex items-stretch mt-4">
+    <div class="row">
       <select
-        class="flex-1 min-w-0"
+        class="select"
         v-model="activeEntry"
         @change.prevent="handleChange"
       >
@@ -21,7 +21,7 @@
         </option>
       </select>
       <button
-        class="bg-pink-2 hover:bg-pink-1 text-white p-2 rounded flex-initial"
+        class="button"
         type="submit"
       >
         Select an entry
@@ -70,6 +70,37 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
+  .title {
+    @apply
+      text-xl;
+  }
+
+  .row {
+    @apply
+      mt-4
+      flex
+      items-stretch;
+  }
+
+  .select {
+    @apply
+      flex-1
+      min-w-0;
+  }
+
+  .button {
+    @apply
+      p-2
+      flex-initial
+      bg-pink-2
+      text-white
+      rounded
+  }
+
+  .button:hover {
+    @apply
+      bg-pink-1;
+  }
 
 </style>

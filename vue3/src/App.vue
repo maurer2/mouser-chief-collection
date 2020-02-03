@@ -1,7 +1,7 @@
 <template>
   <div class="useless-wrapper-class-for-eslint-that-is-not-needed-anymore">
-    <header class="p-4 bg-gray flex-initial">
-      <div class="wrapper w-6/12 m-auto min-w-full md:min-w-0">
+    <header class="header">
+      <div class="wrapper">
         <select-box
           :entries="state.entries"
           @entry-selected="handleEntrySelected"
@@ -9,9 +9,8 @@
       </div>
     </header>
 
-    <main class="p-4 bg-gray-light flex-1">
-      <div
-        class="wrapper w-6/12 m-auto min-w-full md:min-w-0"
+    <main class="main">
+      <div class="wrapper"
         v-if="state.activeEntry !== ''"
       >
         <entry :entry="state.activeEntry" />
@@ -60,4 +59,32 @@ export default {
   .useless-wrapper-class-for-eslint-that-is-not-needed-anymore {
     display: contents;
   }
+
+  .header {
+    @apply
+      p-4
+      flex-initial
+      bg-gray;
+  }
+
+  .wrapper {
+    @apply
+      w-8/12
+      m-auto
+      min-w-full;
+  }
+
+  @screen md {
+    .wrapper {
+      @apply min-w-0;
+    }
+  }
+
+  .main {
+    @apply
+      p-4
+      flex-1
+      bg-gray-light
+  }
+
 </style>
