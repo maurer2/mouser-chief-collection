@@ -1,4 +1,5 @@
 const tailwindcss = require('tailwindcss');
+const postcssNested = require('postcss-nested');
 
 module.exports = {
   plugins: {
@@ -6,5 +7,6 @@ module.exports = {
     'postcss-preset-env': {},
     'cssnano': {},
     tailwindcss: {},
+    'postcss-nested': {},
   }
 }

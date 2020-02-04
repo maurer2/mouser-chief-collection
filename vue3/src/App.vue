@@ -72,10 +72,8 @@ export default {
       w-8/12
       m-auto
       min-w-full;
-  }
 
-  @screen md {
-    .wrapper {
+    @screen md {
       @apply min-w-0;
     }
   }
