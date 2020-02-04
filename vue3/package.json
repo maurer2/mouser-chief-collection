@@ -1,17 +1,22 @@
 {
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server",
-    "build": "webpack --env.prod"
+    "build": "webpack --env.prod",
+    "lint": "vue-cli-service lint",
+    "dev": "webpack-dev-server"
   },
   "dependencies": {
-    "postcss-nested": "^4.2.1",
     "vue": "^3.0.0-alpha.4"
   },
   "devDependencies": {
+    "@vue/cli-plugin-eslint": "^4.1.2",
     "@vue/compiler-sfc": "^3.0.0-alpha.4",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "babel-eslint": "^10.0.3",
     "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
     "file-loader": "^5.0.2",
     "mini-css-extract-plugin": "^0.9.0",
     "postcss-import": "^12.0.1",
@@ -23,6 +28,9 @@
     "vue-loader": "^16.0.0-alpha.1",
     "webpack": "^4.41.4",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-dev-server": "^3.10.1",
+    "@vue/cli-service": "^4.1.2",
+    "postcss-nested": "^4.2.1",
+    "string-width": "^4.2.0"
   }
 }

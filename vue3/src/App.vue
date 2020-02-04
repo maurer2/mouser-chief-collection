@@ -8,7 +8,6 @@
         />
       </div>
     </header>
-
     <main class="main">
       <div class="wrapper"
         v-if="state.activeEntry !== ''"
@@ -21,7 +20,7 @@
 </template>
 
 <script>
-import { reactive, computed, ref } from 'vue'
+import { reactive, computed, ref } from 'vue';
 import entries from '../../data/data_flattened.json';
 
 import selectBox from './components/select-box/select-box.vue';
@@ -31,13 +30,13 @@ export default {
   name: 'App',
   components: {
     'select-box': selectBox,
-    'entry': entry,
+    entry,
   },
   setup(props, context) {
     const activeKey = ref('');
 
     const state = reactive({
-      activeEntry: computed(() => entries[activeKey.value] || '' ),
+      activeEntry: computed(() => entries[activeKey.value] || ''),
       entries,
     });
 
@@ -48,9 +47,9 @@ export default {
     return {
       state,
       handleEntrySelected,
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 <style lang="postcss"></style>
@@ -74,7 +73,8 @@ export default {
       min-w-full;
 
     @screen md {
-      @apply min-w-0;
+      @apply
+        min-w-0;
     }
   }
 

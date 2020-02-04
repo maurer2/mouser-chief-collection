@@ -1,6 +1,6 @@
-const path = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env = {}) => ({
   mode: env.prod ? 'production' : 'development',
@@ -8,25 +8,25 @@ module.exports = (env = {}) => ({
   entry: path.resolve(__dirname, './src/main.js'),
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/'
+    publicPath: '/dist/',
   },
   resolve: {
     alias: {
-      'vue': '@vue/runtime-dom'
-    }
+      vue: '@vue/runtime-dom',
+    },
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        use: 'vue-loader'
+        use: 'vue-loader',
       },
       {
         test: /\.png$/,
         use: {
           loader: 'url-loader',
-          options: { limit: 8192 }
-        }
+          options: { limit: 8192 },
+        },
       },
       {
         test: /\.(css|postcss|pcss)$/,
@@ -38,34 +38,34 @@ module.exports = (env = {}) => ({
           /*
           {
             loader: 'style-loader',
-            options: {}, 
+            options: {},
           },
           */
           {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-            }
+            },
           },
           {
             loader: 'postcss-loader',
-            options: {}, 
+            options: {},
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].css'
-    })
+      filename: '[name].css',
+    }),
   ],
   devServer: {
     inline: true,
     hot: true,
     stats: 'minimal',
     contentBase: __dirname,
-    overlay: true
-  }
-})
+    overlay: true,
+  },
+});

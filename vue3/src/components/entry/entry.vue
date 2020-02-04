@@ -23,9 +23,9 @@ export default {
 
     return {
       fields,
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 <style scoped lang="postcss">

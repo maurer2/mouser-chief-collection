@@ -40,21 +40,21 @@ export default {
     entries: JSON,
   },
   setup(props, context) {
-    const { entries } = props
+    const { entries } = props;
     const activeEntry = ref('');
 
     const state = reactive({
       entries,
     });
 
-    function handleChange(event){
+    function handleChange(event) {
       const newValue = event.target.value;
       // activeEntry.value contains stale value
 
       context.emit('entry-selected', newValue);
     }
 
-    function handleSubmit(){
+    function handleSubmit() {
       const newValue = activeEntry.value;
 
       context.emit('entry-selected', newValue);
@@ -65,9 +65,9 @@ export default {
       handleChange,
       handleSubmit,
       activeEntry,
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 <style scoped lang="postcss">
