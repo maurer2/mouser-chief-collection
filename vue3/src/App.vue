@@ -4,13 +4,14 @@
       <div class="wrapper">
         <select-box
           :entries="state.entries"
+          :active-entry="state.activeEntry"
           @entry-selected="handleEntrySelected"
         />
       </div>
     </header>
     <main class="main">
       <div class="wrapper"
-        v-if="state.activeEntry !== ''"
+        v-if="state.activeEntry"
       >
         <entry :entry="state.activeEntry" />
       </div>
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-import { reactive, computed, ref } from 'vue';
+import { reactive, computed } from 'vue';
 import entries from '../../data/data_flattened.json';
 
 import selectBox from './components/select-box/select-box.vue';
@@ -32,16 +33,15 @@ export default {
     'select-box': selectBox,
     entry,
   },
-  setup(props, context) {
-    const activeKey = ref('');
-
+  setup() {
     const state = reactive({
-      activeEntry: computed(() => entries[activeKey.value] || ''),
       entries,
+      activeKey: '',
+      activeEntry: computed(() => state.entries[state.activeKey] || null),
     });
 
     function handleEntrySelected(value) {
-      activeKey.value = value;
+      state.activeKey = value;
     }
 
     return {

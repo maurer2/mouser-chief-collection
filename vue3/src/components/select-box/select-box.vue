@@ -3,18 +3,18 @@
     <h2 class="title">
       Navigation
     </h2>
-    <p>
-      Active entry: {{ activeEntry }}
+    <p v-if="selectedEntry">
+      Active entry: {{ selectedEntry }}
     </p>
     <div class="row">
       <select
         class="select"
-        v-model="activeEntry"
+        v-model="selectedEntry"
         @change.prevent="handleChange"
       >
-        <option value="" disabled>Entries</option>
+        <option :value="null" disabled>Entries</option>
         <option
-          v-for="(entryKey, index) in state.entries"
+          v-for="(entryKey, index) in props.entries"
           :key="entryKey"
           :value="index">
             {{ entryKey.Name }}
@@ -32,39 +32,36 @@
 </template>
 
 <script>
-import { reactive, watch, ref } from 'vue';
+import { ref } from 'vue';
 
 export default {
   name: 'Selectbox',
   props: {
-    entries: JSON,
+    entries: Object,
+    activeEntry: Object,
   },
   setup(props, context) {
-    const { entries } = props;
-    const activeEntry = ref('');
-
-    const state = reactive({
-      entries,
-    });
+    const selectedEntry = ref(props.activeEntry);
 
     function handleChange(event) {
       const newValue = event.target.value;
-      // activeEntry.value contains stale value
+
+      selectedEntry.value = newValue;
 
       context.emit('entry-selected', newValue);
     }
 
     function handleSubmit() {
-      const newValue = activeEntry.value;
+      const newValue = selectedEntry.value;
 
       context.emit('entry-selected', newValue);
     }
 
     return {
-      state,
+      props,
+      selectedEntry,
       handleChange,
       handleSubmit,
-      activeEntry,
     };
   },
 };
