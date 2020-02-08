@@ -3,7 +3,7 @@
     <header class="header">
       <div class="wrapper">
         <select-box
-          :entries="state.entries"
+          :entries="entries"
           :active-entry="state.activeEntry"
           @entry-selected="handleEntrySelected"
         />
@@ -35,9 +35,8 @@ export default {
   },
   setup() {
     const state = reactive({
-      entries,
       activeKey: '',
-      activeEntry: computed(() => state.entries[state.activeKey] || null),
+      activeEntry: computed(() => entries[state.activeKey] || null),
     });
 
     function handleEntrySelected(value) {
@@ -45,8 +44,10 @@ export default {
     }
 
     return {
+      // ...toRefs(state),
       state,
       handleEntrySelected,
+      entries,
     };
   },
 };
