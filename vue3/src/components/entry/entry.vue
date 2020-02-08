@@ -1,28 +1,34 @@
 <template>
   <section class="entry">
     <h2 class="title">
-      {{ entry['Name'] }}
+      {{ title }}
     </h2>
-    <template v-for="(key) in fields">
-      <dl class="list" :key="key">
-        <dt class="list-key">{{ key }}: </dt>
-        <dd class="list-value">{{ entry[key] }}</dd>
+    <template v-for="(fieldValue, fieldKey) in entry">
+      <dl class="list" :key="fieldKey">
+        <dt class="list-key">
+          {{ fieldKey }}:
+        </dt>
+        <dd class="list-value">
+          {{ fieldValue }}
+        </dd>
       </dl>
     </template>
   </section>
 </template>
 
 <script>
+import { computed } from 'vue';
+
 export default {
   name: 'Entry',
   props: {
     entry: Object,
   },
-  setup() {
-    const fields = ['Name', 'Began tenure', 'Ended tenure', 'Prime Minister(s)'];
+  setup(props) {
+    const title = computed(() => props.entry['Name']);
 
     return {
-      fields,
+      title,
     };
   },
 };
