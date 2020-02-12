@@ -3,7 +3,9 @@
     "Name": "Rufus of England (popularly nicknamed \"Treasury Bill\")",
     "Began tenure": "1924",
     "Ended tenure": "c.1930",
-    "Prime Minister(s)": "Ramsay MacDonald"
+    "Prime Minister(s)": [
+      "Ramsay MacDonald"
+    ]
   },
   "Peter": {
     "Name": "Peter",
@@ -30,13 +32,17 @@
     "Name": "Nelson",
     "Began tenure": "1940s",
     "Ended tenure": "",
-    "Prime Minister(s)": "Winston Churchill"
+    "Prime Minister(s)": [
+      "Winston Churchill"
+    ]
   },
   "Peter II": {
     "Name": "Peter II",
     "Began tenure": "1946",
     "Ended tenure": "",
-    "Prime Minister(s)": "Clement Attlee"
+    "Prime Minister(s)": [
+      "Clement Attlee"
+    ]
   },
   "Peter III": {
     "Name": "Peter III",
@@ -85,13 +91,17 @@
     "Name": "Sybil",
     "Began tenure": "2007",
     "Ended tenure": "2009",
-    "Prime Minister(s)": "Gordon Brown"
+    "Prime Minister(s)": [
+      "Gordon Brown"
+    ]
   },
   "Freya": {
     "Name": "Freya",
     "Began tenure": "2012",
     "Ended tenure": "2014",
-    "Prime Minister(s)": "David Cameron"
+    "Prime Minister(s)": [
+      "David Cameron"
+    ]
   },
   "Larry": {
     "Name": "Larry",

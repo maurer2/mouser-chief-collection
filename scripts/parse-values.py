@@ -36,14 +36,20 @@ def clean_entries(entries) -> list:
     # remove [x]
     cleaned_entries: list = [(re.sub(r"\[.*?\]", "", entry)) for entry in entries]
 
+    # trim
+    cleaned_entries: list = [entry.strip() for entry in cleaned_entries]
+
+    # normalize commas for next step
+    cleaned_entries: list = [entry.replace(", ", ",") for entry in cleaned_entries]
+
     # convert comma separated entries in string to real list
-    cleaned_entries = [
-        entry.replace(", ", ",").split(",") if entry.count(",") > 0 else entry
+    last_entry_in_list = len(cleaned_entries) - 2
+    cleaned_entries: list = [
+        entry.split(",")
+        if cleaned_entries.index(entry) == last_entry_in_list
+        else entry
         for entry in cleaned_entries
     ]
-
-    # trim
-    # cleaned_entries = [entry.strip() for entry in cleaned_entries]
 
     return cleaned_entries
 
