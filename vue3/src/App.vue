@@ -10,9 +10,7 @@
       </div>
     </header>
     <main class="main">
-      <div class="wrapper"
-        v-if="activeEntry"
-      >
+      <div class="wrapper" v-if="activeEntry">
         <entry :entry="activeEntry" />
       </div>
     </main>

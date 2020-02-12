@@ -9,7 +9,7 @@
           {{ fieldKey }}:
         </dt>
         <dd class="list-value">
-          {{ fieldValue }}
+          <Subentry :fieldValue="fieldValue" />
         </dd>
       </dl>
     </template>
@@ -18,11 +18,15 @@
 
 <script>
 import { computed } from 'vue';
+import Subentry from '../subentry/subentry.vue';
 
 export default {
   name: 'Entry',
   props: {
     entry: Object,
+  },
+  components: {
+    Subentry,
   },
   setup(props) {
     const title = computed(() => props.entry['Name']);
