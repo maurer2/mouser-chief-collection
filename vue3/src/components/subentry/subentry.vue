@@ -6,7 +6,7 @@
       </span>
     </template>
     <template v-else>
-      <ol class="list list-disc list-inside pl-5">
+      <ol class="list">
         <li
           class="list-entry"
           v-for="(value, index) in fieldValue"
@@ -41,5 +41,11 @@ export default {
 </script>
 
 <style scoped lang="postcss">
+  .list {
+    @apply
+      pl-5
+      list-disc
+      list-inside;
+  }
 
 </style>
