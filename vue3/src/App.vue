@@ -9,9 +9,27 @@
         />
       </div>
     </header>
-    <main class="main">
+    <main class="main relative">
       <div class="wrapper" v-if="activeEntry">
+        <button
+          class="button absolute left-0 top-0"
+          :class="{ 'button--is-disabled': buttonPrevIsDisabled }"
+          type="button"
+          @click="handlePrevClick"
+          :disabled="buttonPrevIsDisabled"
+        >
+          Previous
+        </button>
         <entry :entry="activeEntry" />
+        <button
+          class="button absolute right-0 top-0"
+          :class="{ 'button--is-disabled': buttonNextDisabled }"
+          type="button"
+          @click="handleNextClick"
+          :disabled="buttonNextDisabled"
+        >
+          Next
+        </button>
       </div>
     </main>
   </div>
@@ -37,21 +55,57 @@ export default {
     });
 
     const activeEntry = computed(() => entries[state.activeKey] || null);
+    const buttonPrevIsDisabled = computed(() => false);
+    const buttonNextDisabled = computed(() => false);
+    const entryNames = Object.keys(entries);
 
     function handleEntrySelected(value) {
       state.activeKey = value;
     }
 
+    function handlePrevClick() {
+      const currentIndex = entryNames.indexOf(state.activeKey) || 0;
+
+      if (currentIndex === 0) {
+        return;
+      }
+
+      const prevIndex = currentIndex - 1;
+      const newValue = entryNames[prevIndex];
+
+      state.activeKey = newValue;
+    }
+
+    function handleNextClick() {
+      const lastEntryInArray = entryNames.length - 1;
+      const currentIndex = entryNames.indexOf(state.activeKey) || lastEntryInArray;
+
+      if (currentIndex === lastEntryInArray) {
+        return;
+      }
+
+      const nextIndex = currentIndex + 1;
+      const newValue = entryNames[nextIndex];
+
+      state.activeKey = newValue;
+    }
+
     watch(() => {
-      console.log('ActiveEntry ', activeEntry.value);
+      console.log('entryNames ', entryNames);
+      console.log('activeEntry ', activeEntry.value);
+      console.log('buttonPrevIsDisabled ', buttonPrevIsDisabled.value);
+      console.log('buttonNextDisabled ', buttonNextDisabled.value);
     });
 
     return {
-      // ...toRefs(state),
       entries,
       state,
       handleEntrySelected,
       activeEntry,
+      buttonPrevIsDisabled,
+      buttonNextDisabled,
+      handlePrevClick,
+      handleNextClick,
     };
   },
 };
@@ -88,6 +142,21 @@ export default {
       p-4
       flex-1
       bg-gray-light
+  }
+
+  .button {
+    @apply
+      m-4
+      p-2
+      bg-pink-2
+      text-white
+      rounded
+  }
+
+  .button--is-disabled {
+    @apply
+      opacity-50
+      cursor-not-allowed
   }
 
 </style>
