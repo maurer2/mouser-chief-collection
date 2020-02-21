@@ -54,10 +54,10 @@ export default {
       activeKey: '',
     });
 
-    const activeEntry = computed(() => entries[state.activeKey] || null);
-    const buttonPrevIsDisabled = computed(() => false);
-    const buttonNextDisabled = computed(() => false);
     const entryNames = Object.keys(entries);
+    const activeEntry = computed(() => entries[state.activeKey] || null);
+    const buttonPrevIsDisabled = computed(() => entryNames.indexOf(state.activeKey) === 0);
+    const buttonNextDisabled = computed(() => entryNames.indexOf(state.activeKey) === entryNames.length - 1);
 
     function handleEntrySelected(value) {
       state.activeKey = value;
@@ -78,7 +78,7 @@ export default {
 
     function handleNextClick() {
       const lastEntryInArray = entryNames.length - 1;
-      const currentIndex = entryNames.indexOf(state.activeKey) || lastEntryInArray;
+      const currentIndex = entryNames.indexOf(state.activeKey);
 
       if (currentIndex === lastEntryInArray) {
         return;
@@ -91,10 +91,7 @@ export default {
     }
 
     watch(() => {
-      console.log('entryNames ', entryNames);
       console.log('activeEntry ', activeEntry.value);
-      console.log('buttonPrevIsDisabled ', buttonPrevIsDisabled.value);
-      console.log('buttonNextDisabled ', buttonNextDisabled.value);
     });
 
     return {
