@@ -3,36 +3,38 @@
     <h2 class="title">
       Navigation
     </h2>
-    <p v-if="selectedEntry">
-      Active entry: {{ selectedEntry }}
-    </p>
-    <div class="row">
-      <select
-        class="select"
-        v-model="selectedEntry"
-        @change.prevent="handleChange"
-      >
-        <option :value="null" disabled>Entries</option>
-        <option
-          v-for="(entryKey, index) in props.entries"
-          :key="entryKey"
-          :value="index">
-            {{ entryKey.Name }}
-        </option>
-      </select>
-      <button
-        class="button"
-        type="submit"
-      >
-        Select an entry
-      </button>
-    </div>
+    <template v-if="selectedEntry">
+      <p>
+        Active entry: {{ selectedEntry }}
+      </p>
+      <div class="row">
+        <select
+          class="select"
+          v-model="newEntry"
+          @change.prevent="handleChange"
+        >
+          <option :value="null" disabled>Entries</option>
+          <option
+            v-for="(entryKey, index) in props.entries"
+            :key="entryKey"
+            :value="index">
+              {{ entryKey.Name }}
+          </option>
+        </select>
+        <button
+          class="button"
+          type="submit"
+        >
+          Select an entry
+        </button>
+      </div>
+    </template>
   </form>
 
 </template>
 
 <script>
-import { ref } from 'vue';
+import { watch, computed, ref } from 'vue';
 
 export default {
   name: 'Selectbox',
@@ -41,20 +43,29 @@ export default {
     activeEntry: Object,
   },
   setup(props, context) {
-    const selectedEntry = ref(props.activeEntry);
+    const selectedEntry = computed(() => props.activeEntry['Name']);
+    const newEntry = ref(props.activeEntry);
+
+    watch(() => {
+      console.log('activeEntry1', props.activeEntry);
+      console.log('activeEntry11', selectedEntry);
+    });
 
     function handleChange(event) {
+      console.log(event.target.value);
       const newValue = event.target.value;
 
-      selectedEntry.value = newValue;
+      newEntry.value = newValue;
 
       context.emit('entry-selected', newValue);
     }
 
     function handleSubmit() {
+      /*
       const newValue = selectedEntry.value;
 
       context.emit('entry-selected', newValue);
+      */
     }
 
     return {
@@ -62,6 +73,7 @@ export default {
       selectedEntry,
       handleChange,
       handleSubmit,
+      newEntry,
     };
   },
 };

@@ -4,13 +4,13 @@
       <div class="wrapper">
         <select-box
           :entries="entries"
-          :active-entry="activeEntry"
+          :active-entry="state.activeEntry"
           @entry-selected="handleEntrySelected"
         />
       </div>
     </header>
     <main class="main relative">
-      <div class="wrapper" v-if="activeEntry">
+      <div class="wrapper" v-if="state.activeEntry || true">
         <button
           class="button absolute left-0 top-0"
           :class="{ 'button--is-disabled': buttonPrevIsDisabled }"
@@ -20,7 +20,7 @@
         >
           Previous
         </button>
-        <entry :entry="activeEntry" />
+        <entry :active-entry="state.activeEntry" />
         <button
           class="button absolute right-0 top-0"
           :class="{ 'button--is-disabled': buttonNextDisabled }"
@@ -52,10 +52,10 @@ export default {
   setup() {
     const state = reactive({
       activeKey: '',
+      activeEntry: computed(() => entries[state.activeKey] || null),
     });
 
     const entryNames = Object.keys(entries);
-    const activeEntry = computed(() => entries[state.activeKey] || null);
     const buttonPrevIsDisabled = computed(() => entryNames.indexOf(state.activeKey) === 0);
     const buttonNextDisabled = computed(() => entryNames.indexOf(state.activeKey) === entryNames.length - 1);
 
@@ -64,12 +64,11 @@ export default {
     }
 
     function handlePrevClick() {
-      const currentIndex = entryNames.indexOf(state.activeKey) || 0;
-
-      if (currentIndex === 0) {
+      if (buttonPrevIsDisabled.value) {
         return;
       }
 
+      const currentIndex = entryNames.indexOf(state.activeKey);
       const prevIndex = currentIndex - 1;
       const newValue = entryNames[prevIndex];
 
@@ -77,13 +76,11 @@ export default {
     }
 
     function handleNextClick() {
-      const lastEntryInArray = entryNames.length - 1;
-      const currentIndex = entryNames.indexOf(state.activeKey);
-
-      if (currentIndex === lastEntryInArray) {
+      if (buttonNextDisabled.value) {
         return;
       }
 
+      const currentIndex = entryNames.indexOf(state.activeKey);
       const nextIndex = currentIndex + 1;
       const newValue = entryNames[nextIndex];
 
@@ -91,14 +88,13 @@ export default {
     }
 
     watch(() => {
-      console.log('activeEntry ', activeEntry.value);
+      // console.log('activeEntry ', state.activeEntry);
     });
 
     return {
       entries,
       state,
       handleEntrySelected,
-      activeEntry,
       buttonPrevIsDisabled,
       buttonNextDisabled,
       handlePrevClick,
