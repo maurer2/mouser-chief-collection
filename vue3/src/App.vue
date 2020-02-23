@@ -20,7 +20,7 @@
         >
           Previous
         </button>
-        <entry :active-entry="state.activeEntry" />
+        <entry :active-entry="entries[state.activeEntry]" />
         <button
           class="button absolute right-0 top-0"
           :class="{ 'button--is-disabled': buttonNextDisabled }"
@@ -52,7 +52,7 @@ export default {
   setup() {
     const state = reactive({
       activeKey: '',
-      activeEntry: computed(() => entries[state.activeKey] || null),
+      activeEntry: computed(() => state.activeKey || ''),
     });
 
     const entryNames = Object.keys(entries);
@@ -89,7 +89,7 @@ export default {
     }
 
     watch(() => {
-      // console.log('activeEntry ', state.activeEntry);
+      console.log('activeEntry ', state.activeEntry);
     });
 
     return {

@@ -32,33 +32,27 @@
 </template>
 
 <script>
-import { watch, computed, reactive } from 'vue';
+import { watch, reactive } from 'vue';
 
 export default {
   name: 'Selectbox',
   props: {
     entries: Object,
-    activeEntry: Object,
+    activeEntry: String,
   },
   setup(props, context) {
-    const oldEntry = computed(() => ((props.activeEntry && props.activeEntry.Name) ? props.activeEntry.Name : ''));
     const data = reactive({
       list: Object.keys(props.entries),
-      newEntry: oldEntry.value,
+      newEntry: props.activeEntry,
     });
 
     watch(() => {
-      // data.newEntry = oldEntry.value;
-      console.log('oldEntry', oldEntry.value);
-      console.log('newEntry', data.newEntry);
-
-      if (oldEntry.value !== data.newEntry) {
-        // context.emit('entry-selected', data.newEntry);
-      }
+      data.newEntry = props.activeEntry;
+      console.log('props.activeEntry', props.activeEntry);
     });
 
     function handleChange(event) {
-      console.log('emit', event.target.value);
+      data.newEntry = event.target.value;
       context.emit('entry-selected', event.target.value);
     }
 
@@ -66,7 +60,6 @@ export default {
 
     return {
       props,
-      oldEntry,
       handleSubmit,
       handleChange,
       data,
