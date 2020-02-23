@@ -60,6 +60,7 @@ export default {
     const buttonNextDisabled = computed(() => entryNames.indexOf(state.activeKey) === entryNames.length - 1);
 
     function handleEntrySelected(value) {
+      console.log('received nav entry:', value);
       state.activeKey = value;
     }
 

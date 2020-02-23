@@ -3,28 +3,28 @@
     <h2 class="title">
       Navigation
     </h2>
-    <p v-if="newEntry !== null">
-      Active entry: {{ newEntry }}
+    <p v-if="data.newEntry">
+      Active entry: {{ data.newEntry }}
     </p>
-    <div class="row" :key="newEntry">
+    <div class="row">
       <select
         class="select"
-        v-model="newEntry"
-        @change.prevent="handleChange"
+        v-model="data.newEntry"
+        @change="handleChange"
       >
-        <option :value="null" disabled>Entries</option>
+        <option value="" disabled>Entries</option>
         <option
-          v-for="value in props.entries"
-          :key="value.Name"
-          :value="value.Name">
-            {{ value.Name }}
+          v-for="value in data.list"
+          :key="value"
+          :value="value">
+            {{ value }}
         </option>
       </select>
       <button
         class="button"
         type="submit"
       >
-        Select an entry
+        Select entry
       </button>
     </div>
   </form>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { watch, computed, ref } from 'vue';
+import { watch, computed, reactive } from 'vue';
 
 export default {
   name: 'Selectbox',
@@ -41,34 +41,35 @@ export default {
     activeEntry: Object,
   },
   setup(props, context) {
-    const selectedEntry = computed(() => ((props.activeEntry !== null) ? props.activeEntry : null));
-    const newEntry = ref(() => ((props.activeEntry !== null) ? props.activeEntry : null));
+    const oldEntry = computed(() => ((props.activeEntry && props.activeEntry.Name) ? props.activeEntry.Name : ''));
+    const data = reactive({
+      list: Object.keys(props.entries),
+      newEntry: oldEntry.value,
+    });
 
     watch(() => {
-      newEntry.value = ((selectedEntry !== null) ? selectedEntry.value : null);
-      console.log('selectedEntry', newEntry.value);
+      // data.newEntry = oldEntry.value;
+      console.log('oldEntry', oldEntry.value);
+      console.log('newEntry', data.newEntry);
+
+      if (oldEntry.value !== data.newEntry) {
+        // context.emit('entry-selected', data.newEntry);
+      }
     });
 
     function handleChange(event) {
-      const newValue = event.target.value;
-
-      context.emit('entry-selected', newValue);
+      console.log('emit', event.target.value);
+      context.emit('entry-selected', event.target.value);
     }
 
-    function handleSubmit() {
-      /*
-      const newValue = selectedEntry.value;
-
-      context.emit('entry-selected', newValue);
-      */
-    }
+    function handleSubmit() {}
 
     return {
       props,
-      selectedEntry,
-      handleChange,
+      oldEntry,
       handleSubmit,
-      newEntry,
+      handleChange,
+      data,
     };
   },
 };
