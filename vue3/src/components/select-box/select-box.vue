@@ -3,32 +3,30 @@
     <h2 class="title">
       Navigation
     </h2>
-    <template v-if="selectedEntry">
-      <p>
-        Active entry: {{ selectedEntry }}
-      </p>
-      <div class="row">
-        <select
-          class="select"
-          v-model="newEntry"
-          @change.prevent="handleChange"
-        >
-          <option :value="null" disabled>Entries</option>
-          <option
-            v-for="(entryKey, index) in props.entries"
-            :key="entryKey"
-            :value="index">
-              {{ entryKey.Name }}
-          </option>
-        </select>
-        <button
-          class="button"
-          type="submit"
-        >
-          Select an entry
-        </button>
-      </div>
-    </template>
+    <p v-if="newEntry !== null">
+      Active entry: {{ newEntry }}
+    </p>
+    <div class="row" :key="newEntry">
+      <select
+        class="select"
+        v-model="newEntry"
+        @change.prevent="handleChange"
+      >
+        <option :value="null" disabled>Entries</option>
+        <option
+          v-for="value in props.entries"
+          :key="value.Name"
+          :value="value.Name">
+            {{ value.Name }}
+        </option>
+      </select>
+      <button
+        class="button"
+        type="submit"
+      >
+        Select an entry
+      </button>
+    </div>
   </form>
 
 </template>
@@ -43,19 +41,16 @@ export default {
     activeEntry: Object,
   },
   setup(props, context) {
-    const selectedEntry = computed(() => props.activeEntry['Name']);
-    const newEntry = ref(props.activeEntry);
+    const selectedEntry = computed(() => ((props.activeEntry !== null) ? props.activeEntry : null));
+    const newEntry = ref(() => ((props.activeEntry !== null) ? props.activeEntry : null));
 
     watch(() => {
-      console.log('activeEntry1', props.activeEntry);
-      console.log('activeEntry11', selectedEntry);
+      newEntry.value = ((selectedEntry !== null) ? selectedEntry.value : null);
+      console.log('selectedEntry', newEntry.value);
     });
 
     function handleChange(event) {
-      console.log(event.target.value);
       const newValue = event.target.value;
-
-      newEntry.value = newValue;
 
       context.emit('entry-selected', newValue);
     }

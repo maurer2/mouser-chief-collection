@@ -29,7 +29,7 @@ export default {
     Subentry,
   },
   setup(props) {
-    const title = computed(() => props.activeEntry['Name']);
+    const title = computed(() => ((props.activeEntry !== null) ? props.activeEntry['Name'] : ''));
 
     watch(() => {
       // console.log('activeEntry2', props.activeEntry);
