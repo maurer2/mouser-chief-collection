@@ -3,13 +3,14 @@
     <h2 class="title">
       Navigation
     </h2>
-    <p v-if="data.newEntry">
-      Active entry: {{ data.newEntry }}
+    <p v-if="data.selectedEntry">
+      <span>Selected entry: </span>
+      <strong>{{ data.selectedEntry }}</strong>
     </p>
     <div class="row">
       <select
         class="select"
-        v-model="data.newEntry"
+        v-model="data.selectedEntry"
         @change="handleChange"
       >
         <option value="" disabled>Entries</option>
@@ -32,7 +33,7 @@
 </template>
 
 <script>
-import { watch, reactive } from 'vue';
+import { reactive, watchEffect } from 'vue';
 
 export default {
   name: 'Selectbox',
@@ -43,26 +44,26 @@ export default {
   setup(props, context) {
     const data = reactive({
       list: Object.keys(props.entries),
-      newEntry: props.activeEntry,
+      selectedEntry: '',
     });
 
-    watch(() => {
-      data.newEntry = props.activeEntry;
-      console.log('props.activeEntry', props.activeEntry);
+    watchEffect(() => {
+      data.selectedEntry = props.activeEntry;
     });
 
     function handleChange(event) {
-      data.newEntry = event.target.value;
+      data.selectedEntry = event.target.value;
       context.emit('entry-selected', event.target.value);
     }
 
-    function handleSubmit() {}
+    function handleSubmit() {
+      context.emit('entry-selected', data.selectedEntry);
+    }
 
     return {
-      props,
+      data,
       handleSubmit,
       handleChange,
-      data,
     };
   },
 };
@@ -71,6 +72,7 @@ export default {
 <style scoped lang="postcss">
   .title {
     @apply
+      mb-4
       text-xl;
   }
 
