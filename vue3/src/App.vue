@@ -1,5 +1,5 @@
 <template>
-  <div class="useless-wrapper-class-for-eslint-that-is-not-needed-anymore">
+  <div class="container">
     <header class="header">
       <div class="wrapper">
         <select-box
@@ -10,26 +10,18 @@
       </div>
     </header>
     <main class="main relative">
-      <div class="wrapper" v-if="state.activeEntry || true">
-        <button
-          class="button absolute left-0 top-0"
-          :class="{ 'button--is-disabled': buttonPrevIsDisabled }"
-          type="button"
-          @click="handlePrevClick"
-          :disabled="buttonPrevIsDisabled"
-        >
-          Previous
-        </button>
+      <div class="wrapper" v-if="state.activeEntry">
+        <pager
+          :isPrevButton="true"
+          :isDisabled="buttonPrevIsDisabled"
+          @pager-clicked="handlePrevClick"
+        />
         <entry :active-entry="entries[state.activeEntry]" />
-        <button
-          class="button absolute right-0 top-0"
-          :class="{ 'button--is-disabled': buttonNextDisabled }"
-          type="button"
-          @click="handleNextClick"
-          :disabled="buttonNextDisabled"
-        >
-          Next
-        </button>
+        <pager
+          :isPrevButton="false"
+          :isDisabled="buttonNextIsDisabled"
+          @pager-clicked="handleNextClick"
+        />
       </div>
     </main>
   </div>
@@ -37,10 +29,11 @@
 </template>
 
 <script>
-import { reactive, computed, watch } from 'vue';
+import { reactive, computed, watchEffect } from 'vue';
 import entries from '../../data/data_flattened.json';
 
 import selectBox from './components/select-box/select-box.vue';
+import pager from './components/pager/pager.vue';
 import entry from './components/entry/entry.vue';
 
 export default {
@@ -48,6 +41,7 @@ export default {
   components: {
     'select-box': selectBox,
     entry,
+    pager,
   },
   setup() {
     const state = reactive({
@@ -57,7 +51,7 @@ export default {
 
     const entryNames = Object.keys(entries);
     const buttonPrevIsDisabled = computed(() => entryNames.indexOf(state.activeKey) === 0);
-    const buttonNextDisabled = computed(() => entryNames.indexOf(state.activeKey) === entryNames.length - 1);
+    const buttonNextIsDisabled = computed(() => entryNames.indexOf(state.activeKey) === entryNames.length - 1);
 
     function handleEntrySelected(value) {
       console.log('received nav entry:', value);
@@ -77,7 +71,7 @@ export default {
     }
 
     function handleNextClick() {
-      if (buttonNextDisabled.value) {
+      if (buttonNextIsDisabled.value) {
         return;
       }
 
@@ -88,7 +82,7 @@ export default {
       state.activeKey = newValue;
     }
 
-    watch(() => {
+    watchEffect(() => {
       console.log('activeEntry ', state.activeEntry);
     });
 
@@ -97,7 +91,7 @@ export default {
       state,
       handleEntrySelected,
       buttonPrevIsDisabled,
-      buttonNextDisabled,
+      buttonNextIsDisabled,
       handlePrevClick,
       handleNextClick,
     };
@@ -108,7 +102,7 @@ export default {
 <style lang="postcss"></style>
 
 <style scoped lang="postcss">
-  .useless-wrapper-class-for-eslint-that-is-not-needed-anymore {
+  .container {
     display: contents;
   }
 
