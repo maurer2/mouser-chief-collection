@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { computed, watch } from 'vue';
+import { computed, watchEffect } from 'vue';
 import Subentry from '../subentry/subentry.vue';
 
 export default {
@@ -31,7 +31,7 @@ export default {
   setup(props) {
     const title = computed(() => ((props.activeEntry !== null) ? props.activeEntry.Name : ''));
 
-    watch(() => {
+    watchEffect(() => {
       // console.log('activeEntry2', props.activeEntry);
     });
 

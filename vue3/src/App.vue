@@ -4,19 +4,19 @@
       <div class="wrapper">
         <select-box
           :entryNames="entryNames"
-          :active-entry="state.activeEntry"
+          :active-entry="data.activeEntry"
           @entry-selected="handleEntrySelected"
         />
       </div>
     </header>
     <main class="main relative">
-      <div class="wrapper" v-if="state.activeEntry">
+      <div class="wrapper" v-if="data.activeEntry">
         <pager
           :isPrevButton="true"
           :isDisabled="buttonPrevIsDisabled"
           @pager-clicked="handlePrevClick"
         />
-        <entry :active-entry="entries[state.activeEntry]" />
+        <entry :active-entry="entries[data.activeEntry]" />
         <pager
           :isPrevButton="false"
           :isDisabled="buttonNextIsDisabled"
@@ -44,18 +44,17 @@ export default {
     pager,
   },
   setup() {
-    const state = reactive({
+    const data = reactive({
       activeKey: '',
-      activeEntry: computed(() => state.activeKey || ''),
+      activeEntry: computed(() => data.activeKey || ''),
     });
 
     const entryNames = Object.keys(entries);
-    const buttonPrevIsDisabled = computed(() => entryNames.indexOf(state.activeKey) === 0);
-    const buttonNextIsDisabled = computed(() => entryNames.indexOf(state.activeKey) === entryNames.length - 1);
+    const buttonPrevIsDisabled = computed(() => entryNames.indexOf(data.activeKey) === 0);
+    const buttonNextIsDisabled = computed(() => entryNames.indexOf(data.activeKey) === entryNames.length - 1);
 
     function handleEntrySelected(value) {
-      console.log('received nav entry:', value);
-      state.activeKey = value;
+      data.activeKey = value;
     }
 
     function handlePrevClick() {
@@ -63,11 +62,11 @@ export default {
         return;
       }
 
-      const currentIndex = entryNames.indexOf(state.activeKey);
+      const currentIndex = entryNames.indexOf(data.activeKey);
       const prevIndex = currentIndex - 1;
       const newValue = entryNames[prevIndex];
 
-      state.activeKey = newValue;
+      data.activeKey = newValue;
     }
 
     function handleNextClick() {
@@ -75,24 +74,24 @@ export default {
         return;
       }
 
-      const currentIndex = entryNames.indexOf(state.activeKey);
+      const currentIndex = entryNames.indexOf(data.activeKey);
       const nextIndex = currentIndex + 1;
       const newValue = entryNames[nextIndex];
 
-      state.activeKey = newValue;
+      data.activeKey = newValue;
     }
 
     watchEffect(() => {
-      console.log('activeEntry ', state.activeEntry);
+      console.log('activeEntry ', data.activeEntry);
     });
 
     return {
       entries,
-      state,
+      data,
       entryNames,
-      handleEntrySelected,
       buttonPrevIsDisabled,
       buttonNextIsDisabled,
+      handleEntrySelected,
       handlePrevClick,
       handleNextClick,
     };

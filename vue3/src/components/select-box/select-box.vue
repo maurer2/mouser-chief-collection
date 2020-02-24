@@ -5,11 +5,17 @@
     </h2>
     <p v-if="!data.isDefaultSelection">
       <span>Selected entry: </span>
-      <strong>{{ data.selectedEntry }}</strong>
+      <output
+        for="select"
+        class="font-bold"
+      >
+          {{ data.selectedEntry }}
+      </output>
     </p>
     <div class="row">
       <select
         class="select"
+        id="select"
         v-model="data.selectedEntry"
         @change="handleChange"
       >

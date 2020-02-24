@@ -1,8 +1,11 @@
 <template>
   <div class="subentry">
     <template v-if="isPrimitive">
-      <span class="text">
+      <span class="text" v-if="fieldValue">
         {{ fieldValue }}
+      </span>
+      <span class="text" v-else>
+        -
       </span>
     </template>
     <template v-else>
