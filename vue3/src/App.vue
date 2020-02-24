@@ -3,7 +3,7 @@
     <header class="header">
       <div class="wrapper">
         <select-box
-          :entries="entries"
+          :entryNames="entryNames"
           :active-entry="state.activeEntry"
           @entry-selected="handleEntrySelected"
         />
@@ -89,6 +89,7 @@ export default {
     return {
       entries,
       state,
+      entryNames,
       handleEntrySelected,
       buttonPrevIsDisabled,
       buttonNextIsDisabled,

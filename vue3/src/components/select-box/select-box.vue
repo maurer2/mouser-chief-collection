@@ -3,7 +3,7 @@
     <h2 class="title">
       Navigation
     </h2>
-    <p v-if="data.selectedEntry">
+    <p v-if="!data.isDefaultSelection">
       <span>Selected entry: </span>
       <strong>{{ data.selectedEntry }}</strong>
     </p>
@@ -22,8 +22,10 @@
         </option>
       </select>
       <button
-        class="button"
         type="submit"
+        class="button"
+        :class="{'button--is-disabled': data.isDefaultSelection}"
+        :disabled="data.isDefaultSelection"
       >
         Select entry
       </button>
@@ -33,18 +35,19 @@
 </template>
 
 <script>
-import { reactive, watchEffect } from 'vue';
+import { reactive, watchEffect, computed } from 'vue';
 
 export default {
   name: 'Selectbox',
   props: {
-    entries: Object,
+    entryNames: Array,
     activeEntry: String,
   },
   setup(props, context) {
     const data = reactive({
-      list: Object.keys(props.entries),
+      list: props.entryNames,
       selectedEntry: '',
+      isDefaultSelection: computed(() => data.selectedEntry === ''),
     });
 
     watchEffect(() => {
@@ -96,6 +99,12 @@ export default {
       bg-pink-2
       text-white
       rounded
+  }
+
+  .button--is-disabled {
+    @apply
+      opacity-50
+      cursor-not-allowed
   }
 
   .button:hover {
