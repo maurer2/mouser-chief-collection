@@ -9,8 +9,8 @@
         />
       </div>
     </header>
-    <main class="main relative">
-      <div class="wrapper" v-if="data.activeEntry">
+    <main class="main">
+      <div class="wrapper wrapper--grid" v-if="data.activeEntry">
         <pager
           :isPrevButton="true"
           :isDisabled="buttonPrevIsDisabled"
@@ -112,8 +112,12 @@ export default {
   .header {
     @apply
       p-4
-      flex-initial
       bg-gray;
+
+      .button {
+        @apply
+          m-4
+      }
   }
 
   .wrapper {
@@ -131,13 +135,26 @@ export default {
   .main {
     @apply
       p-4
-      flex-1
       bg-gray-light
   }
 
+  .wrapper--grid {
+    display: grid;
+    grid-template-rows:
+      min-content
+      1fr
+      min-content
+    ;
+    grid-template-columns:
+      1fr
+      1fr
+    ;
+  }
+
   .button {
+    grid-row: 1 / 2;
+
     @apply
-      m-4
       p-2
       bg-pink-2
       text-white
@@ -148,6 +165,14 @@ export default {
     @apply
       opacity-50
       cursor-not-allowed
+  }
+
+  .entry {
+    grid-row: 2 / 2;
+    grid-column: span 2;
+
+    @apply
+      mt-4
   }
 
 </style>

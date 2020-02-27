@@ -1,11 +1,11 @@
 <template>
   <button
     type="button"
-    class="button absolute top-0"
+    class="button"
     :class="{
       'button--is-disabled': props.isDisabled,
-      'left-0': props.isPrevButton,
-      'right-0': !props.isPrevButton,
+      'button-prev': props.isPrevButton,
+      'button-next': !props.isPrevButton,
     }"
     :disabled="props.isDisabled"
     @click="handleClick"
@@ -37,11 +37,21 @@ export default {
 <style scoped lang="postcss">
   .button {
     @apply
-      m-4
+      m-0
       p-2
       bg-pink-2
       text-white
       rounded
+  }
+
+  .button-prev {
+    @apply
+      mr-4
+  }
+
+  .button-next {
+    @apply
+      ml-4
   }
 
   .button--is-disabled {
