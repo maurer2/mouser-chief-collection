@@ -149,10 +149,27 @@ export default {
       1fr
       1fr
     ;
+
+    @screen md {
+      grid-template-rows:
+        1fr
+      ;
+
+      grid-template-columns:
+        100px
+        1fr
+        100px
+      ;
+    }
   }
 
   .button {
     grid-row: 1 / 2;
+
+    @screen md {
+      grid-row: 1;
+      height: min-content;
+    }
 
     @apply
       p-2
@@ -170,6 +187,11 @@ export default {
   .entry {
     grid-row: 2 / 2;
     grid-column: span 2;
+
+    @screen md {
+      grid-row: 1;
+      grid-column: 2 / 3;
+    }
 
     @apply
       mt-4
