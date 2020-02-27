@@ -24,6 +24,9 @@
         />
       </div>
     </main>
+    <footer class="footer">
+      Footer
+    </footer>
   </div>
 
 </template>
