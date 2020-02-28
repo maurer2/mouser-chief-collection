@@ -25,7 +25,7 @@
       </div>
     </main>
     <footer class="footer">
-      Footer
+      {{ entryNames.length }} entries loaded
     </footer>
   </div>
 
@@ -198,6 +198,13 @@ export default {
 
     @apply
       mt-4
+  }
+
+  .footer {
+    @apply
+      p-2
+      text-center
+      bg-gray
   }
 
 </style>
