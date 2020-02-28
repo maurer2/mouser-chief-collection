@@ -95,11 +95,13 @@ export default {
   .select {
     @apply
       flex-1
-      min-w-0;
+      min-w-0
+      w-full
   }
 
   .button {
     @apply
+      ml-4
       p-2
       flex-initial
       bg-pink-2

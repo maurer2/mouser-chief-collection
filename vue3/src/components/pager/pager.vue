@@ -46,12 +46,22 @@ export default {
 
   .button-prev {
     @apply
-      mr-4
+      mr-2;
+
+    @screen md {
+      @apply
+        mr-4
+    }
   }
 
   .button-next {
     @apply
-      ml-4
+      ml-2;
+
+    @screen md {
+      @apply
+        ml-4;
+    }
   }
 
   .button--is-disabled {
