@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <header class="header">
-      <div class="wrapper">
+      <div class="header-inner">
         <select-box
           :entryNames="entryNames"
           :active-entry="data.activeEntry"
@@ -10,7 +10,7 @@
       </div>
     </header>
     <main class="main">
-      <div class="wrapper wrapper--grid" v-if="data.activeEntry">
+      <div class="main-inner" v-if="data.activeEntry">
         <pager
           :isPrevButton="true"
           :isDisabled="buttonPrevIsDisabled"
@@ -120,7 +120,7 @@ export default {
       }
   }
 
-  .wrapper {
+  .header-inner {
     @apply
       w-8/12
       m-auto
@@ -138,7 +138,7 @@ export default {
       bg-gray-light
   }
 
-  .wrapper--grid {
+  .main-inner {
     display: grid;
     grid-template-rows:
       min-content
@@ -160,6 +160,9 @@ export default {
         1fr
         100px
       ;
+
+      min-height: 100%;
+      align-items: center;
     }
   }
 
@@ -188,16 +191,16 @@ export default {
     grid-row: 2 / 2;
     grid-column: span 2;
 
+    @apply
+      mt-4;
+
     @screen md {
       grid-row: 1;
       grid-column: 2 / 3;
 
-      @apply
-        mt-0
+      margin: auto;
+      width: 75%;
     }
-
-    @apply
-      mt-4
   }
 
   .footer {
