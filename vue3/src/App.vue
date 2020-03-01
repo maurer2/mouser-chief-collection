@@ -121,14 +121,10 @@ export default {
   }
 
   .header-inner {
-    @apply
-      w-8/12
-      m-auto
-      min-w-full;
 
     @screen md {
-      @apply
-        min-w-0;
+      margin: auto;
+      width: calc(75% - 200px + 3rem);
     }
   }
 
