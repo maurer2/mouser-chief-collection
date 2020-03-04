@@ -102,8 +102,6 @@ export default {
 };
 </script>
 
-<style lang="postcss"></style>
-
 <style scoped lang="postcss">
   .container {
     display: contents;
@@ -114,14 +112,13 @@ export default {
       p-4
       bg-gray;
 
-      .button {
-        @apply
-          m-4
-      }
+    &.button {
+      @apply
+        m-4;
+    }
   }
 
   .header-inner {
-
     @screen md {
       margin: auto;
       width: calc(75% - 200px + 3rem);
@@ -131,7 +128,7 @@ export default {
   .main {
     @apply
       p-4
-      bg-gray-light
+      bg-gray-light;
   }
 
   .main-inner {
@@ -139,24 +136,17 @@ export default {
     grid-template-rows:
       min-content
       1fr
-      min-content
-    ;
+      min-content;
     grid-template-columns:
       1fr
-      1fr
-    ;
+      1fr;
 
     @screen md {
-      grid-template-rows:
-        1fr
-      ;
-
+      grid-template-rows: 1fr;
       grid-template-columns:
         100px
         1fr
-        100px
-      ;
-
+        100px;
       min-height: 100%;
       align-items: center;
     }
@@ -174,13 +164,13 @@ export default {
       p-2
       bg-pink-2
       text-white
-      rounded
+      rounded;
   }
 
   .button--is-disabled {
     @apply
       opacity-50
-      cursor-not-allowed
+      cursor-not-allowed;
   }
 
   .entry {
@@ -193,7 +183,6 @@ export default {
     @screen md {
       grid-row: 1;
       grid-column: 2 / 3;
-
       margin: auto;
       width: 75%;
     }
@@ -203,7 +192,7 @@ export default {
     @apply
       p-2
       text-center
-      bg-gray
+      bg-gray;
   }
 
 </style>

@@ -96,7 +96,7 @@ export default {
     @apply
       flex-1
       min-w-0
-      w-full
+      w-full;
   }
 
   .button {
@@ -106,13 +106,13 @@ export default {
       flex-initial
       bg-pink-2
       text-white
-      rounded
+      rounded;
   }
 
   .button--is-disabled {
     @apply
       opacity-50
-      cursor-not-allowed
+      cursor-not-allowed;
   }
 
   .button:hover {
