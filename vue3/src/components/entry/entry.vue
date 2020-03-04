@@ -45,6 +45,7 @@ export default {
 <style scoped lang="postcss">
   .title {
     @apply
+      mb-4
       text-xl;
   }
 

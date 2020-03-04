@@ -148,29 +148,29 @@ export default {
         1fr
         100px;
       min-height: 100%;
-      align-items: center;
+      align-items: top;
     }
   }
 
   .button {
     grid-row: 1 / 2;
 
-    @screen md {
-      grid-row: 1;
-      height: min-content;
-    }
-
     @apply
       p-2
       bg-pink-2
       text-white
       rounded;
-  }
 
-  .button--is-disabled {
-    @apply
-      opacity-50
-      cursor-not-allowed;
+    @screen md {
+      grid-row: 1;
+      height: min-content;
+    }
+
+    &--is-disabled {
+      @apply
+        opacity-50
+        cursor-not-allowed;
+    }
   }
 
   .entry {
@@ -183,7 +183,7 @@ export default {
     @screen md {
       grid-row: 1;
       grid-column: 2 / 3;
-      margin: auto;
+      margin: 0 auto;
       width: 75%;
     }
   }
