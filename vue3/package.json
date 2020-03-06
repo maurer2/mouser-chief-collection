@@ -9,13 +9,13 @@
     "serve": "yarpm run webpack-dev-server"
   },
   "dependencies": {
-    "vue": "^3.0.0-alpha.7"
+    "vue": "^3.0.0-alpha.8"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
     "@vue/cli-plugin-eslint": "^4.1.2",
     "@vue/cli-service": "^4.2.2",
-    "@vue/compiler-sfc": "^3.0.0-alpha.7",
+    "@vue/compiler-sfc": "^3.0.0-alpha.8",
     "@vue/eslint-config-airbnb": "^4.0.0",
     "autoprefixer": "^9.7.4",
     "babel-eslint": "^10.0.3",
