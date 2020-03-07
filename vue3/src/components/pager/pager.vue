@@ -42,6 +42,12 @@ export default {
       bg-pink-2
       text-white
       rounded;
+
+    &--is-disabled {
+      @apply
+        opacity-50
+        cursor-not-allowed;
+    }
   }
 
   .button-prev {
@@ -50,7 +56,8 @@ export default {
 
     @screen md {
       @apply
-        mr-4;
+        mr-4
+        mb-auto;
     }
   }
 
@@ -60,14 +67,9 @@ export default {
 
     @screen md {
       @apply
+        mb-auto
         ml-4;
     }
-  }
-
-  .button--is-disabled {
-    @apply
-      opacity-50
-      cursor-not-allowed;
   }
 
 </style>

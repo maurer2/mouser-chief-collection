@@ -43,6 +43,18 @@ export default {
 </script>
 
 <style scoped lang="postcss">
+  .entry {
+    @apply
+      mt-4;
+
+    @screen md {
+      grid-row: 1;
+      grid-column: 2 / 3;
+      margin: 0 auto;
+      width: 75%;
+    }
+  }
+
   .title {
     @apply
       mb-4
@@ -65,4 +77,5 @@ export default {
     @apply
       flex-1;
   }
+
 </style>

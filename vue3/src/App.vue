@@ -10,14 +10,17 @@
     <main class="main">
       <template v-if="data.activeEntry">
         <pager
-          class="pager pagger--left"
+          class="pager pagger--prev"
           :isPrevButton="true"
           :isDisabled="buttonPrevIsDisabled"
           @pager-clicked="handlePrevClick"
         />
-        <entry :active-entry="entries[data.activeEntry]" />
+        <entry
+          class="entry"
+          :active-entry="entries[data.activeEntry]"
+        />
         <pager
-          class="pager pagger--right"
+          class="pager pagger--next"
           :isPrevButton="false"
           :isDisabled="buttonNextIsDisabled"
           @pager-clicked="handleNextClick"
@@ -113,79 +116,41 @@ export default {
     @apply
       p-4
       bg-gray;
-
-    &.button {
-      @apply
-        m-4;
-    }
   }
 
   .main {
     grid-area: main;
-
     display: grid;
     grid-template-rows:
       50px
       1fr;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-        "sidebar-left sidebar-right"
-        "main main"
-      ;
+      "sidebar-left sidebar-right"
+      "content content";
 
     @screen md {
-      grid-template-rows:
-        1fr;
+      grid-template-rows: 1fr;
       grid-template-columns: 100px 1fr 100px;
-      grid-template-areas:
-        "sidebar-left main sidebar-right"
-      ;
-      min-height: 100%;
-      align-items: top;
+      grid-template-areas: "sidebar-left content sidebar-right";
     }
 
     @apply
       p-4
       bg-gray-light;
 
-    .button {
-      @apply
-        p-2
-        bg-pink-2
-        text-white
-        rounded;
-
-      @screen md {
-        height: min-content;
-      }
-
-      &--is-disabled {
-        @apply
-          opacity-50
-          cursor-not-allowed;
-      }
-    }
-
-    .pagger--left {
+    & .pagger--prev {
       grid-area: sidebar-left;
     }
 
-    .pagger--right {
+    & .entry {
+      grid-area: content;
+    }
+
+    & .pagger--next {
       grid-area: sidebar-right;
     }
   }
-
-  .entry {
-      @apply
-        mt-4;
-
-      @screen md {
-        grid-row: 1;
-        grid-column: 2 / 3;
-        margin: 0 auto;
-        width: 75%;
-      }
-    }
 
   .footer {
     grid-area: footer;

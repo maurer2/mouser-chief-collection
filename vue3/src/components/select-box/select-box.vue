@@ -119,21 +119,23 @@ export default {
     @apply
       ml-4
       p-2
+      pl-4
+      pr-4
       flex-initial
       bg-pink-2
       text-white
       rounded;
-  }
 
-  .button--is-disabled {
-    @apply
-      opacity-50
-      cursor-not-allowed;
-  }
+    &--is-disabled {
+      @apply
+        opacity-50
+        cursor-not-allowed;
+    }
 
-  .button:hover {
-    @apply
-      bg-pink-1;
+    &:hover {
+      @apply
+        bg-pink-1;
+    }
   }
 
 </style>
