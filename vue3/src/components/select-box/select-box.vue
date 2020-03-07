@@ -1,5 +1,8 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form
+    @submit.prevent="handleSubmit"
+    @reset.prevent="handleReset"
+  >
     <h2 class="title">
       Navigation
     </h2>
@@ -27,6 +30,14 @@
             {{ value }}
         </option>
       </select>
+      <button
+        type="reset"
+        class="button"
+        :class="{'button--is-disabled': data.isDefaultSelection}"
+        :disabled="data.isDefaultSelection"
+      >
+        X
+      </button>
       <button
         type="submit"
         class="button"
@@ -69,9 +80,14 @@ export default {
       context.emit('entry-selected', data.selectedEntry);
     }
 
+    function handleReset() {
+      context.emit('entry-selected', '');
+    }
+
     return {
       data,
       handleSubmit,
+      handleReset,
       handleChange,
     };
   },
