@@ -50,8 +50,8 @@ export default {
     @screen md {
       grid-row: 1;
       grid-column: 2 / 3;
-      margin: 0 auto;
       width: 75%;
+      margin: 0 auto;
     }
   }
 

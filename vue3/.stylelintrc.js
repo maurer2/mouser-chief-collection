@@ -1,6 +1,7 @@
 module.exports = {
   extends: [
     'stylelint-config-standard',
+    'stylelint-config-rational-order',
   ],
   rules: {
     'block-closing-brace-newline-before': 'always',
@@ -16,6 +17,10 @@ module.exports = {
           'screen'
         ]
       }
-    ]
+    ],
+    'plugin/rational-order': [true, {
+      'border-in-box-model': true,
+      'empty-line-between-groups': true,
+    }],
   },
 }

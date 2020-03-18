@@ -119,20 +119,20 @@ export default {
   }
 
   .main {
-    grid-area: main;
     display: grid;
+    grid-area: main;
+    grid-template-areas:
+      "sidebar-left sidebar-right"
+      "content content";
     grid-template-rows:
       50px
       1fr;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "sidebar-left sidebar-right"
-      "content content";
 
     @screen md {
+      grid-template-areas: "sidebar-left content sidebar-right";
       grid-template-rows: 1fr;
       grid-template-columns: 100px 1fr 100px;
-      grid-template-areas: "sidebar-left content sidebar-right";
     }
 
     @apply
