@@ -37,7 +37,7 @@ export default {
 <style scoped lang="postcss">
   .button {
     @apply
-      m-0
+      m-4
       p-2
       bg-pink-2
       text-white
@@ -51,6 +51,8 @@ export default {
   }
 
   .button-prev {
+    grid-area: sidebar-left;
+
     @apply
       mr-2;
 
@@ -62,6 +64,8 @@ export default {
   }
 
   .button-next {
+    grid-area: sidebar-right;
+
     @apply
       ml-2;
 

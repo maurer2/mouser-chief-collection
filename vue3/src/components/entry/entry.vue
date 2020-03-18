@@ -44,15 +44,11 @@ export default {
 
 <style scoped lang="postcss">
   .entry {
-    @apply
-      mt-4;
+    grid-area: content;
 
-    @screen md {
-      grid-row: 1;
-      grid-column: 2 / 3;
-      width: 75%;
-      margin: 0 auto;
-    }
+    @apply
+      p-4
+      bg-gray-light;
   }
 
   .title {

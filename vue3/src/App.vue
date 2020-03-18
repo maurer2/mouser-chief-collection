@@ -10,7 +10,6 @@
     <main class="main">
       <template v-if="data.activeEntry">
         <pager
-          class="pager pagger--prev"
           :isPrevButton="true"
           :isDisabled="buttonPrevIsDisabled"
           @pager-clicked="handlePrevClick"
@@ -20,7 +19,6 @@
           :active-entry="entries[data.activeEntry]"
         />
         <pager
-          class="pager pagger--next"
           :isPrevButton="false"
           :isDisabled="buttonNextIsDisabled"
           @pager-clicked="handleNextClick"
@@ -125,31 +123,18 @@ export default {
       "sidebar-left sidebar-right"
       "content content";
     grid-template-rows:
-      50px
+      minmax(50px, auto)
       1fr;
     grid-template-columns: 1fr 1fr;
 
     @screen md {
       grid-template-areas: "sidebar-left content sidebar-right";
       grid-template-rows: 1fr;
-      grid-template-columns: 100px 1fr 100px;
+      grid-template-columns: minmax(150px, auto) 1fr minmax(150px, auto);
     }
 
     @apply
-      p-4
-      bg-gray-light;
-
-    & .pagger--prev {
-      grid-area: sidebar-left;
-    }
-
-    & .entry {
-      grid-area: content;
-    }
-
-    & .pagger--next {
-      grid-area: sidebar-right;
-    }
+      bg-gray-dark;
   }
 
   .footer {
