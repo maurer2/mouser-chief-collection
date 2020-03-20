@@ -43,7 +43,17 @@ export default {
       text-white
       rounded;
 
+    &:hover {
+      @apply
+        bg-pink-1;
+    }
+
     &--is-disabled {
+      &:hover {
+        @apply
+          bg-pink-2;
+      }
+
       @apply
         opacity-50
         cursor-not-allowed;

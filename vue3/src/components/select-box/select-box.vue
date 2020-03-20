@@ -6,15 +6,17 @@
     <h2 class="title">
       Navigation
     </h2>
-    <p v-if="!data.isDefaultSelection">
-      <span>Selected entry: </span>
-      <output
-        for="select"
-        class="font-bold"
-      >
+    <template v-if="!data.isDefaultSelection">
+      <p class="output">
+        <span>Selected entry: </span>
+        <output
+          for="select"
+          class="font-bold"
+        >
           {{ data.selectedEntry }}
-      </output>
-    </p>
+        </output>
+      </p>
+    </template>
     <div class="row">
       <select
         class="select"
@@ -32,7 +34,7 @@
       </select>
       <button
         type="reset"
-        class="button"
+        class="button button--reset"
         :class="{'button--is-disabled': data.isDefaultSelection}"
         :disabled="data.isDefaultSelection"
       >
@@ -40,7 +42,7 @@
       </button>
       <button
         type="submit"
-        class="button"
+        class="button button--submit"
         :class="{'button--is-disabled': data.isDefaultSelection}"
         :disabled="data.isDefaultSelection"
       >
@@ -97,15 +99,18 @@ export default {
 <style scoped lang="postcss">
   .title {
     @apply
-      mb-4
-      text-xl;
+      sr-only;
   }
 
   .row {
     @apply
-      mt-4
       flex
       items-stretch;
+  }
+
+  .output {
+    @apply
+      mb-4;
   }
 
   .select {
@@ -135,6 +140,14 @@ export default {
     &:hover {
       @apply
         bg-pink-1;
+    }
+  }
+
+  .button--reset {
+    display: none;
+
+    @screen sm {
+      display: unset;
     }
   }
 

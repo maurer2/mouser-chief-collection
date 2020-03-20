@@ -4,6 +4,7 @@
 
 html {
   min-height: 100%;
+  font-size: 16px;
 }
 
 body {
@@ -15,12 +16,13 @@ body {
   min-height: inherit;
   grid-template-areas:
     "header"
+    "nav"
     "main"
     "footer";
   grid-template-rows:
-    min-content
+    auto
+    auto
     1fr
-    min-content
-  ;
+    auto;
   grid-template-columns: 1fr;
 }

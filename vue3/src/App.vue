@@ -1,12 +1,17 @@
 <template>
   <div class="wrapper">
     <header class="header">
+      <h1 class="title">
+        Mouser-Chief-Collection
+      </h1>
+    </header>
+    <nav class="nav">
       <select-box
         :entryNames="entryNames"
         :active-entry="data.activeEntry"
         @entry-selected="handleEntrySelected"
       />
-    </header>
+    </nav>
     <main class="main">
       <template v-if="data.activeEntry">
         <pager
@@ -108,8 +113,25 @@ export default {
     display: contents;
   }
 
+  .title {
+    @apply
+      m-0
+      leading-normal
+      text-xl
+      text-white;
+  }
+
   .header {
     grid-area: header;
+
+    @apply
+      p-4
+      text-center
+      bg-pink-2;
+  }
+
+  .nav {
+    grid-area: nav;
 
     @apply
       p-4
@@ -120,11 +142,11 @@ export default {
     display: grid;
     grid-area: main;
     grid-template-areas:
-      "sidebar-left sidebar-right"
-      "content content";
+      "content content"
+      "sidebar-left sidebar-right";
     grid-template-rows:
-      minmax(50px, auto)
-      1fr;
+      1fr
+      minmax(50px, auto);
     grid-template-columns: 1fr 1fr;
 
     @screen md {
@@ -141,7 +163,8 @@ export default {
     grid-area: footer;
 
     @apply
-      p-2
+      p-4
+      leading-none
       text-center
       bg-gray;
   }
