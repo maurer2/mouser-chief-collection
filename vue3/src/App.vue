@@ -6,26 +6,26 @@
       </h1>
     </header>
     <nav class="nav">
-      <select-box
-        :entryNames="entryNames"
+      <SelectBox
+        :entry-names="entryNames"
         :active-entry="data.activeEntry"
         @entry-selected="handleEntrySelected"
       />
     </nav>
     <main class="main">
       <template v-if="data.activeEntry">
-        <pager
-          :isPrevButton="true"
-          :isDisabled="buttonPrevIsDisabled"
+        <Pager
+          :is-prev-button="true"
+          :is-disabled="buttonPrevIsDisabled"
           @pager-clicked="handlePrevClick"
         />
-        <entry
+        <Entry
           class="entry"
           :active-entry="entries[data.activeEntry]"
         />
-        <pager
-          :isPrevButton="false"
-          :isDisabled="buttonNextIsDisabled"
+        <Pager
+          :is-prev-button="false"
+          :is-disabled="buttonNextIsDisabled"
           @pager-clicked="handleNextClick"
         />
       </template>
@@ -34,23 +34,22 @@
       {{ entryNames.length }} entries loaded
     </footer>
   </div>
-
 </template>
 
 <script>
 import { reactive, computed, watchEffect } from 'vue';
 import entries from '../../data/data_flattened.json';
 
-import selectBox from './components/select-box/select-box.vue';
-import pager from './components/pager/pager.vue';
-import entry from './components/entry/entry.vue';
+import SelectBox from './components/select-box/select-box.vue';
+import Pager from './components/pager/pager.vue';
+import Entry from './components/entry/entry.vue';
 
 export default {
   name: 'App',
   components: {
-    'select-box': selectBox,
-    entry,
-    pager,
+    SelectBox,
+    Entry,
+    Pager,
   },
   setup() {
     const data = reactive({

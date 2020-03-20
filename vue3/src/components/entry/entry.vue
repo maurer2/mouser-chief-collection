@@ -4,12 +4,15 @@
       {{ title }}
     </h2>
     <template v-for="(fieldValue, fieldKey) in activeEntry">
-      <dl class="list" :key="fieldKey">
+      <dl
+        :key="fieldKey"
+        class="list"
+      >
         <dt class="list-key">
           {{ fieldKey }}:
         </dt>
         <dd class="list-value">
-          <Subentry :fieldValue="fieldValue" />
+          <Subentry :field-value="fieldValue" />
         </dd>
       </dl>
     </template>
@@ -17,23 +20,23 @@
 </template>
 
 <script>
-import { computed, watchEffect } from 'vue';
+import { computed } from 'vue';
 import Subentry from '../subentry/subentry.vue';
 
 export default {
   name: 'Entry',
-  props: {
-    activeEntry: Object,
-  },
   components: {
     Subentry,
   },
+  props: {
+    activeEntry: {
+      type: Object,
+      required: true,
+      default: () => {},
+    },
+  },
   setup(props) {
     const title = computed(() => ((props.activeEntry !== null) ? props.activeEntry.Name : ''));
-
-    watchEffect(() => {
-      // console.log('activeEntry2', props.activeEntry);
-    });
 
     return {
       title,

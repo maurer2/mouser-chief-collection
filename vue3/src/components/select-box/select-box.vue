@@ -19,17 +19,23 @@
     </template>
     <div class="row">
       <select
-        class="select"
         id="select"
         v-model="data.selectedEntry"
+        class="select"
         @change="handleChange"
       >
-        <option value="" disabled>Entries</option>
+        <option
+          value=""
+          disabled
+        >
+          Entries
+        </option>
         <option
           v-for="value in data.list"
           :key="value"
-          :value="value">
-            {{ value }}
+          :value="value"
+        >
+          {{ value }}
         </option>
       </select>
       <button
@@ -50,7 +56,6 @@
       </button>
     </div>
   </form>
-
 </template>
 
 <script>
@@ -59,8 +64,16 @@ import { reactive, watchEffect, computed } from 'vue';
 export default {
   name: 'Selectbox',
   props: {
-    entryNames: Array,
-    activeEntry: String,
+    entryNames: {
+      type: Array,
+      required: true,
+      default: () => [],
+    },
+    activeEntry: {
+      type: String,
+      required: true,
+      default: '',
+    },
   },
   setup(props, context) {
     const data = reactive({

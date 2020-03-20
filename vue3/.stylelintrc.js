@@ -9,20 +9,20 @@ module.exports = {
     'at-rule-no-unknown': [
       true,
       {
-        'ignoreAtRules': [
+        ignoreAtRules: [
           'tailwind',
           'apply',
           'responsive',
           'variants',
-          'screen'
-        ]
-      }
+          'screen',
+        ],
+      },
     ],
     'plugin/rational-order': [
       true,
       {
         'border-in-box-model': true,
         'empty-line-between-groups': true,
-    }],
+      }],
   },
-}
+};
