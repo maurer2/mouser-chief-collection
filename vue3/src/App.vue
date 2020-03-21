@@ -44,6 +44,8 @@ import SelectBox from './components/select-box/select-box.vue';
 import Pager from './components/pager/pager.vue';
 import Entry from './components/entry/entry.vue';
 
+const entryNames = Object.keys(entries);
+
 export default {
   name: 'App',
   components: {
@@ -55,11 +57,11 @@ export default {
     const data = reactive({
       activeKey: '',
       activeEntry: computed(() => data.activeKey || ''),
+      positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
 
-    const entryNames = Object.keys(entries);
-    const buttonPrevIsDisabled = computed(() => entryNames.indexOf(data.activeKey) === 0);
-    const buttonNextIsDisabled = computed(() => entryNames.indexOf(data.activeKey) === entryNames.length - 1);
+    const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
+    const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
 
     function handleEntrySelected(value) {
       data.activeKey = value;
@@ -91,6 +93,7 @@ export default {
 
     watchEffect(() => {
       console.log('activeEntry ', data.activeEntry);
+      console.log('positionInList ', data.positionInList);
     });
 
     return {
