@@ -23,7 +23,7 @@ module.exports = {
         'style',
       ],
     }],
-    'vue/component-definition-name-casing': 'off'
+    'vue/component-definition-name-casing': 'off',
   },
   parserOptions: {
     parser: 'babel-eslint',
