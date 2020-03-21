@@ -2,12 +2,9 @@
   <div class="wrapper">
     <header class="header">
       <h1 class="title">
-        <router-link :to="{ name: 'root' }">
-          Mouser-Chief-Collection
-        </router-link>
-        <router-link to="/">
-          Root
-        </router-link>
+        <Link :to="{ name: 'root' }">
+        Mouser-Chief-Collection
+        </Link>
       </h1>
       <router-view />
     </header>
@@ -44,7 +41,7 @@
 
 <script>
 import { reactive, computed, watchEffect } from 'vue';
-import { RouterLink, RouterView } from 'vue-router';
+import { Link, RouterView } from 'vue-router';
 
 import entries from '../../data/data_flattened.json';
 
@@ -60,7 +57,7 @@ export default {
     SelectBox,
     Entry,
     Pager,
-    RouterLink,
+    Link,
     RouterView,
   },
   setup() {

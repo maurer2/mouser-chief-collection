@@ -25,7 +25,7 @@
     "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",
     "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "eslint-plugin-vue": "v7.0.0-alpha.0",
     "file-loader": "^5.0.2",
     "mini-css-extract-plugin": "^0.9.0",
     "postcss-import": "^12.0.1",
