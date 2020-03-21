@@ -2,11 +2,13 @@
   <div class="wrapper">
     <header class="header">
       <h1 class="title">
-        <Link :to="{ name: 'root' }">
-        Mouser-Chief-Collection
-        </Link>
+        <Link
+          :to="{ name: 'root' }"
+          text="Mouser-Chief-Collection"
+          class="title-link"
+        />
       </h1>
-      <router-view />
+      <View />
     </header>
     <nav class="nav">
       <SelectBox
@@ -34,14 +36,26 @@
       </template>
     </main>
     <footer class="footer">
-      {{ entryNames.length }} entries loaded
+      <div>
+        {{ entryNames.length }} entries loaded
+      </div>
+      <div>
+        <Link
+          :to="{ name: 'root' }"
+          text="root"
+        />
+        <Link
+          :to="{ name: 'cat' }"
+          text="cat"
+        />
+      </div>
     </footer>
   </div>
 </template>
 
 <script>
 import { reactive, computed, watchEffect } from 'vue';
-import { Link, RouterView } from 'vue-router';
+import { Link, View } from 'vue-router';
 
 import entries from '../../data/data_flattened.json';
 
@@ -58,7 +72,7 @@ export default {
     Entry,
     Pager,
     Link,
-    RouterView,
+    View,
   },
   setup() {
     const data = reactive({
@@ -129,6 +143,13 @@ export default {
       leading-normal
       text-xl
       text-white;
+  }
+
+  .title-link {
+    color: inherit;
+
+    @apply
+      no-underline;
   }
 
   .header {

@@ -4,7 +4,8 @@
     "build": "webpack --env.prod",
     "cleanup": "sort-package-json",
     "dev": "webpack-dev-server",
-    "lint:js": "vue-cli-service lint",
+    "lint:js": "vue-cli-service lint --no-fix",
+    "lint:js:fix": "vue-cli-service lint --fix",
     "lint:styles": "stylelint '**/*.{vue, css, scss}'; exit 0",
     "lint:styles:fix": "stylelint --fix '**/*.{vue, css, scss}'; exit 0",
     "serve": "yarpm run webpack-dev-server"
