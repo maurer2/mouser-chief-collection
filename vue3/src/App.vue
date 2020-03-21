@@ -2,11 +2,13 @@
   <div class="wrapper">
     <header class="header">
       <h1 class="title">
-        Mouser-Chief-Collection
+        <router-link :to="{ name: 'root' }">
+          Mouser-Chief-Collection
+        </router-link>
+        <router-link to="/">
+          Root
+        </router-link>
       </h1>
-      <router-link to="/">Root</router-link>
-      <router-link to="/cat">Cat</router-link>
-
       <router-view />
     </header>
     <nav class="nav">
@@ -42,6 +44,8 @@
 
 <script>
 import { reactive, computed, watchEffect } from 'vue';
+import { RouterLink, RouterView } from 'vue-router';
+
 import entries from '../../data/data_flattened.json';
 
 import SelectBox from './components/select-box/select-box.vue';
@@ -56,6 +60,8 @@ export default {
     SelectBox,
     Entry,
     Pager,
+    RouterLink,
+    RouterView,
   },
   setup() {
     const data = reactive({
@@ -66,6 +72,7 @@ export default {
 
     const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
     const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
+    // const routes = context.root;
 
     function handleEntrySelected(value) {
       data.activeKey = value;
