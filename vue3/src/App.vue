@@ -4,6 +4,10 @@
       <h1 class="title">
         Mouser-Chief-Collection
       </h1>
+      <router-link to="/">Root</router-link>
+      <router-link to="/cat">Cat</router-link>
+
+      <router-view />
     </header>
     <nav class="nav">
       <SelectBox
