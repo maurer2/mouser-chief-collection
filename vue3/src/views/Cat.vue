@@ -3,12 +3,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  setup() {
-    console.log('setup');
+export default {
+  setup(_, context) {
+    setTimeout(() => {
+      // console.log('setup', context.attrs);
+    }, 2500);
   },
-});
+};
 
 </script>

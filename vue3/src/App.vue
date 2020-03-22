@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { reactive, computed, watchEffect } from 'vue';
+import { reactive, computed, watchEffect, getCurrentInstance } from 'vue';
 import { Link, View } from 'vue-router';
 
 import entries from '../../data/data_flattened.json';
@@ -81,9 +81,12 @@ export default {
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
 
+    const { router } = getCurrentInstance().appContext.provides;
+
+    console.log('router', router.currentRoute);
+
     const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
     const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
-    // const routes = context.root;
 
     function handleEntrySelected(value) {
       data.activeKey = value;
