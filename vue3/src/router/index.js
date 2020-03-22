@@ -14,6 +14,10 @@ const routes = [
     component: Cat,
     name: 'cat',
   },
+  {
+    path: '/*',
+    component: Root,
+  },
 ];
 
 // eslint-disable-next-line import/prefer-default-export
