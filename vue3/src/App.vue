@@ -8,7 +8,6 @@
           class="title-link"
         />
       </h1>
-      <View />
     </header>
     <nav class="nav">
       <SelectBox
@@ -35,6 +34,9 @@
         />
       </template>
     </main>
+    <div class="view">
+      <View />
+    </div>
     <footer class="footer">
       <div>
         {{ entryNames.length }} entries loaded
@@ -45,7 +47,7 @@
           text="root"
         />
         <Link
-          :to="{ name: 'cat' }"
+          :to="{ name: 'cat', params: { activeKey: '' } }"
           text="cat"
         />
       </div>
@@ -54,7 +56,9 @@
 </template>
 
 <script>
-import { reactive, computed, watchEffect, getCurrentInstance } from 'vue';
+import {
+  reactive, computed, watchEffect, getCurrentInstance,
+} from 'vue';
 import { Link, View } from 'vue-router';
 
 import entries from '../../data/data_flattened.json';
@@ -82,8 +86,6 @@ export default {
     });
 
     const { router } = getCurrentInstance().appContext.provides;
-
-    console.log('router', router.currentRoute);
 
     const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
     const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
@@ -115,6 +117,19 @@ export default {
 
       data.activeKey = newValue;
     }
+
+    watchEffect(() => {
+      if (data.activeKey === '') {
+        return;
+      }
+
+      router.push({
+        name: 'cat',
+        params: {
+          activeKey: data.activeKey,
+        },
+      });
+    });
 
     watchEffect(() => {
       console.log('activeEntry ', data.activeEntry);
@@ -172,6 +187,12 @@ export default {
       bg-gray;
   }
 
+  .view {
+    padding: 1rem;
+    background: lightgreen;
+    text-align: center;
+  }
+
   .main {
     display: grid;
     grid-area: main;
@@ -184,8 +205,10 @@ export default {
     grid-template-columns: 1fr 1fr;
 
     @screen md {
-      grid-template-areas: "sidebar-left content sidebar-right";
-      grid-template-rows: 1fr;
+      grid-template-areas:
+        "sidebar-left content sidebar-right";
+      grid-template-rows:
+        1fr;
       grid-template-columns: minmax(150px, auto) 1fr minmax(150px, auto);
     }
 

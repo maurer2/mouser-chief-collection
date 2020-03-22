@@ -18,11 +18,13 @@ body {
     "header"
     "nav"
     "main"
+    "view"
     "footer";
   grid-template-rows:
     auto
     auto
     1fr
+    50px
     auto;
   grid-template-columns: 1fr;
 }
