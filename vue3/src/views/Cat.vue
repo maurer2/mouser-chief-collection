@@ -1,26 +1,34 @@
 <template>
   <div class="wrapper">
-    Cat
-    <template v-if="props">
-      {{ props }}
-    </template>
+    Cat-View {{ props }}
   </div>
 </template>
 
 <script lang="ts">
+import { reactive, watchEffect } from 'vue';
+
 export default {
-  name: 'Cat-View',
+  name: 'Cat',
   props: {
-    activeKey: {
-      type: String,
-      default: '',
+    position: {
+      type: Number,
+      default: -1,
       required: true,
     },
   },
   setup(props) {
-    console.log('setup', props);
+    const data = reactive({
+      position: props.position,
+    });
 
-    return props;
+    watchEffect(() => {
+      console.log('props.position ', props.position, data.position);
+    });
+
+    return {
+      data,
+      props,
+    };
   },
 };
 

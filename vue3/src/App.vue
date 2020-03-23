@@ -35,21 +35,14 @@
       </template>
     </main>
     <div class="view">
-      <View />
+      <View
+        :key="data.positionInList"
+        :position="data.positionInList"
+      />
     </div>
     <footer class="footer">
       <div>
         {{ entryNames.length }} entries loaded
-      </div>
-      <div>
-        <Link
-          :to="{ name: 'root' }"
-          text="root"
-        />
-        <Link
-          :to="{ name: 'cat', params: { activeKey: '' } }"
-          text="cat"
-        />
       </div>
     </footer>
   </div>
@@ -104,6 +97,8 @@ export default {
       const newValue = entryNames[prevIndex];
 
       data.activeKey = newValue;
+
+      router.push({ name: 'cat', params: { position: prevIndex } });
     }
 
     function handleNextClick() {
@@ -116,24 +111,13 @@ export default {
       const newValue = entryNames[nextIndex];
 
       data.activeKey = newValue;
+
+      router.push({ name: 'cat', params: { position: nextIndex } });
     }
 
     watchEffect(() => {
-      if (data.activeKey === '') {
-        return;
-      }
-
-      router.push({
-        name: 'cat',
-        params: {
-          activeKey: data.activeKey,
-        },
-      });
-    });
-
-    watchEffect(() => {
       console.log('activeEntry ', data.activeEntry);
-      console.log('positionInList ', data.positionInList);
+      // console.log('positionInList ', data.positionInList);
     });
 
     return {

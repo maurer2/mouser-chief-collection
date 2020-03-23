@@ -24,7 +24,7 @@ body {
     auto
     auto
     1fr
-    50px
+    auto
     auto;
   grid-template-columns: 1fr;
 }

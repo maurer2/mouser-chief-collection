@@ -10,7 +10,7 @@ const routes = [
     name: 'root',
   },
   {
-    path: '/cat/:activeKey',
+    path: '/cat/:position',
     component: Cat,
     name: 'cat',
     props: true,
