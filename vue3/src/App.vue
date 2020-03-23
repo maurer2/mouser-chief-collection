@@ -36,8 +36,7 @@
     </main>
     <div class="view">
       <View
-        :key="data.positionInList"
-        :position="data.positionInList"
+        :entry="data.activeEntry"
       />
     </div>
     <footer class="footer">
@@ -97,8 +96,7 @@ export default {
       const newValue = entryNames[prevIndex];
 
       data.activeKey = newValue;
-
-      router.push({ name: 'cat', params: { position: prevIndex } });
+      router.push({ name: 'cat', params: { entry: data.activeEntry } });
     }
 
     function handleNextClick() {
@@ -111,8 +109,7 @@ export default {
       const newValue = entryNames[nextIndex];
 
       data.activeKey = newValue;
-
-      router.push({ name: 'cat', params: { position: nextIndex } });
+      router.push({ name: 'cat', params: { entry: data.activeEntry } });
     }
 
     watchEffect(() => {

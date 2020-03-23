@@ -10,19 +10,19 @@ import { reactive, watchEffect } from 'vue';
 export default {
   name: 'Cat',
   props: {
-    position: {
-      type: Number,
-      default: -1,
+    entry: {
+      type: String,
+      default: '',
       required: true,
     },
   },
   setup(props) {
     const data = reactive({
-      position: props.position,
+      entry: props.entry,
     });
 
     watchEffect(() => {
-      console.log('props.position ', props.position, data.position);
+      console.log('props.position ', props.entry, data.entry);
     });
 
     return {

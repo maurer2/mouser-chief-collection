@@ -10,7 +10,7 @@ const routes = [
     name: 'root',
   },
   {
-    path: '/cat/:position',
+    path: '/cat/:entry',
     component: Cat,
     name: 'cat',
     props: true,
