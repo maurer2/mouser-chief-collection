@@ -4,13 +4,16 @@
     "build": "webpack --env.prod",
     "cleanup": "sort-package-json",
     "dev": "webpack-dev-server",
-    "lint:js": "vue-cli-service lint",
+    "lint:js": "vue-cli-service lint --no-fix",
+    "lint:js:fix": "vue-cli-service lint",
     "lint:styles": "stylelint '**/*.{vue, css, scss}'; exit 0",
     "lint:styles:fix": "stylelint --fix '**/*.{vue, css, scss}'; exit 0",
     "serve": "yarpm run webpack-dev-server"
   },
   "dependencies": {
-    "vue": "^3.0.0-alpha.9"
+    "npm": "^6.14.3",
+    "vue": "^3.0.0-alpha.9",
+    "vue-router": "next"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
@@ -23,7 +26,7 @@
     "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",
     "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "eslint-plugin-vue": "v7.0.0-alpha.0",
     "file-loader": "^5.0.2",
     "mini-css-extract-plugin": "^0.9.0",
     "postcss-import": "^12.0.1",

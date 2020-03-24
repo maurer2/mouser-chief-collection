@@ -2,7 +2,11 @@
   <div class="wrapper">
     <header class="header">
       <h1 class="title">
-        Mouser-Chief-Collection
+        <Link
+          to="/"
+          text="Mouser-Chief-Collection"
+          class="title-link"
+        />
       </h1>
     </header>
     <nav class="nav">
@@ -19,10 +23,9 @@
           :is-disabled="buttonPrevIsDisabled"
           @pager-clicked="handlePrevClick"
         />
-        <Entry
-          class="entry"
-          :active-entry="entries[data.activeEntry]"
-        />
+        <div class="content">
+          <View />
+        </div>
         <Pager
           :is-prev-button="false"
           :is-disabled="buttonNextIsDisabled"
@@ -31,18 +34,23 @@
       </template>
     </main>
     <footer class="footer">
-      {{ entryNames.length }} entries loaded
+      <div>
+        {{ entryNames.length }} entries loaded
+      </div>
     </footer>
   </div>
 </template>
 
 <script>
-import { reactive, computed, watchEffect } from 'vue';
+import {
+  reactive, computed, watchEffect, getCurrentInstance,
+} from 'vue';
+import { Link, View } from 'vue-router';
+
 import entries from '../../data/data_flattened.json';
 
 import SelectBox from './components/select-box/select-box.vue';
 import Pager from './components/pager/pager.vue';
-import Entry from './components/entry/entry.vue';
 
 const entryNames = Object.keys(entries);
 
@@ -50,8 +58,9 @@ export default {
   name: 'App',
   components: {
     SelectBox,
-    Entry,
     Pager,
+    Link,
+    View,
   },
   setup() {
     const data = reactive({
@@ -59,6 +68,8 @@ export default {
       activeEntry: computed(() => data.activeKey || ''),
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
+
+    const { router } = getCurrentInstance().appContext.provides;
 
     const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
     const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
@@ -92,8 +103,12 @@ export default {
     }
 
     watchEffect(() => {
-      console.log('activeEntry ', data.activeEntry);
-      console.log('positionInList ', data.positionInList);
+      if (data.activeEntry === '') {
+        router.push({ path: '/' });
+        return;
+      }
+
+      router.push({ path: `/cat/${data.activeEntry}` });
     });
 
     return {
@@ -123,6 +138,13 @@ export default {
       text-white;
   }
 
+  .title-link {
+    color: inherit;
+
+    @apply
+      no-underline;
+  }
+
   .header {
     grid-area: header;
 
@@ -138,6 +160,12 @@ export default {
     @apply
       p-4
       bg-gray;
+  }
+
+  .view {
+    padding: 1rem;
+    text-align: center;
+    background: lightgreen;
   }
 
   .main {
@@ -159,6 +187,10 @@ export default {
 
     @apply
       bg-gray-dark;
+  }
+
+  .content {
+    grid-area: content;
   }
 
   .footer {
