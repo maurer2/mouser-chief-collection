@@ -23,10 +23,9 @@
           :is-disabled="buttonPrevIsDisabled"
           @pager-clicked="handlePrevClick"
         />
-        <Entry
-          class="entry"
-          :active-entry="entries[data.activeEntry]"
-        />
+        <div class="content">
+          <View />
+        </div>
         <Pager
           :is-prev-button="false"
           :is-disabled="buttonNextIsDisabled"
@@ -34,9 +33,6 @@
         />
       </template>
     </main>
-    <div class="view">
-      <View />
-    </div>
     <footer class="footer">
       <div>
         {{ entryNames.length }} entries loaded
@@ -63,7 +59,6 @@ export default {
   name: 'App',
   components: {
     SelectBox,
-    Entry,
     Pager,
     Link,
     View,
@@ -197,6 +192,10 @@ export default {
 
     @apply
       bg-gray-dark;
+  }
+
+  .content {
+    grid-area: content;
   }
 
   .footer {

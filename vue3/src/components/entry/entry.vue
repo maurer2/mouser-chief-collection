@@ -47,7 +47,7 @@ export default {
 
 <style scoped lang="postcss">
   .entry {
-    grid-area: content;
+    min-height: 100%;
 
     @apply
       p-4
