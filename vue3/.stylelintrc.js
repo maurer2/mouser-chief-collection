@@ -22,7 +22,9 @@ module.exports = {
       true,
       {
         'border-in-box-model': true,
-        'empty-line-between-groups': true,
-      }],
+        'empty-line-between-groups': false,
+        severity: 'warning',
+      },
+    ],
   },
 };
