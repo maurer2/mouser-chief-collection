@@ -7,13 +7,10 @@ const routes = [
   {
     path: '/',
     component: Root,
-    name: 'root',
   },
   {
     path: '/cat/:entry',
     component: Cat,
-    name: 'cat',
-    props: true,
   },
   {
     path: '/*',

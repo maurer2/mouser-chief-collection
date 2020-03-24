@@ -3,7 +3,7 @@
     <header class="header">
       <h1 class="title">
         <Link
-          :to="{ name: 'root' }"
+          to="/"
           text="Mouser-Chief-Collection"
           class="title-link"
         />
@@ -35,9 +35,7 @@
       </template>
     </main>
     <div class="view">
-      <View
-        :entry="data.activeEntry"
-      />
+      <View />
     </div>
     <footer class="footer">
       <div>
@@ -96,7 +94,6 @@ export default {
       const newValue = entryNames[prevIndex];
 
       data.activeKey = newValue;
-      router.push({ name: 'cat', params: { entry: data.activeEntry } });
     }
 
     function handleNextClick() {
@@ -109,12 +106,17 @@ export default {
       const newValue = entryNames[nextIndex];
 
       data.activeKey = newValue;
-      router.push({ name: 'cat', params: { entry: data.activeEntry } });
     }
 
     watchEffect(() => {
-      console.log('activeEntry ', data.activeEntry);
-      // console.log('positionInList ', data.positionInList);
+      console.log('data.activeEntry', data.activeEntry);
+
+      if (data.activeEntry === '') {
+        router.push({ path: '/' });
+        return;
+      }
+
+      router.push({ path: `/cat/${data.activeEntry}` });
     });
 
     return {

@@ -1,28 +1,23 @@
 <template>
   <div class="wrapper">
-    Cat-View {{ props }}
+    Cat-View {{ data.currentRoute.params }}
   </div>
 </template>
 
 <script lang="ts">
-import { reactive, watchEffect } from 'vue';
+import { reactive, watchEffect, getCurrentInstance } from 'vue';
 
 export default {
   name: 'Cat',
-  props: {
-    entry: {
-      type: String,
-      default: '',
-      required: true,
-    },
-  },
   setup(props) {
+    const { router } = getCurrentInstance().appContext.provides;
     const data = reactive({
       entry: props.entry,
+      currentRoute: router.currentRoute,
     });
 
     watchEffect(() => {
-      console.log('props.position ', props.entry, data.entry);
+      console.log('data.currentRoute ', data.currentRoute);
     });
 
     return {
