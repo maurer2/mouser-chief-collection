@@ -51,7 +51,6 @@ import entries from '../../data/data_flattened.json';
 
 import SelectBox from './components/select-box/select-box.vue';
 import Pager from './components/pager/pager.vue';
-import Entry from './components/entry/entry.vue';
 
 const entryNames = Object.keys(entries);
 
@@ -104,8 +103,6 @@ export default {
     }
 
     watchEffect(() => {
-      console.log('data.activeEntry', data.activeEntry);
-
       if (data.activeEntry === '') {
         router.push({ path: '/' });
         return;
@@ -167,8 +164,8 @@ export default {
 
   .view {
     padding: 1rem;
-    background: lightgreen;
     text-align: center;
+    background: lightgreen;
   }
 
   .main {
@@ -183,10 +180,8 @@ export default {
     grid-template-columns: 1fr 1fr;
 
     @screen md {
-      grid-template-areas:
-        "sidebar-left content sidebar-right";
-      grid-template-rows:
-        1fr;
+      grid-template-areas: "sidebar-left content sidebar-right";
+      grid-template-rows: 1fr;
       grid-template-columns: minmax(150px, auto) 1fr minmax(150px, auto);
     }
 
