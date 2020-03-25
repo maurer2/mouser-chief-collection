@@ -24,6 +24,7 @@ module.exports = {
       ],
     }],
     'vue/component-definition-name-casing': 'off',
+    "vue/component-name-in-template-casing": "error"
   },
   parserOptions: {
     parser: 'babel-eslint',

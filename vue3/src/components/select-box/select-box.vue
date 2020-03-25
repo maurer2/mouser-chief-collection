@@ -58,7 +58,7 @@
   </form>
 </template>
 
-<script>
+<script lang="ts">
 import { reactive, watchEffect, computed } from 'vue';
 
 export default {

@@ -19,7 +19,7 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import { computed } from 'vue';
 import Subentry from '../subentry/subentry.vue';
 
