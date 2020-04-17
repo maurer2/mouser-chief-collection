@@ -24,6 +24,7 @@ module.exports = {
       ],
     }],
     'vue/component-definition-name-casing': 'off',
+    'newline-before-return': 'error',
   },
   parserOptions: {
     parser: 'babel-eslint',

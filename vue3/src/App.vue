@@ -41,9 +41,10 @@
 
 <script>
 import {
-  reactive, computed, watchEffect, getCurrentInstance,
+  reactive, computed, watchEffect,
 } from 'vue';
 import { Link, View } from 'vue-router';
+import { router } from './router';
 
 import entries from '../../data/data_flattened.json';
 
@@ -66,8 +67,6 @@ export default {
       activeEntry: computed(() => data.activeKey || ''),
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
-
-    const { router } = getCurrentInstance().appContext.provides;
 
     const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
     const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
@@ -103,6 +102,7 @@ export default {
     watchEffect(() => {
       if (data.activeEntry === '') {
         router.push({ path: '/' });
+
         return;
       }
 

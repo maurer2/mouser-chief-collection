@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import Root from '../views/Root.vue';
 import Cat from '../views/Cat.vue';
+import NotFound from '../views/NotFound.vue';
 
 const routes = [
   {
@@ -14,7 +15,7 @@ const routes = [
   },
   {
     path: '/*',
-    component: Root,
+    component: NotFound,
   },
 ];
 

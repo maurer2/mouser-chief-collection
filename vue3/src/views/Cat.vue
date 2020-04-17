@@ -5,7 +5,8 @@
 </template>
 
 <script lang="ts">
-import { reactive, getCurrentInstance, computed } from 'vue';
+import { reactive, computed } from 'vue';
+import { router } from '../router';
 import Entry from '../components/entry/entry.vue';
 
 import entries from '../../../data/data_flattened.json';
@@ -16,7 +17,8 @@ export default {
     Entry,
   },
   setup() {
-    const { router } = getCurrentInstance().appContext.provides;
+    console.log('cat');
+
     const data = reactive({
       currentRoute: router.currentRoute,
       entry: computed(() => data.currentRoute.params.entry || ''),
