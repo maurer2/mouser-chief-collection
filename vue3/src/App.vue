@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <article class="wrapper">
     <header class="header">
       <h1 class="title">
         <Link
@@ -34,11 +34,9 @@
       </template>
     </main>
     <footer class="footer">
-      <div>
-        {{ entryNames.length }} entries loaded
-      </div>
+      {{ entryNames.length }} entries loaded
     </footer>
-  </div>
+  </article>
 </template>
 
 <script>
