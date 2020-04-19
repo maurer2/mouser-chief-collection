@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 import Root from '../views/Root.vue';
 import Cat from '../views/Cat.vue';
@@ -8,19 +8,22 @@ const routes = [
   {
     path: '/',
     component: Root,
+    props: true,
   },
   {
-    path: '/cat/:entry',
+    path: '/cat/:entryName',
     component: Cat,
+    props: true,
   },
   {
     path: '/*',
     component: NotFound,
+    props: true,
   },
 ];
 
 // eslint-disable-next-line import/prefer-default-export
 export const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
