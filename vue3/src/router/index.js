@@ -16,7 +16,7 @@ const routes = [
     props: true,
   },
   {
-    path: '/*',
+    path: '/:catchAll(.*)',
     component: NotFound,
     props: true,
   },
