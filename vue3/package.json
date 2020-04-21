@@ -12,14 +12,14 @@
     "serve": "yarpm run webpack-dev-server"
   },
   "dependencies": {
-    "vue": "^3.0.0-beta.2",
+    "vue": "^3.0.0-beta.3",
     "vue-router": "v4.0.0-alpha.7"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^2.1.0",
+    "@fullhuman/postcss-purgecss": "^2.1.2",
     "@vue/cli-plugin-eslint": "^4.2.3",
     "@vue/cli-service": "^4.2.3",
-    "@vue/compiler-sfc": "^3.0.0-beta.2",
+    "@vue/compiler-sfc": "^3.0.0-beta.3",
     "@vue/eslint-config-airbnb": "^4.0.0",
     "autoprefixer": "^9.7.4",
     "babel-eslint": "^10.1.0",
