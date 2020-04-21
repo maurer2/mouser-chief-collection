@@ -15,23 +15,13 @@
         :active-entry="data.activeEntry"
         @entry-selected="handleEntrySelected"
       />
+      <router-link to="/cat/peter">Peter</router-link>
+      <router-link to="/cat/nelson">Nelson</router-link>
     </nav>
     <main class="main">
-      <template v-if="data.activeEntry">
-        <Pager
-          :is-prev-button="true"
-          :is-disabled="buttonPrevIsDisabled"
-          @pager-clicked="handlePrevClick"
-        />
-        <div class="content">
-          <View />
-        </div>
-        <Pager
-          :is-prev-button="false"
-          :is-disabled="buttonNextIsDisabled"
-          @pager-clicked="handleNextClick"
-        />
-      </template>
+      <div class="content">
+        <View />
+      </div>
     </main>
     <footer class="footer">
       {{ entryNames.length }} entries loaded
@@ -57,7 +47,6 @@ export default {
   name: 'App',
   components: {
     SelectBox,
-    Pager,
     Link,
     View,
   },
@@ -68,56 +57,15 @@ export default {
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
 
-    const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
-    const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
-
     function handleEntrySelected(value) {
       data.activeKey = value;
     }
-
-    function handlePrevClick() {
-      if (buttonPrevIsDisabled.value) {
-        return;
-      }
-
-      const currentIndex = entryNames.indexOf(data.activeKey);
-      const prevIndex = currentIndex - 1;
-      const newValue = entryNames[prevIndex];
-
-      data.activeKey = newValue;
-    }
-
-    function handleNextClick() {
-      if (buttonNextIsDisabled.value) {
-        return;
-      }
-
-      const currentIndex = entryNames.indexOf(data.activeKey);
-      const nextIndex = currentIndex + 1;
-      const newValue = entryNames[nextIndex];
-
-      data.activeKey = newValue;
-    }
-
-    watchEffect(() => {
-      if (data.activeEntry === '') {
-        router.push({ path: '/' });
-
-        return;
-      }
-
-      router.push({ path: `/cat/${data.activeEntry}` });
-    });
 
     return {
       entries,
       data,
       entryNames,
-      buttonPrevIsDisabled,
-      buttonNextIsDisabled,
       handleEntrySelected,
-      handlePrevClick,
-      handleNextClick,
     };
   },
 };

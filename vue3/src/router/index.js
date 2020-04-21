@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 import Root from '../views/Root.vue';
-import Cat from '../views/Cat.vue';
+import Content from '../views/Content.vue';
 import NotFound from '../views/NotFound.vue';
 
 const routes = [
@@ -12,7 +12,7 @@ const routes = [
   },
   {
     path: '/cat/:entryName',
-    component: Cat,
+    component: Content,
     props: true,
   },
   {
