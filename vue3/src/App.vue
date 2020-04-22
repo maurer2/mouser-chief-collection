@@ -37,9 +37,18 @@ import { router } from './router';
 import entries from '../../data/data_flattened.json';
 
 import SelectBox from './components/select-box/select-box.vue';
-import Pager from './components/pager/pager.vue';
 
 const entryNames = Object.keys(entries);
+
+const entriesTransformedNested = Object.entries(entries).map((entry) => {
+  const [key, value] = entry;
+
+  return {
+    [key.toLowerCase()]: value,
+  };
+});
+
+const entriesTransformed = Object.assign({}, ...entriesTransformedNested);
 
 export default {
   name: 'App',
@@ -61,6 +70,14 @@ export default {
 
     function handleEntryChange(newEntry) {
       console.log('newEntry', newEntry);
+
+      data.activeKey = newEntry;
+
+      if (data.activeKey === '') {
+        return;
+      }
+
+      router.push({ path: `/cat/${newEntry.toLowerCase()}` });
     }
 
     return {
