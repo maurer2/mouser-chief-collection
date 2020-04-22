@@ -1,13 +1,13 @@
 <template>
   <div class="wrapper">
-    <Entry :active-entry="data.activeEntry" />
-
     <Pager
       :is-prev-button="true"
       :is-disabled="buttonPrevIsDisabled"
       @pager-clicked="handlePrevClick"
     />
-
+    <div class="content">
+      <Entry :active-entry="data.activeEntry" />
+    </div>
     <Pager
       :is-prev-button="false"
       :is-disabled="buttonNextIsDisabled"
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, computed } from 'vue';
+import { reactive, computed, watchEffect } from 'vue';
 import Entry from '../components/entry/entry.vue';
 
 import entries from '../../../data/data_flattened.json';
@@ -47,7 +47,7 @@ export default {
       default: '',
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const data = reactive({
       activeKey: '',
       activeEntry: computed(() => entriesTransformed[props.entryName] || ''),
@@ -56,7 +56,6 @@ export default {
 
     const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
     const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
-
 
     function handlePrevClick() {
       if (buttonPrevIsDisabled.value) {
@@ -82,12 +81,29 @@ export default {
       data.activeKey = newValue;
     }
 
+    watchEffect(() => {
+      emit('entryChange', data.activeKey);
+    });
+
     return {
       data,
       handlePrevClick,
       handleNextClick,
+      buttonPrevIsDisabled,
+      buttonNextIsDisabled,
     };
   },
 };
 
 </script>
+
+<style scoped lang="postcss">
+  .wrapper {
+    display: contents;
+  }
+
+  .content {
+    grid-area: content;
+  }
+
+</style>

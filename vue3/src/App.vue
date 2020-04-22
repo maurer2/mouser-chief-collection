@@ -19,9 +19,7 @@
       <router-link to="/cat/nelson">Nelson</router-link>
     </nav>
     <main class="main">
-      <div class="content">
-        <View />
-      </div>
+      <View @entryChange="handleEntryChange" />
     </main>
     <footer class="footer">
       {{ entryNames.length }} entries loaded
@@ -61,11 +59,16 @@ export default {
       data.activeKey = value;
     }
 
+    function handleEntryChange(newEntry) {
+      console.log('newEntry', newEntry);
+    }
+
     return {
       entries,
       data,
       entryNames,
       handleEntrySelected,
+      handleEntryChange,
     };
   },
 };
