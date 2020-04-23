@@ -1,25 +1,16 @@
 <template>
   <article class="wrapper">
     <header class="header">
-      <h1 class="title">
-        <Link
-          to="/"
-          text="Mouser-Chief-Collection"
-          class="title-link"
-        />
-      </h1>
-    </header>
-    <nav class="nav">
-      <SelectBox
-        :entry-names="entryNames"
-        :active-entry="data.activeEntry"
-        @entry-selected="handleEntrySelected"
+      <View
+        name="header"
+        @entryChange="handleEntryChange"
       />
-      <router-link to="/cat/peter">Peter</router-link>
-      <router-link to="/cat/nelson">Nelson</router-link>
-    </nav>
+    </header>
     <main class="main">
-      <View @entryChange="handleEntryChange" />
+      <View
+        name="content"
+        @entryChange="handleEntryChange"
+      />
     </main>
     <footer class="footer">
       {{ entryNames.length }} entries loaded
@@ -28,33 +19,17 @@
 </template>
 
 <script>
-import {
-  reactive, computed, watchEffect,
-} from 'vue';
-import { Link, View } from 'vue-router';
+import { reactive, computed } from 'vue';
+import { View } from 'vue-router';
 import { router } from './router';
 
 import entries from '../../data/data_flattened.json';
 
-import SelectBox from './components/select-box/select-box.vue';
-
 const entryNames = Object.keys(entries);
-
-const entriesTransformedNested = Object.entries(entries).map((entry) => {
-  const [key, value] = entry;
-
-  return {
-    [key.toLowerCase()]: value,
-  };
-});
-
-const entriesTransformed = Object.assign({}, ...entriesTransformedNested);
 
 export default {
   name: 'App',
   components: {
-    SelectBox,
-    Link,
     View,
   },
   setup() {
@@ -64,13 +39,7 @@ export default {
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
 
-    function handleEntrySelected(value) {
-      data.activeKey = value;
-    }
-
     function handleEntryChange(newEntry) {
-      console.log('newEntry', newEntry);
-
       data.activeKey = newEntry;
 
       if (data.activeKey === '') {
@@ -84,7 +53,6 @@ export default {
       entries,
       data,
       entryNames,
-      handleEntrySelected,
       handleEntryChange,
     };
   },
@@ -126,12 +94,6 @@ export default {
     @apply
       p-4
       bg-gray;
-  }
-
-  .view {
-    padding: 1rem;
-    text-align: center;
-    background: lightgreen;
   }
 
   .main {
