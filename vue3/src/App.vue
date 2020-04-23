@@ -1,5 +1,8 @@
 <template>
   <article class="wrapper">
+    <h1>
+      Debug: {{ data.router.currentRoute.params }}
+    </h1>
     <header class="header">
       <View
         name="header"
@@ -37,6 +40,7 @@ export default {
       activeKey: '',
       activeEntry: computed(() => data.activeKey || ''),
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
+      router,
     });
 
     function handleEntryChange(newEntry) {

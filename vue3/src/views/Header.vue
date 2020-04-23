@@ -57,10 +57,8 @@ export default {
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
 
-    console.log(props);
-
     watchEffect(() => {
-      emit('entryChange', data.activeKey);
+      // emit('entryChange', data.activeKey);
     });
 
     return {

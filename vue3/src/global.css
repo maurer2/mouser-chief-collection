@@ -15,10 +15,12 @@ body {
   display: grid;
   min-height: inherit;
   grid-template-areas:
+    "debug"
     "header"
     "main"
     "footer";
   grid-template-rows:
+    auto
     auto
     1fr
     auto;

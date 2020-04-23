@@ -14,10 +14,7 @@ const routes = [
       header: Header,
       content: Root,
     },
-    props: {
-      header: true,
-      content: true,
-    },
+    props: true,
   },
   {
     path: '/cat/:entryName',
@@ -25,10 +22,7 @@ const routes = [
       header: Header,
       content: Content,
     },
-    props: {
-      header: true,
-      content: true,
-    },
+    props: true,
   },
   {
     path: '/:catchAll(.*)',
