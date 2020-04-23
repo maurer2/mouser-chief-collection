@@ -16,11 +16,9 @@ body {
   min-height: inherit;
   grid-template-areas:
     "header"
-    "nav"
     "main"
     "footer";
   grid-template-rows:
-    auto
     auto
     1fr
     auto;

@@ -64,36 +64,8 @@ export default {
     display: contents;
   }
 
-  .title {
-    @apply
-      m-0
-      leading-normal
-      text-xl
-      text-white;
-  }
-
-  .title-link {
-    color: inherit;
-
-    @apply
-      no-underline;
-  }
-
   .header {
     grid-area: header;
-
-    @apply
-      p-4
-      text-center
-      bg-pink-2;
-  }
-
-  .nav {
-    grid-area: nav;
-
-    @apply
-      p-4
-      bg-gray;
   }
 
   .main {

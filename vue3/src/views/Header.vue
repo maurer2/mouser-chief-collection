@@ -13,10 +13,11 @@
         :active-entry="data.activeEntry"
         @entry-selected="handleEntrySelected"
       />
-
-      <router-link to="/cat/peter">Peter</router-link>
-      <router-link to="/cat/nelson">Nelson</router-link>
     </nav>
+
+    <router-link to="/cat/peter">Peter</router-link>
+    <router-link to="/cat/nelson">Nelson</router-link>
+
   </div>
 </template>
 
@@ -56,6 +57,8 @@ export default {
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
 
+    console.log(props);
+
     watchEffect(() => {
       emit('entryChange', data.activeKey);
     });
@@ -71,6 +74,28 @@ export default {
 <style scoped lang="postcss">
   .wrapper {
     display: contents;
+  }
+
+  .title {
+    @apply
+      text-center
+      bg-pink-2;
+  }
+
+  .title-link {
+    @apply
+      m-0
+      p-4
+      leading-normal
+      text-xl
+      text-white
+      no-underline;
+  }
+
+  .nav {
+    @apply
+      p-4
+      bg-gray;
   }
 
 </style>

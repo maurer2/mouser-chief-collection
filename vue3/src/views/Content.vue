@@ -54,6 +54,8 @@ export default {
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
 
+    console.log(props);
+
     const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
     const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
 
