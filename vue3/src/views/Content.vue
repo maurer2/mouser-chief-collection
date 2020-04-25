@@ -17,12 +17,14 @@
 </template>
 
 <script lang="ts">
-import { reactive, computed, watchEffect } from 'vue';
+import { reactive, computed } from 'vue';
 import Entry from '../components/entry/entry.vue';
 
 import entries from '../../../data/data_flattened.json';
 
 import Pager from '../components/pager/pager.vue';
+import { router } from '../router';
+
 
 const entriesTransformedNested = Object.entries(entries).map((entry) => {
   const [key, value] = entry;
@@ -47,7 +49,7 @@ export default {
       default: '',
     },
   },
-  setup(props, { emit }) {
+  setup(props) {
     const data = reactive({
       activeKey: props.entryName,
       activeEntry: computed(() => entriesTransformed[props.entryName] || ''),
@@ -67,6 +69,8 @@ export default {
       const newValue = entryNames[prevIndex];
 
       data.activeKey = newValue;
+
+      router.push({ path: `/cat/${data.activeKey.toLowerCase()}` });
     }
 
     function handleNextClick() {
@@ -79,13 +83,9 @@ export default {
       const newValue = entryNames[nextIndex];
 
       data.activeKey = newValue;
+
+      router.push({ path: `/cat/${data.activeKey.toLowerCase()}` });
     }
-
-    watchEffect(() => {
-      emit('entryChange', data.activeKey);
-
-      router.push({ path: '/cat/', params: { entryName: data.activeKey.toLowerCase() } });
-    });
 
     return {
       data,
