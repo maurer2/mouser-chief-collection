@@ -61,7 +61,7 @@ export default {
     function handleEntrySelected(newValue) {
       // emit('entryChange', newValue);
 
-      router.push({ path: '/cat/', params: { entryName: newValue.toLowerCase() } });
+      router.push({ path: `/cat/${newValue.toLowerCase()}` });
     }
 
     return {
