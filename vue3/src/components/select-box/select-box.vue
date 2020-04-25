@@ -69,7 +69,7 @@ export default {
       required: true,
       default: () => [],
     },
-    activeEntry: {
+    activeKey: {
       type: String,
       required: true,
       default: '',
@@ -83,7 +83,7 @@ export default {
     });
 
     watchEffect(() => {
-      data.selectedEntry = props.activeEntry;
+      data.selectedEntry = props.activeKey;
     });
 
     function handleChange(event) {

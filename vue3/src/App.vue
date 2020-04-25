@@ -45,13 +45,13 @@ export default {
     });
 
     function handleEntryChange(newEntry) {
-      data.activeKey = newEntry;
+      console.log('handleEntryChange', newEntry);
 
-      if (data.activeKey === '') {
-        return;
-      }
+      // router.push({ path: '/cat/', params: { entryName: newEntry.toLowerCase() } });
 
-      router.push({ path: `/cat/${newEntry.toLowerCase()}` });
+
+
+      // router.push({ path: `/cat/${newEntry.toLowerCase()}` });
     }
 
     return {

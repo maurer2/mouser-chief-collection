@@ -10,7 +10,7 @@
     <nav class="nav">
       <SelectBox
         :entry-names="data.entryNames"
-        :active-entry="data.activeKey"
+        :active-key="data.activeKey"
         @entry-selected="handleEntrySelected"
       />
     </nav>
@@ -21,6 +21,8 @@
 import { reactive, computed, watchEffect } from 'vue';
 import { Link } from 'vue-router';
 import SelectBox from '../components/select-box/select-box.vue';
+import { router } from '../router';
+
 
 import entries from '../../../data/data_flattened.json';
 
@@ -46,10 +48,9 @@ export default {
       default: '',
     },
   },
-  setup(props, { emit }) {
+  setup(props) {
     const data = reactive({
       activeKey: props.entryName,
-      activeEntry: computed(() => entriesTransformed[props.entryName] || ''),
       entryNames,
     });
 
@@ -58,7 +59,9 @@ export default {
     });
 
     function handleEntrySelected(newValue) {
-      console.log('handleEntrySelected', newValue);
+      // emit('entryChange', newValue);
+
+      router.push({ path: '/cat/', params: { entryName: newValue.toLowerCase() } });
     }
 
     return {

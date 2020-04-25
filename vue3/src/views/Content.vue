@@ -83,6 +83,8 @@ export default {
 
     watchEffect(() => {
       emit('entryChange', data.activeKey);
+
+      router.push({ path: '/cat/', params: { entryName: data.activeKey.toLowerCase() } });
     });
 
     return {
