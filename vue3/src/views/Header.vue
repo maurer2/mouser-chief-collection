@@ -9,15 +9,11 @@
     </h1>
     <nav class="nav">
       <SelectBox
-        :entry-names="entryNames"
-        :active-entry="data.activeEntry"
+        :entry-names="data.entryNames"
+        :active-entry="data.activeKey"
         @entry-selected="handleEntrySelected"
       />
     </nav>
-
-    <router-link to="/cat/peter">Peter</router-link>
-    <router-link to="/cat/nelson">Nelson</router-link>
-
   </div>
 </template>
 
@@ -52,17 +48,22 @@ export default {
   },
   setup(props, { emit }) {
     const data = reactive({
-      activeKey: '',
+      activeKey: props.entryName,
       activeEntry: computed(() => entriesTransformed[props.entryName] || ''),
-      positionInList: computed(() => entryNames.indexOf(data.activeKey)),
+      entryNames,
     });
 
     watchEffect(() => {
       // emit('entryChange', data.activeKey);
     });
 
+    function handleEntrySelected(newValue) {
+      console.log('handleEntrySelected', newValue);
+    }
+
     return {
       data,
+      handleEntrySelected,
     };
   },
 };

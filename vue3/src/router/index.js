@@ -1,21 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 import Root from '../views/Root.vue';
-import NotFound from '../views/NotFound.vue';
 
 import Header from '../views/Header.vue';
 import Content from '../views/Content.vue';
 
 const routes = [
-  {
-    path: '/',
-    component: Root,
-    components: {
-      header: Header,
-      content: Root,
-    },
-    props: true,
-  },
   {
     path: '/cat/:entryName',
     components: {
@@ -26,7 +16,11 @@ const routes = [
   },
   {
     path: '/:catchAll(.*)',
-    component: NotFound,
+    component: Root,
+    components: {
+      header: Header,
+      content: Content,
+    },
     props: true,
   },
 ];

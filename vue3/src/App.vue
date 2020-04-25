@@ -1,7 +1,8 @@
 <template>
   <article class="wrapper">
     <h1>
-      Debug: {{ data.router.currentRoute.params }}
+      <router-link to="/cat/peter">Peter</router-link>
+      <router-link to="/cat/nelson">Nelson</router-link>
     </h1>
     <header class="header">
       <View
@@ -16,6 +17,7 @@
       />
     </main>
     <footer class="footer">
+      {{ data.activeKey }}
       {{ entryNames.length }} entries loaded
     </footer>
   </article>
@@ -37,10 +39,9 @@ export default {
   },
   setup() {
     const data = reactive({
-      activeKey: '',
-      activeEntry: computed(() => data.activeKey || ''),
-      positionInList: computed(() => entryNames.indexOf(data.activeKey)),
-      router,
+      currentRoute: router.currentRoute,
+      routeParams: computed(() => data.currentRoute.params),
+      activeKey: computed(() => (('entryName' in data.routeParams) ? data.routeParams.entryName : '')),
     });
 
     function handleEntryChange(newEntry) {

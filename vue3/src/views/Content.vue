@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" v-if="data.activeEntry">
     <Pager
       :is-prev-button="true"
       :is-disabled="buttonPrevIsDisabled"
@@ -49,12 +49,10 @@ export default {
   },
   setup(props, { emit }) {
     const data = reactive({
-      activeKey: '',
+      activeKey: props.entryName,
       activeEntry: computed(() => entriesTransformed[props.entryName] || ''),
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
-
-    console.log(props);
 
     const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
     const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
