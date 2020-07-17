@@ -59,7 +59,7 @@ export default {
     SelectBox,
     Pager,
     RouterView,
-    RouterLink
+    RouterLink,
   },
   setup() {
     const data = reactive({
