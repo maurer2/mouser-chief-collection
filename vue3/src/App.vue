@@ -2,7 +2,7 @@
   <article class="wrapper">
     <header class="header">
       <h1 class="title">
-        <Link
+        <RouterLink
           to="/"
           text="Mouser-Chief-Collection"
           class="title-link"
@@ -24,7 +24,7 @@
           @pager-clicked="handlePrevClick"
         />
         <div class="content">
-          <View />
+          <RouterView />
         </div>
         <Pager
           :is-prev-button="false"
@@ -43,7 +43,7 @@
 import {
   reactive, computed, watchEffect,
 } from 'vue';
-import { Link, View } from 'vue-router';
+import { RouterView, RouterLink } from 'vue-router';
 import { router } from './router';
 
 import entries from '../../data/data_flattened.json';
@@ -58,8 +58,8 @@ export default {
   components: {
     SelectBox,
     Pager,
-    Link,
-    View,
+    RouterView,
+    RouterLink,
   },
   setup() {
     const data = reactive({

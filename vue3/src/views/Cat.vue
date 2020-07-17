@@ -6,7 +6,8 @@
 
 <script lang="ts">
 import { reactive, computed } from 'vue';
-import { router } from '../router';
+import { useRoute } from 'vue-router';
+
 import Entry from '../components/entry/entry.vue';
 
 import entries from '../../../data/data_flattened.json';
@@ -17,11 +18,11 @@ export default {
     Entry,
   },
   setup() {
-    console.log('cat');
+    const route = useRoute();
 
     const data = reactive({
-      currentRoute: router.currentRoute,
-      entry: computed(() => data.currentRoute.params.entry || ''),
+      currentRoute: route,
+      entry: computed(() => route.params.entry || ''),
       activeEntry: computed(() => entries[data.entry] || ''),
     });
 
