@@ -12,8 +12,8 @@
     "serve": "yarpm run webpack-dev-server"
   },
   "dependencies": {
-    "vue": "^3.0.0-beta.2",
-    "vue-router": "v4.0.0-alpha.7"
+    "vue": "^v3.0.0-rc.1",
+    "vue-router": "^v4.0.0-beta.2"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
