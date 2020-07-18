@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <h1 class="title">
-      <Link
+      <RouterLink
         to="/"
         text="Mouser-Chief-Collection"
         class="title-link"
@@ -19,10 +19,9 @@
 
 <script lang="ts">
 import { reactive, computed, watchEffect } from 'vue';
-import { Link } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import SelectBox from '../components/select-box/select-box.vue';
 import { router } from '../router';
-
 
 import entries from '../../../data/data_flattened.json';
 
@@ -39,7 +38,7 @@ const entryNames = Object.keys(entries);
 export default {
   name: 'Content',
   components: {
-    Link,
+    RouterLink,
     SelectBox,
   },
   props: {
