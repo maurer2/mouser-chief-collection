@@ -1,6 +1,11 @@
 <template>
-  <section class="pagination">
-    <p>Showing entry {{ positionInList + 1 }} / {{ numEntries }}</p>
+  <section
+    class="pagination"
+    :style="cssVars"
+  >
+    <p class="text">
+      {{ positionInList + 1 }} / {{ numEntries }}
+    </p>
   </section>
 </template>
 
@@ -26,22 +31,26 @@ export default {
     const { positionInList, numEntries } = toRefs(props);
 
     const progressInPercent = computed(() => (100 * (positionInList.value + 1)) / numEntries.value);
+    const cssVars = {
+      '--progressInPercent': progressInPercent,
+    };
 
     return {
-      props,
       positionInList,
       numEntries,
       progressInPercent,
+      cssVars,
     };
   },
 };
 </script>
 
-<style scoped lang="postcss" vars="{ progressInPercent }">
+<style scoped lang="postcss">
   .pagination {
     @apply
       p-4
       leading-none
+      text-white
       text-center
       bg-gray;
 
