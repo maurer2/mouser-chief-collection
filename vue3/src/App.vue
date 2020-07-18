@@ -34,7 +34,10 @@
       </template>
     </main>
     <footer class="footer">
-      {{ entryNames.length }} entries loaded
+      <Footer
+        :num-entries="entryNames.length"
+        :position-in-list="positionInList2"
+      />
     </footer>
   </article>
 </template>
@@ -50,6 +53,7 @@ import entries from '../../data/data_flattened.json';
 
 import SelectBox from './components/select-box/select-box.vue';
 import Pager from './components/pager/pager.vue';
+import Footer from './components/footer/footer.vue';
 
 const entryNames = Object.keys(entries);
 
@@ -58,6 +62,7 @@ export default {
   components: {
     SelectBox,
     Pager,
+    Footer,
     RouterView,
     RouterLink,
   },
@@ -68,6 +73,7 @@ export default {
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
 
+    const positionInList2 = computed(() => entryNames.indexOf(data.activeKey));
     const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
     const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
 
@@ -109,6 +115,10 @@ export default {
       router.push({ path: `/cat/${data.activeEntry}` });
     });
 
+    watchEffect(() => {
+      console.log(data.positionInList, positionInList2.value);
+    });
+
     return {
       entries,
       data,
@@ -118,6 +128,7 @@ export default {
       handleEntrySelected,
       handlePrevClick,
       handleNextClick,
+      positionInList2,
     };
   },
 };
@@ -193,12 +204,6 @@ export default {
 
   .footer {
     grid-area: footer;
-
-    @apply
-      p-4
-      leading-none
-      text-center
-      bg-gray;
   }
 
 </style>
