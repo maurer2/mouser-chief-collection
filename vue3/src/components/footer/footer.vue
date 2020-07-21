@@ -31,7 +31,12 @@ export default {
     const { positionInList, numEntries } = toRefs(props);
 
     const positionInListOneBased = computed(() => positionInList.value + 1);
-    const progressInPercent = computed(() => (100 * (positionInListOneBased.value)) / numEntries.value);
+
+    const progressInPercent = computed(() => {
+      const percentsExact = (100 * positionInListOneBased.value) / numEntries.value;
+
+      return Math.floor(percentsExact);
+    });
 
     const positionInListFormatted = computed(() => {
       const positionInListAsString = positionInListOneBased.value.toString();
