@@ -115,9 +115,11 @@ export default {
       router.push({ path: `/cat/${data.activeEntry}` });
     });
 
+    /*
     watchEffect(() => {
       console.log(data.positionInList, positionInList2.value);
     });
+    */
 
     return {
       entries,

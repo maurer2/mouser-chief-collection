@@ -4,7 +4,7 @@
     :style="cssVars"
   >
     <p class="text">
-      {{ positionInList + 1 }} / {{ numEntries }}
+      {{ positionInListFormatted }} / {{ numEntries }}
     </p>
   </section>
 </template>
@@ -30,13 +30,26 @@ export default {
   setup(props) {
     const { positionInList, numEntries } = toRefs(props);
 
-    const progressInPercent = computed(() => (100 * (positionInList.value + 1)) / numEntries.value);
+    const positionInListOneBased = computed(() => positionInList.value + 1);
+    const progressInPercent = computed(() => (100 * (positionInListOneBased.value)) / numEntries.value);
+
+    const positionInListFormatted = computed(() => {
+      const positionInListAsString = positionInListOneBased.value.toString();
+      const numEntriesAsString = numEntries.value.toString();
+
+      if (!String.prototype.padStart) {
+        return positionInListAsString;
+      }
+
+      return positionInListAsString.padStart(numEntriesAsString.length, '0');
+    });
+
     const cssVars = {
       '--progressInPercent': progressInPercent,
     };
 
     return {
-      positionInList,
+      positionInListFormatted,
       numEntries,
       progressInPercent,
       cssVars,
