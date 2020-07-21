@@ -1,8 +1,5 @@
 <template>
-  <section
-    class="pagination"
-    :style="cssVars"
-  >
+  <section class="pagination">
     <p class="text">
       {{ positionInListFormatted }} / {{ numEntries }}
     </p>
@@ -51,21 +48,16 @@ export default {
         : positionInListAsString.padStart(numEntriesAsString.length, '0');
     });
 
-    const cssVars = {
-      '--progressInPercent': progressInPercent,
-    };
-
     return {
       positionInListFormatted,
       numEntries,
       progressInPercent,
-      cssVars,
     };
   },
 };
 </script>
 
-<style scoped lang="postcss">
+<style scoped lang="postcss" vars={ progressInPercent }>
   .pagination {
     @apply
       p-4
