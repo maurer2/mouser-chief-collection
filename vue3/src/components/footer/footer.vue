@@ -41,7 +41,9 @@ export default {
         return positionInListAsString;
       }
 
-      return positionInListAsString.padStart(numEntriesAsString.length, '0');
+      return (positionInListAsString === '0')
+        ? positionInListAsString
+        : positionInListAsString.padStart(numEntriesAsString.length, '0');
     });
 
     const cssVars = {
