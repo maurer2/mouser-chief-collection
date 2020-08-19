@@ -10,7 +10,8 @@
     "lint:js:fix": "vue-cli-service lint",
     "lint:styles": "stylelint '**/*.{vue, css, scss}'; exit 0",
     "lint:styles:fix": "stylelint --fix '**/*.{vue, css, scss}'; exit 0",
-    "serve": "yarpm run serve"
+    "serve": "yarpm run serve",
+    "dist-test": "yarpm run build && webpack-dev-server --inline --content-base ./dist"
   },
   "resolutions": {
     "@vue/cli-service@/minimist": "^1.2.2"
