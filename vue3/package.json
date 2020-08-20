@@ -6,6 +6,7 @@
     "cleanup": "sort-package-json",
     "debug:autoprefixer": "yarpm run autoprefixer --info",
     "dev": "vite",
+    "dev:verbose": "vite --debug",
     "lint:js": "vue-cli-service lint --no-fix",
     "lint:js:fix": "vue-cli-service lint",
     "lint:styles": "stylelint '**/*.{vue, css, scss}'; exit 0",
