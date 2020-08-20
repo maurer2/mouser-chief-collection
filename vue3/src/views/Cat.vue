@@ -10,7 +10,8 @@ import { useRoute } from 'vue-router';
 
 import Entry from '../components/entry/entry.vue';
 
-import entries from '../data_flattened2.json';
+// data/data_flattened.json
+import entries from '/@data/data_flattened.json';
 
 export default {
   name: 'Cat',

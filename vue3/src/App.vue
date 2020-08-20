@@ -49,8 +49,8 @@ import {
 import { RouterView, RouterLink } from 'vue-router';
 import { router } from './router';
 
-// import entries from './data_flattened2.json';
-import entries from '../../data/data_flattened.json';
+// data/data_flattened.json
+import entries from '/@data/data_flattened.json';
 
 import SelectBox from './components/select-box/select-box.vue';
 import Pager from './components/pager/pager.vue';
