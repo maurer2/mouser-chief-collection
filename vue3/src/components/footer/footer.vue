@@ -36,8 +36,8 @@ export default {
     });
 
     const positionInListFormatted = computed(() => {
-      const positionInListAsString = positionInListOneBased.value.toString();
-      const numEntriesAsString = numEntries.value.toString();
+      const positionInListAsString = String(positionInListOneBased.value);
+      const numEntriesAsString = String(numEntries.value);
 
       if (!String.prototype.padStart) {
         return positionInListAsString;
@@ -57,7 +57,7 @@ export default {
 };
 </script>
 
-<style scoped lang="postcss" vars={ progressInPercent }>
+<style scoped lang="postcss" vars="{ progressInPercent }">
   .pagination {
     @apply
       p-4
