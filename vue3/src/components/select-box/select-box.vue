@@ -75,6 +75,9 @@ export default {
       default: '',
     },
   },
+  emits: [
+    'entry-selected',
+  ],
   setup(props, context) {
     const data = reactive({
       list: props.entryNames,
