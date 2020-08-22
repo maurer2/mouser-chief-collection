@@ -1,7 +1,7 @@
 const tailwindcss = require('tailwindcss');
 const purgecss = require('@fullhuman/postcss-purgecss');
 const autoprefixer = require('autoprefixer');
-// const cssnano = require('cssnano');
+const cssnano = require('cssnano');
 const postcssNested = require('postcss-nested'); // needed for unwrapping media queries
 const postcssImport = require('postcss-import');
 
@@ -23,7 +23,7 @@ module.exports = {
       whitelistPatterns: [/-(leave|enter|appear)(|-(to|from|active))$/, /^(?!cursor-move).+-move$/, /^router-link(|-exact)-active$/],
     }),
     autoprefixer,
-    // cssnano,
+    cssnano,
   ],
   preset: {
     autoprefixer: {
