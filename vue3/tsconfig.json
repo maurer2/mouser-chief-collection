@@ -18,8 +18,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "noImplicitAny": true,
+    "baseUrl": ".",
+    "paths": {
+      "@data/*": ["../data/*"], // https://github.com/vitejs/vite/issues/637
+    }
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
   ],
 }

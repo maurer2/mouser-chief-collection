@@ -3,9 +3,11 @@
     <h2 class="title">
       {{ title }}
     </h2>
-    <template v-for="(fieldValue, fieldKey) in activeEntry">
+    <template
+      v-for="(fieldValue, fieldKey) in activeEntry"
+      :key="fieldKey"
+    >
       <dl
-        :key="fieldKey"
         class="list"
       >
         <dt class="list-key">
