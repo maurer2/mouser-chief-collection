@@ -47,10 +47,9 @@ import {
   reactive, computed, watchEffect,
 } from 'vue';
 import { RouterView, RouterLink } from 'vue-router';
-import { router } from './router';
-
-// data/data_flattened.json
+// eslint-disable-next-line
 import entries from '/@data/data_flattened.json';
+import { router } from './router';
 
 import SelectBox from './components/select-box/select-box.vue';
 import Pager from './components/pager/pager.vue';

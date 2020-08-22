@@ -7,11 +7,9 @@
 <script lang="ts">
 import { reactive, computed } from 'vue';
 import { useRoute } from 'vue-router';
-
-import Entry from '../components/entry/entry.vue';
-
-// data/data_flattened.json
+// eslint-disable-next-line
 import entries from '/@data/data_flattened.json';
+import Entry from '../components/entry/entry.vue';
 
 export default {
   name: 'Cat',
