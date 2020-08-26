@@ -22,7 +22,6 @@
         id="select"
         v-model="data.selectedEntry"
         class="select"
-        @change="handleChange"
       >
         <option
           value=""
@@ -59,7 +58,7 @@
 </template>
 
 <script>
-import { reactive, watchEffect, computed } from 'vue';
+import { reactive, computed } from 'vue';
 
 export default {
   name: 'Selectbox',
@@ -81,18 +80,12 @@ export default {
   setup(props, context) {
     const data = reactive({
       list: props.entryNames,
-      selectedEntry: '',
+      selectedEntry: computed({
+        get: () => props.activeEntry,
+        set: (value) => context.emit('entry-selected', value)
+      }),
       isDefaultSelection: computed(() => data.selectedEntry === ''),
     });
-
-    watchEffect(() => {
-      data.selectedEntry = props.activeEntry;
-    });
-
-    function handleChange(event) {
-      data.selectedEntry = event.target.value;
-      context.emit('entry-selected', event.target.value);
-    }
 
     function handleSubmit() {
       context.emit('entry-selected', data.selectedEntry);
@@ -106,7 +99,6 @@ export default {
       data,
       handleSubmit,
       handleReset,
-      handleChange,
     };
   },
 };
