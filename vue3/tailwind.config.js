@@ -1,5 +1,5 @@
 module.exports = {
-  important: true,
+  important: false,
   theme: {
     screens: {
       sm: '640px',

@@ -1,8 +1,8 @@
 <template>
-  <div class="wrapper">
+  <article class="wrapper">
     <header class="header">
       <h1 class="title">
-        <Link
+        <RouterLink
           to="/"
           text="Mouser-Chief-Collection"
           class="title-link"
@@ -24,7 +24,7 @@
           @pager-clicked="handlePrevClick"
         />
         <div class="content">
-          <View />
+          <RouterView />
         </div>
         <Pager
           :is-prev-button="false"
@@ -34,23 +34,26 @@
       </template>
     </main>
     <footer class="footer">
-      <div>
-        {{ entryNames.length }} entries loaded
-      </div>
+      <Footer
+        :num-entries="entryNames.length"
+        :position-in-list="positionInList2"
+      />
     </footer>
-  </div>
+  </article>
 </template>
 
 <script lang="ts">
 import {
-  reactive, computed, watchEffect, getCurrentInstance,
+  reactive, computed, watchEffect,
 } from 'vue';
-import { Link, View } from 'vue-router';
-
-import entries from '../../data/data_flattened.json';
+import { RouterView, RouterLink } from 'vue-router';
+// eslint-disable-next-line
+import entries from '/@data/data_flattened.json';
+import { router } from './router';
 
 import SelectBox from './components/select-box/select-box.vue';
 import Pager from './components/pager/pager.vue';
+import Footer from './components/footer/footer.vue';
 
 const entryNames = Object.keys(entries);
 
@@ -59,8 +62,9 @@ export default {
   components: {
     SelectBox,
     Pager,
-    Link,
-    View,
+    Footer,
+    RouterView,
+    RouterLink,
   },
   setup() {
     const data = reactive({
@@ -69,8 +73,7 @@ export default {
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
 
-    const { router } = getCurrentInstance().appContext.provides;
-
+    const positionInList2 = computed(() => entryNames.indexOf(data.activeKey));
     const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
     const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
 
@@ -105,11 +108,18 @@ export default {
     watchEffect(() => {
       if (data.activeEntry === '') {
         router.push({ path: '/' });
+
         return;
       }
 
       router.push({ path: `/cat/${data.activeEntry}` });
     });
+
+    /*
+    watchEffect(() => {
+      console.log(data.positionInList, positionInList2.value);
+    });
+    */
 
     return {
       entries,
@@ -120,6 +130,7 @@ export default {
       handleEntrySelected,
       handlePrevClick,
       handleNextClick,
+      positionInList2,
     };
   },
 };
@@ -195,12 +206,6 @@ export default {
 
   .footer {
     grid-area: footer;
-
-    @apply
-      p-4
-      leading-none
-      text-center
-      bg-gray;
   }
 
 </style>

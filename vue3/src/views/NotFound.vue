@@ -1,11 +1,11 @@
 <template>
-  <h1>Root</h1>
+  <h1>404</h1>
 </template>
 
 <script lang="ts">
 export default {
   setup() {
-    console.log('root');
+    console.log('404');
   },
 };
 

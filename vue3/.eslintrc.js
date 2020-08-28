@@ -25,6 +25,9 @@ module.exports = {
     }],
     'vue/component-definition-name-casing': 'off',
     "vue/component-name-in-template-casing": "error"
+    'vue/no-template-key': 'off', // https://github.com/vuejs/vue-next/issues/1734#issuecomment-665745971
+    'newline-before-return': 'error',
+    'import/no-extraneous-dependencies': 'off', // vite fix
   },
   parserOptions: {
     parser: 'babel-eslint',

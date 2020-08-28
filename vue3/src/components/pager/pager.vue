@@ -21,6 +21,9 @@ export default {
     isPrevButton: Boolean,
     isDisabled: Boolean,
   },
+  emits: [
+    'pager-clicked',
+  ],
   setup(props, context) {
     function handleClick() {
       context.emit('pager-clicked', props.isPrevButton);

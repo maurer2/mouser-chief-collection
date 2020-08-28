@@ -5,10 +5,11 @@
 </template>
 
 <script lang="ts">
-import { reactive, getCurrentInstance, computed } from 'vue';
+import { reactive, computed } from 'vue';
+import { useRoute } from 'vue-router';
+// eslint-disable-next-line
+import entries from '/@data/data_flattened.json';
 import Entry from '../components/entry/entry.vue';
-
-import entries from '../../../data/data_flattened.json';
 
 export default {
   name: 'Cat',
@@ -16,10 +17,11 @@ export default {
     Entry,
   },
   setup() {
-    const { router } = getCurrentInstance().appContext.provides;
+    const route = useRoute();
+
     const data = reactive({
-      currentRoute: router.currentRoute,
-      entry: computed(() => data.currentRoute.params.entry || ''),
+      currentRoute: route,
+      entry: computed(() => route.params.entry || ''),
       activeEntry: computed(() => entries[data.entry] || ''),
     });
 
