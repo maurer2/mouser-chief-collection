@@ -15,14 +15,11 @@
     "lint:styles:fix": "stylelint --fix '**/*.{vue, css, scss}'; exit 0",
     "serve": "yarpm run dev"
   },
-  "resolutions": {
-    "@vue/cli-service@/minimist": "^1.2.2"
-  },
   "dependencies": {
     "@koa/cors": "^3.1.0",
     "tailwindcss": "^1.5.1",
     "vite": "^1.0.0-rc.4",
-    "vue": "^v3.0.0-rc.7",
+    "vue": "^v3.0.0-rc.9",
     "vue-loader-v16": "^16.0.0-beta.5",
     "vue-router": "^v4.0.0-beta.7"
   },
@@ -32,7 +29,7 @@
     "@typescript-eslint/parser": "^2.34.0",
     "@vue/cli-plugin-eslint": "^4.2.3",
     "@vue/cli-service": "^4.5.4",
-    "@vue/compiler-sfc": "^3.0.0-rc.7",
+    "@vue/compiler-sfc": "^3.0.0-rc.9",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "@vue/eslint-config-typescript": "5.1.0",
     "autoprefixer": "^9.7.4",

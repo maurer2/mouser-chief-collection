@@ -815,7 +815,7 @@
     "@vue/compiler-core" "3.0.0-rc.9"
     "@vue/shared" "3.0.0-rc.9"
 
-"@vue/compiler-sfc@^3.0.0-rc.5", "@vue/compiler-sfc@^3.0.0-rc.7":
+"@vue/compiler-sfc@^3.0.0-rc.5", "@vue/compiler-sfc@^3.0.0-rc.9":
   version "3.0.0-rc.9"
   resolved "https://registry.yarnpkg.com/@vue/compiler-sfc/-/compiler-sfc-3.0.0-rc.9.tgz#8b1af6bf1cb2561b5f92ce11053e5d21b558ca8b"
   integrity sha512-kmjGzcyp93Q+ZKfvxC3GtI9bEXCa9TxsuO+Q9WtiyvOWBLxZkklQc1n5DFn6vtAUIjjlIE5GZoKawvn9LfKejA==
@@ -6012,7 +6012,7 @@ minimist-options@^3.0.1:
     arrify "^1.0.1"
     is-plain-obj "^1.1.0"
 
-minimist@^1.1.0, minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.2, minimist@^1.2.5:
+minimist@^1.1.0, minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
@@ -10158,7 +10158,7 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@^3.0.0-rc.5, vue@^v3.0.0-rc.7:
+vue@^3.0.0-rc.5, vue@^v3.0.0-rc.9:
   version "3.0.0-rc.9"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.0.0-rc.9.tgz#8c54e6168625e3533f1f764ad3fa89235b01afb3"
   integrity sha512-bimvpl5q/sKy1dAOE+KNX9T3p6Qq8kuNRmOYwaxtacI91ksjS7nVGse1FANhTL+XTQgl8+ySrd3f67xWi26nxw==
