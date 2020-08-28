@@ -33,18 +33,18 @@
         />
       </template>
     </main>
-    <Footer class="footer">
+    <div class="footer">
       <Footer
         :num-entries="entryNames.length"
         :position-in-list="positionInList2"
       />
-    </Footer>
+    </div>
   </article>
 </template>
 
 <script lang="ts">
 import {
-  reactive, computed, watchEffect,
+  defineComponent, reactive, computed, watchEffect,
 } from 'vue';
 import { RouterView, RouterLink } from 'vue-router';
 // eslint-disable-next-line
@@ -57,7 +57,7 @@ import Footer from './components/footer/footer.vue';
 
 const entryNames = Object.keys(entries);
 
-export default {
+export default defineComponent({
   name: 'App',
   components: {
     SelectBox,
@@ -133,7 +133,8 @@ export default {
       positionInList2,
     };
   },
-};
+});
+
 </script>
 
 <style scoped lang="postcss">
