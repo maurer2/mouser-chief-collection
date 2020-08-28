@@ -5,13 +5,13 @@
 </template>
 
 <script lang="ts">
-import { reactive, computed } from 'vue';
+import { defineComponent, reactive, computed } from 'vue';
 import { useRoute } from 'vue-router';
 // eslint-disable-next-line
 import entries from '/@data/data_flattened.json';
 import Entry from '../components/entry/entry.vue';
 
-export default {
+export default defineComponent({
   name: 'Cat',
   components: {
     Entry,
@@ -29,6 +29,6 @@ export default {
       data,
     };
   },
-};
+});
 
 </script>

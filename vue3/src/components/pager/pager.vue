@@ -15,7 +15,14 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+
+type PagerProps = {
+  isPrevButton: boolean;
+  isDisabled: boolean;
+}
+
+export default defineComponent({
   name: 'Pager',
   props: {
     isPrevButton: Boolean,
@@ -24,7 +31,7 @@ export default {
   emits: [
     'pager-clicked',
   ],
-  setup(props, context) {
+  setup(props: PagerProps, context) {
     function handleClick() {
       context.emit('pager-clicked', props.isPrevButton);
     }
@@ -34,7 +41,8 @@ export default {
       props,
     };
   },
-};
+});
+
 </script>
 
 <style scoped lang="postcss">

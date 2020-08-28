@@ -33,12 +33,12 @@
         />
       </template>
     </main>
-    <footer class="footer">
+    <Footer class="footer">
       <Footer
         :num-entries="entryNames.length"
         :position-in-list="positionInList2"
       />
-    </footer>
+    </Footer>
   </article>
 </template>
 
