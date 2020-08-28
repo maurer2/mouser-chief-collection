@@ -57,10 +57,15 @@
   </form>
 </template>
 
-<script>
-import { reactive, computed } from 'vue';
+<script lang="ts">
+import { defineComponent, reactive, computed } from 'vue';
 
-export default {
+type SelectboxProps = {
+  entryNames: any[];
+  activeEntry: string;
+}
+
+export default defineComponent({
   name: 'Selectbox',
   props: {
     entryNames: {
@@ -77,12 +82,12 @@ export default {
   emits: [
     'entry-selected',
   ],
-  setup(props, context) {
+  setup(props: SelectboxProps, context) {
     const data = reactive({
       list: props.entryNames,
       selectedEntry: computed({
         get: () => props.activeEntry,
-        set: (value) => context.emit('entry-selected', value)
+        set: (value) => context.emit('entry-selected', value),
       }),
       isDefaultSelection: computed(() => data.selectedEntry === ''),
     });
@@ -101,7 +106,8 @@ export default {
       handleReset,
     };
   },
-};
+});
+
 </script>
 
 <style scoped lang="postcss">

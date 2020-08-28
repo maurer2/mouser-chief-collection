@@ -28,10 +28,14 @@
   </div>
 </template>
 
-<script>
-import { computed } from 'vue';
+<script lang="ts">
+import { defineComponent, computed } from 'vue';
 
-export default {
+type SubentryProps = {
+  fieldValue: string | any[];
+}
+
+export default defineComponent({
   name: 'Subentry',
   props: {
     fieldValue: {
@@ -40,14 +44,15 @@ export default {
       default: '',
     },
   },
-  setup(props) {
+  setup(props: SubentryProps) {
     const isPrimitive = computed(() => !Array.isArray(props.fieldValue));
 
     return {
       isPrimitive,
     };
   },
-};
+});
+
 </script>
 
 <style scoped lang="postcss">

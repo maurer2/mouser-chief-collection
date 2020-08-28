@@ -5,12 +5,18 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = (env = {}) => ({
   mode: env.prod ? 'production' : 'development',
   devtool: env.prod ? 'source-map' : 'cheap-module-eval-source-map',
-  entry: path.resolve(__dirname, './src/main.js'),
+  entry: path.resolve(__dirname, './src/main.ts'),
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
   },
   resolve: {
+    extensions: [
+      '.ts',
+      '.js',
+      '.vue',
+      '.json',
+    ],
     alias: {
       vue: '@vue/runtime-dom',
     },
@@ -50,6 +56,18 @@ module.exports = (env = {}) => ({
           {
             loader: 'postcss-loader',
             options: {},
+          },
+        ],
+      },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/\.vue$/],
+            },
           },
         ],
       },

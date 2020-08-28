@@ -21,11 +21,15 @@
   </section>
 </template>
 
-<script>
-import { computed } from 'vue';
+<script lang="ts">
+import { defineComponent, computed } from 'vue';
 import Subentry from '../subentry/subentry.vue';
 
-export default {
+type EntryProps = {
+  activeEntry: any;
+}
+
+export default defineComponent({
   name: 'Entry',
   components: {
     Subentry,
@@ -34,17 +38,18 @@ export default {
     activeEntry: {
       type: Object,
       required: true,
-      default: () => {},
+      default: () => { /**/ },
     },
   },
-  setup(props) {
+  setup(props: EntryProps) {
     const title = computed(() => ((props.activeEntry !== null) ? props.activeEntry.Name : ''));
 
     return {
       title,
     };
   },
-};
+});
+
 </script>
 
 <style scoped lang="postcss">

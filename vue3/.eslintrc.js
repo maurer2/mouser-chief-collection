@@ -12,6 +12,8 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'plugin:vue/vue3-strongly-recommended',
     '@vue/airbnb',
+    '@vue/typescript',
+    '@vue/typescript/recommended',
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -24,11 +26,13 @@ module.exports = {
       ],
     }],
     'vue/component-definition-name-casing': 'off',
+    'vue/component-name-in-template-casing': 'error',
     'vue/no-template-key': 'off', // https://github.com/vuejs/vue-next/issues/1734#issuecomment-665745971
     'newline-before-return': 'error',
     'import/no-extraneous-dependencies': 'off', // vite fix
   },
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@typescript-eslint/parser',
+    sourceType: 'module',
   },
 };

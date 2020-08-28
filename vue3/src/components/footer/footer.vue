@@ -6,10 +6,15 @@
   </section>
 </template>
 
-<script>
-import { computed, toRefs } from 'vue';
+<script lang="ts">
+import { defineComponent, computed, toRefs } from 'vue';
 
-export default {
+type FooterProps = {
+  numEntries: number;
+  positionInList: number;
+}
+
+export default defineComponent({
   name: 'Footer',
   components: {},
   props: {
@@ -24,7 +29,7 @@ export default {
       default: 0,
     },
   },
-  setup(props) {
+  setup(props: FooterProps) {
     const { positionInList, numEntries } = toRefs(props);
 
     const positionInListOneBased = computed(() => positionInList.value + 1);
@@ -54,7 +59,8 @@ export default {
       progressInPercent,
     };
   },
-};
+});
+
 </script>
 
 <style scoped lang="postcss" vars="{ 'progress-in-percent': progressInPercent }">
