@@ -44,9 +44,10 @@
 
 <script lang="ts">
 import {
-  defineComponent, reactive, computed, watchEffect,
+  defineComponent, reactive, computed, watchEffect, ComputedRef,
 } from 'vue';
 import { RouterView, RouterLink } from 'vue-router';
+import { MouserChiefDetails, MouserChiefList } from './types';
 // eslint-disable-next-line
 import entries from '/@data/data_flattened.json';
 import { router } from './router';
@@ -67,7 +68,11 @@ export default defineComponent({
     RouterLink,
   },
   setup() {
-    const data = reactive({
+    const data = reactive<{
+      activeKey: string;
+      activeEntry: ComputedRef<MouserChiefDetails>;
+      positionInList: ComputedRef<number>;
+    }>({
       activeKey: '',
       activeEntry: computed(() => data.activeKey || ''),
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
