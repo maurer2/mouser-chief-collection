@@ -44,7 +44,7 @@
 
 <script lang="ts">
 import {
-  defineComponent, reactive, computed, watchEffect, ComputedRef,
+  defineComponent, reactive, computed, watchEffect, ComputedRef, UnwrapRef,
 } from 'vue';
 import { RouterView, RouterLink } from 'vue-router';
 import { MouserChiefDetails, MouserChiefList } from './types';
@@ -56,7 +56,13 @@ import SelectBox from './components/select-box/select-box.vue';
 import Pager from './components/pager/pager.vue';
 import Footer from './components/footer/footer.vue';
 
-const entryNames = Object.keys(entries);
+type DataRevs = {
+  activeKey: string;
+  activeEntry: ComputedRef<MouserChiefDetails | string>;
+  positionInList: ComputedRef<number>;
+}
+
+const entryNames = Object.keys(entries as MouserChiefList);
 
 export default defineComponent({
   name: 'App',
@@ -68,11 +74,7 @@ export default defineComponent({
     RouterLink,
   },
   setup() {
-    const data = reactive<{
-      activeKey: string;
-      activeEntry: ComputedRef<MouserChiefDetails>;
-      positionInList: ComputedRef<number>;
-    }>({
+    const data: UnwrapRef<DataRevs> = reactive<DataRevs>({
       activeKey: '',
       activeEntry: computed(() => data.activeKey || ''),
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
@@ -82,11 +84,11 @@ export default defineComponent({
     const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
     const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
 
-    function handleEntrySelected(value) {
+    function handleEntrySelected(value: MouserChiefDetails['Name']): void {
       data.activeKey = value;
     }
 
-    function handlePrevClick() {
+    function handlePrevClick(): void {
       if (buttonPrevIsDisabled.value) {
         return;
       }
@@ -144,7 +146,7 @@ export default defineComponent({
 
 <style scoped lang="postcss">
   .wrapper {
-    display: contents;
+    @apply contents;
   }
 
   .title {
@@ -180,8 +182,10 @@ export default defineComponent({
   }
 
   .view {
-    padding: 1rem;
-    text-align: center;
+    @apply
+      p-4
+      text-center;
+
     background: lightgreen;
   }
 
