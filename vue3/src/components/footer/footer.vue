@@ -8,6 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, toRefs } from 'vue';
+import type { MouserChiefDetails } from '../../types';
 
 type FooterProps = {
   numEntries: number;
@@ -55,7 +56,7 @@ export default defineComponent({
 
     return {
       positionInListFormatted,
-      numEntries,
+      numberOfEntries: numEntries,
       progressInPercent,
     };
   },
@@ -68,12 +69,12 @@ export default defineComponent({
     @apply
       p-4
       leading-none
-      text-white
       text-center
-      bg-gray;
+      text-white
+      bg-gray
+      bg-no-repeat;
 
     background-image: linear-gradient(to right, #ff299c 0%, #ff299c 100%);
-    background-repeat: no-repeat;
     background-size: calc(var(--progress-in-percent) * 1%) 100%;
   }
 

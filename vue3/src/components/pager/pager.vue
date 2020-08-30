@@ -22,6 +22,10 @@ type PagerProps = {
   isDisabled: boolean;
 }
 
+enum EmitValues {
+    PagerClicked = 'pager-clicked',
+}
+
 export default defineComponent({
   name: 'Pager',
   props: {
@@ -29,11 +33,11 @@ export default defineComponent({
     isDisabled: Boolean,
   },
   emits: [
-    'pager-clicked',
+    EmitValues.PagerClicked,
   ],
   setup(props: PagerProps, context) {
-    function handleClick() {
-      context.emit('pager-clicked', props.isPrevButton);
+    function handleClick(): void {
+      context.emit(EmitValues.PagerClicked, props.isPrevButton);
     }
 
     return {

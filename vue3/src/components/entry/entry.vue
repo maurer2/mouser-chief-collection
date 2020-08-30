@@ -23,10 +23,11 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
+import type { MouserChiefDetails } from '../../types';
 import Subentry from '../subentry/subentry.vue';
 
 type EntryProps = {
-  activeEntry: any;
+  activeEntry: MouserChiefDetails;
 }
 
 export default defineComponent({
@@ -54,10 +55,9 @@ export default defineComponent({
 
 <style scoped lang="postcss">
   .entry {
-    min-height: 100%;
-
     @apply
       p-4
+      min-h-full
       bg-gray-light;
   }
 
