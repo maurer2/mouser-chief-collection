@@ -58,7 +58,7 @@ import Footer from './components/footer/footer.vue';
 
 type DataRevs = {
   activeKey: string;
-  activeEntry: ComputedRef<MouserChiefDetails | string>;
+  activeEntry: ComputedRef<string>;
   positionInList: ComputedRef<number>;
 }
 

@@ -58,11 +58,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed } from 'vue';
+import {
+  defineComponent, reactive, computed, ComputedRef, WritableComputedRef, UnwrapRef,
+} from 'vue';
+import type { MouserChiefDetails } from '../../types';
 
 type SelectboxProps = {
-  entryNames: any[];
-  activeEntry: string;
+  entryNames: MouserChiefDetails['Name'][];
+  activeEntry: MouserChiefDetails['Name'];
+}
+
+type DataRevs = {
+  list: MouserChiefDetails['Name'][];
+  isDefaultSelection: ComputedRef<boolean>;
+  selectedEntry: WritableComputedRef<MouserChiefDetails['Name']>;
+}
+
+enum EmitValues {
+    EntrySelected = 'entry-selected',
 }
 
 export default defineComponent({
@@ -80,24 +93,24 @@ export default defineComponent({
     },
   },
   emits: [
-    'entry-selected',
+    EmitValues.EntrySelected,
   ],
   setup(props: SelectboxProps, context) {
-    const data = reactive({
+    const data: UnwrapRef<DataRevs> = reactive<DataRevs>({
       list: props.entryNames,
       selectedEntry: computed({
         get: () => props.activeEntry,
-        set: (value) => context.emit('entry-selected', value),
+        set: (value) => context.emit(EmitValues.EntrySelected, value),
       }),
       isDefaultSelection: computed(() => data.selectedEntry === ''),
     });
 
-    function handleSubmit() {
-      context.emit('entry-selected', data.selectedEntry);
+    function handleSubmit(): void {
+      context.emit(EmitValues.EntrySelected, data.selectedEntry);
     }
 
-    function handleReset() {
-      context.emit('entry-selected', '');
+    function handleReset(): void {
+      context.emit(EmitValues.EntrySelected, '');
     }
 
     return {
@@ -149,9 +162,9 @@ export default defineComponent({
       pl-4
       pr-4
       flex-initial
+      rounded
       bg-pink-2
-      text-white
-      rounded;
+      text-white;
 
     &--is-disabled {
       @apply
@@ -166,7 +179,8 @@ export default defineComponent({
   }
 
   .button--reset {
-    display: none;
+    @apply
+      hidden;
 
     @screen sm {
       display: unset;
