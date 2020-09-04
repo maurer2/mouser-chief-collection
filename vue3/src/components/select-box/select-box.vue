@@ -110,7 +110,7 @@ export default defineComponent({
     }
 
     function handleReset(): void {
-      context.emit(EmitValues.EntrySelected, '');
+      data.selectedEntry = '';
     }
 
     return {

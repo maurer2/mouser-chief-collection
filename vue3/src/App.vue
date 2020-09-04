@@ -4,9 +4,10 @@
       <h1 class="title">
         <RouterLink
           to="/"
-          text="Mouser-Chief-Collection"
           class="title-link"
-        />
+        >
+          Mouser-Chief-Collection
+        </RouterLink>
       </h1>
     </header>
     <nav class="nav">
@@ -20,7 +21,7 @@
       <template v-if="data.activeEntry">
         <Pager
           :is-prev-button="true"
-          :is-disabled="buttonPrevIsDisabled"
+          :is-disabled="data.isFirstEntry"
           @pager-clicked="handlePrevClick"
         />
         <div class="content">
@@ -28,7 +29,7 @@
         </div>
         <Pager
           :is-prev-button="false"
-          :is-disabled="buttonNextIsDisabled"
+          :is-disabled="data.isLastEntry"
           @pager-clicked="handleNextClick"
         />
       </template>
@@ -60,6 +61,9 @@ type DataRevs = {
   activeKey: string;
   activeEntry: ComputedRef<string>;
   positionInList: ComputedRef<number>;
+  // numberOfEntriesInList: ComputedRef<number>;
+  isFirstEntry: ComputedRef<boolean>;
+  isLastEntry: ComputedRef<boolean>;
 }
 
 const entryNames = Object.keys(entries as MouserChiefList);
@@ -78,37 +82,35 @@ export default defineComponent({
       activeKey: '',
       activeEntry: computed(() => data.activeKey || ''),
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
+      // numberOfEntriesInList: computed(() => entryNames.length),
+      isFirstEntry: computed(() => data.positionInList === 0),
+      isLastEntry: computed(() => data.positionInList === (entryNames.length - 1)),
     });
-
-    const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
-    const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
 
     function handleEntrySelected(value: MouserChiefDetails['Name']): void {
       data.activeKey = value;
     }
 
     function handlePrevClick(): void {
-      if (buttonPrevIsDisabled.value) {
+      if (data.isFirstEntry) {
         return;
       }
 
-      const currentIndex = entryNames.indexOf(data.activeKey);
-      const prevIndex = currentIndex - 1;
-      const newValue = entryNames[prevIndex];
+      const prevIndex = data.positionInList - 1;
+      const newKey = entryNames[prevIndex];
 
-      data.activeKey = newValue;
+      data.activeKey = newKey;
     }
 
     function handleNextClick() {
-      if (buttonNextIsDisabled.value) {
+      if (data.isLastEntry) {
         return;
       }
 
-      const currentIndex = entryNames.indexOf(data.activeKey);
-      const nextIndex = currentIndex + 1;
-      const newValue = entryNames[nextIndex];
+      const nextIndex = data.positionInList + 1;
+      const newKey = entryNames[nextIndex];
 
-      data.activeKey = newValue;
+      data.activeKey = newKey;
     }
 
     watchEffect(() => {
@@ -125,8 +127,6 @@ export default defineComponent({
       entries,
       data,
       entryNames,
-      buttonPrevIsDisabled,
-      buttonNextIsDisabled,
       handleEntrySelected,
       handlePrevClick,
       handleNextClick,
