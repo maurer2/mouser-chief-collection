@@ -36,7 +36,7 @@
     <div class="footer">
       <Footer
         :num-entries="entryNames.length"
-        :position-in-list="positionInList2"
+        :position-in-list="data.positionInList"
       />
     </div>
   </article>
@@ -80,7 +80,6 @@ export default defineComponent({
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
     });
 
-    const positionInList2 = computed(() => entryNames.indexOf(data.activeKey));
     const buttonPrevIsDisabled = computed(() => data.positionInList === 0);
     const buttonNextIsDisabled = computed(() => data.positionInList === entryNames.length - 1);
 
@@ -122,12 +121,6 @@ export default defineComponent({
       router.push({ path: `/cat/${data.activeEntry}` });
     });
 
-    /*
-    watchEffect(() => {
-      console.log(data.positionInList, positionInList2.value);
-    });
-    */
-
     return {
       entries,
       data,
@@ -137,7 +130,6 @@ export default defineComponent({
       handleEntrySelected,
       handlePrevClick,
       handleNextClick,
-      positionInList2,
     };
   },
 });
