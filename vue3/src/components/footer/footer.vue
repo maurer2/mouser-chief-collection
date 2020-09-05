@@ -8,7 +8,6 @@
 
 <script lang="ts">
 import { defineComponent, computed, toRefs } from 'vue';
-import type { MouserChiefDetails } from '../../types';
 
 type FooterProps = {
   numEntries: number;

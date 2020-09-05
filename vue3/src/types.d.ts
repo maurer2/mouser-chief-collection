@@ -1,10 +1,10 @@
-export interface MouserChiefDetails {
+interface MouserChiefDetails {
   'Name': string;
   'Began tenure': string;
   'Ended tenure': string;
   'Prime Minister(s)': string[];
 }
 
-export interface MouserChiefList {
+interface MouserChiefList {
   [name: string]: MouserChiefDetails;
 }

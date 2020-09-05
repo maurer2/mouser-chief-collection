@@ -23,7 +23,6 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import type { MouserChiefDetails } from '../../types';
 import Subentry from '../subentry/subentry.vue';
 
 type EntryProps = {

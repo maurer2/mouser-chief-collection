@@ -61,7 +61,6 @@
 import {
   defineComponent, reactive, computed, ComputedRef, WritableComputedRef, UnwrapRef,
 } from 'vue';
-import type { MouserChiefDetails } from '../../types';
 
 type SelectboxProps = {
   entryNames: MouserChiefDetails['Name'][];
