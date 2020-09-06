@@ -30,7 +30,7 @@
           Entries
         </option>
         <option
-          v-for="value in data.list"
+          v-for="value in data.entries"
           :key="value"
           :value="value"
         >
@@ -64,11 +64,12 @@ import {
 
 type SelectboxProps = {
   entryNames: MouserChiefDetails['Name'][];
-  activeEntry: MouserChiefDetails['Name'];
+  activeEntry: MouserChiefDetails;
+  [x: string]: any; // allow new values
 }
 
 type DataRevs = {
-  list: MouserChiefDetails['Name'][];
+  entries: MouserChiefDetails['Name'][];
   isDefaultSelection: ComputedRef<boolean>;
   selectedEntry: WritableComputedRef<MouserChiefDetails['Name']>;
 }
@@ -86,9 +87,8 @@ export default defineComponent({
       default: () => [],
     },
     activeEntry: {
-      type: String,
-      required: true,
-      default: '',
+      type: Object,
+      default: null,
     },
   },
   emits: [
@@ -96,10 +96,10 @@ export default defineComponent({
   ],
   setup(props: SelectboxProps, context) {
     const data: UnwrapRef<DataRevs> = reactive<DataRevs>({
-      list: props.entryNames,
+      entries: props.entryNames,
       selectedEntry: computed({
-        get: () => props.activeEntry,
-        set: (value) => context.emit(EmitValues.EntrySelected, value),
+        get: () => (props.activeEntry === null) ? '' : props.activeEntry.Name,
+        set: (name) => context.emit(EmitValues.EntrySelected, name),
       }),
       isDefaultSelection: computed(() => data.selectedEntry === ''),
     });

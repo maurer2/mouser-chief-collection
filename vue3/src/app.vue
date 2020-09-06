@@ -36,7 +36,7 @@
     </main>
     <div class="footer">
       <Footer
-        :num-entries="entryNames.length"
+        :num-entries="data.numberOfEntries"
         :position-in-list="data.positionInList"
       />
     </div>
@@ -58,11 +58,12 @@ import Footer from './components/footer/footer.vue';
 
 type DataRevs = {
   activeKey: string;
-  activeEntry: ComputedRef<string>;
+  activeEntry: ComputedRef<MouserChiefDetails | null>;
   positionInList: ComputedRef<number>;
-  // numberOfEntriesInList: ComputedRef<number>;
+  numberOfEntries: ComputedRef<number>;
   isFirstEntry: ComputedRef<boolean>;
   isLastEntry: ComputedRef<boolean>;
+  [x: string]: any; // allow new values
 }
 
 const entryNames = Object.keys(entries as MouserChiefList);
@@ -79,9 +80,15 @@ export default defineComponent({
   setup() {
     const data: UnwrapRef<DataRevs> = reactive<DataRevs>({
       activeKey: '',
-      activeEntry: computed(() => data.activeKey || ''),
+      activeEntry: computed(() => {
+        if (!!entries && data.activeKey in entries) {
+          return entries[data.activeKey]
+        }
+
+        return null;
+      }),
       positionInList: computed(() => entryNames.indexOf(data.activeKey)),
-      // numberOfEntriesInList: computed(() => entryNames.length),
+      numberOfEntries: computed(() => entryNames.length),
       isFirstEntry: computed(() => data.positionInList === 0),
       isLastEntry: computed(() => data.positionInList === (entryNames.length - 1)),
     });
@@ -113,13 +120,13 @@ export default defineComponent({
     }
 
     watchEffect(() => {
-      if (data.activeEntry === '') {
+      if (data.activeKey === '' || data.activeEntry === null) {
         router.push({ path: '/' });
 
         return;
       }
 
-      router.push({ path: `/cat/${data.activeEntry}` });
+      router.push({ path: `/cat/${data.activeKey}` });
     });
 
     return {
