@@ -69,25 +69,28 @@ export default defineComponent({
   }
 
   .list-entry {
-    display: flex;
-    align-items: baseline;
+    @apply
+      flex
+      items-baseline;
 
     &::before {
       @apply
         block
         relative
       text-pink-1;
+
       content: "\2022";
+      top: 0.125rem;
+      left: -0.125rem;
       width: 0.875rem;
       height: 0.5rem;
       line-height: 0.5rem;
       font-size: 1.7rem;
-      top: 0.125rem;
-      left: -0.125rem;
     }
 
     @supports selector(li::marker) {
       display: list-item;
+
       &::before {
         content: none;
       }
