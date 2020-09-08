@@ -58,7 +58,7 @@ export default defineComponent({
 <style scoped lang="postcss">
   .list {
     @apply
-      pl-5
+      // pl-5
       list-none;
 
     @supports selector(li::marker) {

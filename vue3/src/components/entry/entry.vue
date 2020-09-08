@@ -54,6 +54,10 @@ export default defineComponent({
 
 <style scoped lang="postcss">
   .entry {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: min-content repeat(4, minmax(50px, max-content));
+
     @apply
       p-4
       min-h-full
@@ -61,26 +65,26 @@ export default defineComponent({
   }
 
   .title {
+    grid-column: span 2;
+
     @apply
       mb-4
       text-xl;
   }
 
   .list {
-    @apply
-      flex;
+    display: contents;
   }
 
   .list-key {
     @apply
-      pr-1
+      mr-5
       flex-none
       font-bold;
   }
 
   .list-value {
-    @apply
-      flex-1;
+
   }
 
 </style>
