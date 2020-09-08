@@ -55,8 +55,13 @@ export default defineComponent({
 <style scoped lang="postcss">
   .entry {
     display: grid;
-    grid-template-columns: max-content 1fr;
-    grid-template-rows: min-content repeat(4, minmax(50px, max-content));
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content repeat(8, max-content);
+
+    @screen sm {
+      grid-template-columns: max-content 1fr;
+      grid-template-rows: min-content repeat(4, minmax(50px, max-content));
+    }
 
     @apply
       p-4
@@ -79,12 +84,15 @@ export default defineComponent({
   .list-key {
     @apply
       mr-5
-      flex-none
       font-bold;
+
+    grid-column: span 2;
+
+    @screen sm {
+      grid-column: auto;
+    }
   }
 
-  .list-value {
-
-  }
+  .list-value {}
 
 </style>
