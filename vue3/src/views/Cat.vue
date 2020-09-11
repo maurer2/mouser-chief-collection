@@ -1,11 +1,9 @@
 <template>
-  <div class="wrapper">
-    <Entry :active-entry="data.activeEntry" />
-  </div>
+  <Entry :active-entry="activeEntry" />
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed } from 'vue';
+import { defineComponent, reactive, computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 // eslint-disable-next-line
 import entries from '/@data/data_flattened.json';
@@ -16,17 +14,13 @@ export default defineComponent({
   components: {
     Entry,
   },
-  setup() {
+  setup(props, context) {
     const route = useRoute();
-
-    const data = reactive({
-      currentRoute: route,
-      entry: computed(() => route.params.entry || ''),
-      activeEntry: computed(() => entries[data.entry] || ''),
-    });
+    const entry = computed(() => route.params.entry || '');
+    const activeEntry = computed(() => entries[entry.value] || '');
 
     return {
-      data,
+      activeEntry,
     };
   },
 });

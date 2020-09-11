@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Root from '../views/Root.vue';
-import Cat from '../views/Cat.vue';
-import NotFound from '../views/NotFound.vue';
+import Root from '../views/root.vue';
+import Cat from '../views/cat.vue';
+import NotFound from '../views/not-found.vue';
 
 const routes = [
   {

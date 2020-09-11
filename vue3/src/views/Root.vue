@@ -6,6 +6,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+  name: 'Root',
   setup() {
     console.log('root');
   },
