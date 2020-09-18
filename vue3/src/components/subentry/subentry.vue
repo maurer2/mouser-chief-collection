@@ -1,26 +1,14 @@
 <template>
   <div class="subentry">
     <template v-if="isPrimitive">
-      <span
-        v-if="fieldValue"
-        class="text"
-      >
+      <span v-if="fieldValue" class="text">
         {{ fieldValue }}
       </span>
-      <span
-        v-else
-        class="text"
-      >
-        -
-      </span>
+      <span v-else class="text"> - </span>
     </template>
     <template v-else>
       <ol class="list">
-        <li
-          v-for="(value, index) in fieldValue"
-          :key="index"
-          class="list-entry"
-        >
+        <li v-for="(value, index) in fieldValue" :key="index" class="list-entry">
           {{ value }}
         </li>
       </ol>
@@ -29,57 +17,52 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+  import { defineComponent, computed } from 'vue';
 
-type SubentryProps = {
-  fieldValue: string | any[];
-}
+  type SubentryProps = {
+    fieldValue: string | any[];
+  };
 
-export default defineComponent({
-  name: 'Subentry',
-  props: {
-    fieldValue: {
-      type: [String, Array],
-      required: true,
-      default: '',
+  export default defineComponent({
+    name: 'Subentry',
+    props: {
+      fieldValue: {
+        type: [String, Array],
+        required: true,
+        default: '',
+      },
     },
-  },
-  setup(props: SubentryProps) {
-    const isPrimitive = computed(() => !Array.isArray(props.fieldValue));
+    setup(props: SubentryProps) {
+      const isPrimitive = computed(() => !Array.isArray(props.fieldValue));
 
-    return {
-      isPrimitive,
-    };
-  },
-});
-
+      return {
+        isPrimitive,
+      };
+    },
+  });
 </script>
 
 <style scoped lang="postcss">
   .list {
-    @apply
-      // pl-5
+    @apply // pl-5
       list-none;
 
     @supports selector(li::marker) {
-      @apply
-        list-disc
+      @apply list-disc
         list-inside;
     }
   }
 
   .list-entry {
-    @apply
-      flex
+    @apply flex
       items-baseline;
 
     &::before {
-      @apply
-        block
+      @apply block
         relative
       text-pink-1;
 
-      content: "\2022";
+      content: '\2022';
       top: 0.125rem;
       left: -0.125rem;
       width: 0.875rem;
@@ -96,10 +79,8 @@ export default defineComponent({
       }
 
       &::marker {
-        @apply
-        text-pink-1;
+        @apply text-pink-1;
       }
     }
   }
-
 </style>

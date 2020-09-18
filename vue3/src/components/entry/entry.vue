@@ -1,18 +1,9 @@
 <template>
   <section class="entry">
-    <h2 class="title">
-      {{ title }}
-    </h2>
-    <template
-      v-for="(fieldValue, fieldKey) in activeEntry"
-      :key="fieldKey"
-    >
-      <dl
-        class="list"
-      >
-        <dt class="list-key">
-          {{ fieldKey }}:
-        </dt>
+    <h2 class="title">{{ title }}</h2>
+    <template v-for="(fieldValue, fieldKey) in activeEntry" :key="fieldKey">
+      <dl class="list">
+        <dt class="list-key">{{ fieldKey }}:</dt>
         <dd class="list-value">
           <Subentry :field-value="fieldValue" />
         </dd>
@@ -22,34 +13,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
-import Subentry from '../subentry/subentry.vue';
+  import { defineComponent, computed } from 'vue';
+  import Subentry from '../subentry/subentry.vue';
 
-type EntryProps = {
-  activeEntry: MouserChiefDetails;
-}
+  type EntryProps = {
+    activeEntry: MouserChiefDetails;
+  };
 
-export default defineComponent({
-  name: 'Entry',
-  components: {
-    Subentry,
-  },
-  props: {
-    activeEntry: {
-      type: Object,
-      required: true,
-      default: () => { /**/ },
+  export default defineComponent({
+    name: 'Entry',
+    components: {
+      Subentry,
     },
-  },
-  setup(props: EntryProps) {
-    const title = computed(() => ((props.activeEntry !== null) ? props.activeEntry.Name : ''));
+    props: {
+      activeEntry: {
+        type: Object,
+        required: true,
+        default: () => {
+          /**/
+        },
+      },
+    },
+    setup(props: EntryProps) {
+      const title = computed(() => (props.activeEntry !== null ? props.activeEntry.Name : ''));
 
-    return {
-      title,
-    };
-  },
-});
-
+      return {
+        title,
+      };
+    },
+  });
 </script>
 
 <style scoped lang="postcss">
@@ -63,8 +55,7 @@ export default defineComponent({
       grid-template-rows: min-content repeat(4, minmax(50px, max-content));
     }
 
-    @apply
-      p-4
+    @apply p-4
       min-h-full
       bg-gray-light;
   }
@@ -72,8 +63,7 @@ export default defineComponent({
   .title {
     grid-column: span 2;
 
-    @apply
-      mb-4
+    @apply mb-4
       text-xl;
   }
 
@@ -82,8 +72,7 @@ export default defineComponent({
   }
 
   .list-key {
-    @apply
-      mr-5
+    @apply mr-5
       font-bold;
 
     grid-column: span 2;
@@ -93,6 +82,6 @@ export default defineComponent({
     }
   }
 
-  .list-value {}
-
+  .list-value {
+  }
 </style>

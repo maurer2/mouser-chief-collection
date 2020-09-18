@@ -3,26 +3,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
-// eslint-disable-next-line
-import entries from '/@data/data_flattened.json';
-import Entry from '../components/entry/entry.vue';
+  import { defineComponent, reactive, computed, ref } from 'vue';
+  import { useRoute } from 'vue-router';
+  // eslint-disable-next-line
+  import entries from '/@data/data_flattened.json';
+  import Entry from '../components/entry/entry.vue';
 
-export default defineComponent({
-  name: 'Cat',
-  components: {
-    Entry,
-  },
-  setup(props, context) {
-    const route = useRoute();
-    const entry = computed(() => route.params.entry || '');
-    const activeEntry = computed(() => entries[entry.value] || '');
+  export default defineComponent({
+    name: 'Cat',
+    components: {
+      Entry,
+    },
+    setup(props, context) {
+      const route = useRoute();
+      const entry = computed(() => route.params.entry || '');
+      const activeEntry = computed(() => entries[entry.value] || '');
 
-    return {
-      activeEntry,
-    };
-  },
-});
-
+      return {
+        activeEntry,
+      };
+    },
+  });
 </script>

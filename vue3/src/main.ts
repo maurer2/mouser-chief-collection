@@ -6,6 +6,4 @@ import './global.css';
 
 const vueApp = createApp(App);
 
-vueApp
-  .use(router)
-  .mount('#root');
+vueApp.use(router).mount('#root');

@@ -15,62 +15,55 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+  import { defineComponent } from 'vue';
 
-type PagerProps = {
-  isPrevButton: boolean;
-  isDisabled: boolean;
-}
+  type PagerProps = {
+    isPrevButton: boolean;
+    isDisabled: boolean;
+  };
 
-enum EmitValues {
+  enum EmitValues {
     PagerClicked = 'pager-clicked',
-}
+  }
 
-export default defineComponent({
-  name: 'Pager',
-  props: {
-    isPrevButton: Boolean,
-    isDisabled: Boolean,
-  },
-  emits: [
-    EmitValues.PagerClicked,
-  ],
-  setup(props: PagerProps, context) {
-    function handleClick(): void {
-      context.emit(EmitValues.PagerClicked, props.isPrevButton);
-    }
+  export default defineComponent({
+    name: 'Pager',
+    props: {
+      isPrevButton: Boolean,
+      isDisabled: Boolean,
+    },
+    emits: [EmitValues.PagerClicked],
+    setup(props: PagerProps, context) {
+      function handleClick(): void {
+        context.emit(EmitValues.PagerClicked, props.isPrevButton);
+      }
 
-    return {
-      handleClick,
-      props,
-    };
-  },
-});
-
+      return {
+        handleClick,
+        props,
+      };
+    },
+  });
 </script>
 
 <style scoped lang="postcss">
   .button {
-    @apply
-      m-4
+    @apply m-4
       p-2
       bg-pink-2
       text-white
       rounded;
 
     &:hover {
-      @apply
-        bg-pink-1;
+      @apply bg-pink-1;
     }
 
     &--is-disabled {
       &:hover {
-        @apply
-          bg-pink-2;
+        @apply bg-pink-2;
       }
 
-      @apply
-        opacity-50
+      @apply opacity-50
         cursor-not-allowed;
     }
   }
@@ -78,12 +71,10 @@ export default defineComponent({
   .button-prev {
     grid-area: sidebar-left;
 
-    @apply
-      mr-2;
+    @apply mr-2;
 
     @screen md {
-      @apply
-        mr-4
+      @apply mr-4
         mb-auto;
     }
   }
@@ -91,14 +82,11 @@ export default defineComponent({
   .button-next {
     grid-area: sidebar-right;
 
-    @apply
-      ml-2;
+    @apply ml-2;
 
     @screen md {
-      @apply
-        mb-auto
+      @apply mb-auto
         ml-4;
     }
   }
-
 </style>
