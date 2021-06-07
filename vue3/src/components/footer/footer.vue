@@ -5,29 +5,24 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, toRefs } from 'vue';
-
-  type FooterProps = {
-    numEntries: number;
-    positionInList: number;
-  };
+  import { defineComponent, computed, toRefs, PropType } from 'vue';
 
   export default defineComponent({
     name: 'Footer',
     components: {},
     props: {
       numEntries: {
-        type: Number,
+        type: Number as PropType<number>,
         required: true,
         default: 0,
       },
       positionInList: {
-        type: Number,
+        type: Number as PropType<number>,
         required: true,
         default: 0,
       },
     },
-    setup(props: FooterProps) {
+    setup(props) {
       const { positionInList, numEntries } = toRefs(props);
 
       const positionInListOneBased = computed(() => positionInList.value + 1);
@@ -60,7 +55,7 @@
   });
 </script>
 
-<style scoped lang="postcss" vars="{ 'progress-in-percent': progressInPercent }">
+<style scoped lang="postcss">
   .pagination {
     @apply p-4
       leading-none
@@ -70,6 +65,8 @@
       bg-no-repeat;
 
     background-image: linear-gradient(to right, #ff299c 0%, #ff299c 100%);
-    background-size: calc(var(--progress-in-percent) * 1%) 100%;
+    background-size: 0;
+    /* stylelint-disable-next-line */
+    background-size: calc(v-bind(progressInPercent) * 1%) 100%;
   }
 </style>
