@@ -15,12 +15,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, PropType } from 'vue';
 
-  type PagerProps = {
-    isPrevButton: boolean;
-    isDisabled: boolean;
-  };
 
   enum EmitValues {
     PagerClicked = 'pager-clicked',
@@ -29,11 +25,11 @@
   export default defineComponent({
     name: 'Pager',
     props: {
-      isPrevButton: Boolean,
-      isDisabled: Boolean,
+      isPrevButton: Boolean as PropType<boolean>,
+      isDisabled: Boolean as PropType<boolean>,
     },
     emits: [EmitValues.PagerClicked],
-    setup(props: PagerProps, context) {
+    setup(props, context) {
       function handleClick(): void {
         context.emit(EmitValues.PagerClicked, props.isPrevButton);
       }

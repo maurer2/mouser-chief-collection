@@ -13,12 +13,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from 'vue';
+  import { defineComponent, computed, PropType } from 'vue';
   import Subentry from '../subentry/subentry.vue';
-
-  type EntryProps = {
-    activeEntry: MouserChiefDetails;
-  };
 
   export default defineComponent({
     name: 'Entry',
@@ -27,14 +23,14 @@
     },
     props: {
       activeEntry: {
-        type: Object,
+        type: Object as PropType<MouserChiefDetails>,
         required: true,
         default: () => {
           /**/
         },
       },
     },
-    setup(props: EntryProps) {
+    setup(props) {
       const title = computed(() => (props.activeEntry !== null ? props.activeEntry.Name : ''));
 
       return {
