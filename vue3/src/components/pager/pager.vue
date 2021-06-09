@@ -48,7 +48,8 @@
       p-2
       bg-pink-2
       text-white
-      rounded;
+      rounded
+      select-none;
 
     &:hover {
       @apply bg-pink-1;
