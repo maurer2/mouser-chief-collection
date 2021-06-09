@@ -39,7 +39,7 @@
   import { defineComponent, reactive, computed, watchEffect, ComputedRef, UnwrapRef } from 'vue';
   import { RouterView, RouterLink } from 'vue-router';
   // eslint-disable-next-line
-  import entries from '/@data/data_flattened.json';
+  import entries from '@data/data_flattened.json';
   import { router } from './router';
 
   import SelectBox from './components/select-box/select-box.vue';

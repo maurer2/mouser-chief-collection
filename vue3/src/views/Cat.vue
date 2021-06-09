@@ -3,10 +3,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, computed, ref } from 'vue';
+  import { defineComponent, computed } from 'vue';
   import { useRoute } from 'vue-router';
-  // eslint-disable-next-line
-  import entries from '/@data/data_flattened.json';
+    // eslint-disable-next-line
+  import entries from '@data/data_flattened.json';
   import Entry from '../components/entry/entry.vue';
 
   export default defineComponent({

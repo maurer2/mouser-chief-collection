@@ -1,21 +1,14 @@
 import * as path from 'path';
-import cors from '@koa/cors'; // https://github.com/vitejs/vite/issues/341
 import type { UserConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
 const config: UserConfig = {
-  alias: {
-    '/@data/': path.resolve(__dirname, './../data/'), // https://github.com/vitejs/vite/issues/279#issuecomment-635646269
+  resolve: {
+    alias: {
+      '@data': path.resolve(__dirname, './../data/'),
+    },
   },
-  optimizeDeps: {
-    allowNodeBuiltins: ['fs'],
-  },
-  configureServer({ app }) {
-    app.use(
-      cors({
-        origin: '*',
-      }),
-    );
-  },
+  plugins: [vue()],
 };
 
 export default config;

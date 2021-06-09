@@ -44,6 +44,11 @@ module.exports = {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
+      alias: {
+        map: [
+          ['@data', './../data/'],
+        ],
+      },
     },
   },
 };
