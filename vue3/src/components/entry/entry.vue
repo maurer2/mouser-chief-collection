@@ -15,6 +15,7 @@
 <script lang="ts">
   import { defineComponent, computed, PropType } from 'vue';
   import Subentry from '../subentry/subentry.vue';
+  import type { MouserChiefDetails } from '../../types/index'
 
   export default defineComponent({
     name: 'Entry',

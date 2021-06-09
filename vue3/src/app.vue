@@ -38,6 +38,7 @@
 <script lang="ts">
   import { defineComponent, reactive, computed, watchEffect, ComputedRef, UnwrapRef } from 'vue';
   import { RouterView, RouterLink } from 'vue-router';
+  import type { MouserChiefDetails, MouserChiefList } from './types'
   // eslint-disable-next-line
   import entries from '@data/data_flattened.json';
   import { router } from './router';

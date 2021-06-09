@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,14 +16,9 @@
     "noImplicitAny": true,
     "baseUrl": ".",
     "paths": {
-      "@data/*": ["../data/*"], // https://github.com/vitejs/vite/issues/637
+      "@data/*": ["../data/*"] // https://github.com/vitejs/vite/issues/637
     },
-    "typeRoots": [
-      "node_modules/@types",
-      "./src/types.d.ts",
-    ],
+    "typeRoots": ["node_modules/@types"]
   },
-  "include": [
-    "./src/**/*",
-  ],
+  "include": ["./src/**/*"]
 }

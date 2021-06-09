@@ -45,6 +45,7 @@
     WritableComputedRef,
     UnwrapRef,
   } from 'vue';
+  import type { MouserChiefDetails } from '../../types/index'
 
   type SelectboxProps = {
     entryNames: MouserChiefDetails['Name'][];
