@@ -71,17 +71,17 @@
     setup() {
       const data: UnwrapRef<DataRevs> = reactive<DataRevs>({
         activeKey: '',
-        activeEntry: computed(() => {
+        activeEntry: computed<MouserChiefDetails>(() => {
           if (!!entries && data.activeKey in entries) {
             return entries[data.activeKey];
           }
 
           return null;
         }),
-        positionInList: computed(() => entryNames.indexOf(data.activeKey)),
-        numberOfEntries: computed(() => entryNames.length),
-        isFirstEntry: computed(() => data.positionInList === 0),
-        isLastEntry: computed(() => data.positionInList === entryNames.length - 1),
+        positionInList: computed<number>(() => entryNames.indexOf(data.activeKey)),
+        numberOfEntries: computed<number>(() => entryNames.length),
+        isFirstEntry: computed<boolean>(() => data.positionInList === 0),
+        isLastEntry: computed<boolean>(() => data.positionInList === entryNames.length - 1),
       });
 
       function handleEntrySelected(value: MouserChiefDetails['Name']): void {
@@ -99,7 +99,7 @@
         data.activeKey = newKey;
       }
 
-      function handleNextClick() {
+      function handleNextClick(): void {
         if (data.isLastEntry) {
           return;
         }

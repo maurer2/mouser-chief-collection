@@ -17,22 +17,21 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from 'vue';
-
-  type SubentryProps = {
-    fieldValue: string | any[];
-  };
+  import { defineComponent, computed, PropType } from 'vue';
 
   export default defineComponent({
     name: 'Subentry',
     props: {
       fieldValue: {
-        type: [String, Array],
+        type: [
+          String,
+          Array
+        ] as PropType<string| any[]>,
         required: true,
         default: '',
       },
     },
-    setup(props: SubentryProps) {
+    setup(props) {
       const isPrimitive = computed(() => !Array.isArray(props.fieldValue));
 
       return {

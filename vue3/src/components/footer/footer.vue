@@ -25,15 +25,18 @@
     setup(props) {
       const { positionInList, numEntries } = toRefs(props);
 
-      const positionInListOneBased = computed(() => positionInList.value + 1);
+      const positionInListOneBased = computed<number>(() => positionInList.value + 1);
+      const progressInPercent = computed<number>(() => {
+        if (numEntries.value === 0) {
+          return 0
+        }
 
-      const progressInPercent = computed(() => {
         const percentsExact = (100 * positionInListOneBased.value) / numEntries.value;
 
         return Math.floor(percentsExact);
       });
 
-      const positionInListFormatted = computed(() => {
+      const positionInListFormatted = computed<string>(() => {
         const positionInListAsString = String(positionInListOneBased.value);
         const numEntriesAsString = String(numEntries.value);
 
