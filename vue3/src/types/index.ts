@@ -8,3 +8,9 @@ export interface MouserChiefDetails {
 export interface MouserChiefList {
   [name: string]: MouserChiefDetails;
 }
+
+export type LoadingType = {
+  isLoading: boolean;
+  isLoaded: boolean;
+  startDate: Date;
+};

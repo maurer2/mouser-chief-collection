@@ -3,6 +3,7 @@
     <header class="header">
       <h1 class="title">
         <RouterLink to="/" class="title-link"> Mouser-Chief-Collection </RouterLink>
+        <small>{{ isLoading ? '[Loading]' : '' }}</small>
       </h1>
     </header>
     <nav class="nav">
@@ -36,9 +37,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, computed, watchEffect, ComputedRef, UnwrapRef } from 'vue';
+  import { defineComponent, reactive, computed, watchEffect, ComputedRef, UnwrapRef, PropType, toRefs } from 'vue';
   import { RouterView, RouterLink } from 'vue-router';
-  import type { MouserChiefDetails, MouserChiefList } from './types'
+  import type { MouserChiefDetails, MouserChiefList , LoadingType } from './types/index'
+
   // eslint-disable-next-line
   import entriesJSON from '@data/data_flattened.json';
   import { router } from './router';
@@ -68,7 +70,15 @@
       RouterView,
       RouterLink,
     },
-    setup() {
+    props: {
+      loading: {
+        type: Object as PropType<LoadingType>,
+        default: () => { /* */},
+        required: true,
+      }
+    },
+    setup(props) {
+      const {isLoading} = toRefs(props.loading)
       const data: UnwrapRef<DataRevs> = reactive<DataRevs>({
         activeKey: '',
         activeEntry: computed<MouserChiefDetails>(() => {
@@ -108,6 +118,8 @@
         const newKey = entryNames[nextIndex];
 
         data.activeKey = newKey;
+
+        console.log(isLoading)
       }
 
       watchEffect(() => {
@@ -127,6 +139,7 @@
         handleEntrySelected,
         handlePrevClick,
         handleNextClick,
+        isLoading: (isLoading !== null) ? isLoading: true,
       };
     },
   });
