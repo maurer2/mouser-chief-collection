@@ -17,7 +17,6 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
 
-
   enum EmitValues {
     PagerClicked = 'pager-clicked',
   }

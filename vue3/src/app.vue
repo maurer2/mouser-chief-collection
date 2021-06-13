@@ -40,7 +40,7 @@
   import { RouterView, RouterLink } from 'vue-router';
   import type { MouserChiefDetails, MouserChiefList } from './types'
   // eslint-disable-next-line
-  import entries from '@data/data_flattened.json';
+  import entriesJSON from '@data/data_flattened.json';
   import { router } from './router';
 
   import SelectBox from './components/select-box/select-box.vue';
@@ -56,8 +56,8 @@
     isLastEntry: ComputedRef<boolean>;
     [x: string]: any; // allow new values
   };
-
-  const entryNames = Object.keys(entries as MouserChiefList);
+  const entries: MouserChiefList = entriesJSON
+  const entryNames = Object.keys(entries);
 
   export default defineComponent({
     name: 'App',
