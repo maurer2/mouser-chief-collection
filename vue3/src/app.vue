@@ -9,15 +9,15 @@
     <nav class="nav">
       <SelectBox
         :entry-names="entryNames"
-        :active-entry="data.activeEntry"
+        :active-entry="activeEntry"
         @entry-selected="handleEntrySelected"
       />
     </nav>
     <main class="main">
-      <template v-if="data.activeEntry">
+      <template v-if="activeEntry">
         <Pager
           :is-prev-button="true"
-          :is-disabled="data.isFirstEntry"
+          :is-disabled="isFirstEntry"
           @pager-clicked="handlePrevClick"
         />
         <div class="content">
@@ -25,19 +25,19 @@
         </div>
         <Pager
           :is-prev-button="false"
-          :is-disabled="data.isLastEntry"
+          :is-disabled="isLastEntry"
           @pager-clicked="handleNextClick"
         />
       </template>
     </main>
     <div class="footer">
-      <Footer :num-entries="data.numberOfEntries" :position-in-list="data.positionInList" />
+      <Footer :num-entries="numberOfEntries" :position-in-list="positionInList" />
     </div>
   </article>
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, computed, watchEffect, ComputedRef, UnwrapRef, PropType, toRefs } from 'vue';
+  import { defineComponent, computed, watchEffect, PropType, toRefs, ref } from 'vue';
   import { RouterView, RouterLink } from 'vue-router';
   import type { MouserChiefDetails, MouserChiefList , LoadingType } from './types/index'
 
@@ -49,15 +49,6 @@
   import Pager from './components/pager/pager.vue';
   import Footer from './components/footer/footer.vue';
 
-  type DataRevs = {
-    activeKey: string;
-    activeEntry: ComputedRef<MouserChiefDetails | null>;
-    positionInList: ComputedRef<number>;
-    numberOfEntries: ComputedRef<number>;
-    isFirstEntry: ComputedRef<boolean>;
-    isLastEntry: ComputedRef<boolean>;
-    [x: string]: any; // allow new values
-  };
   const entries: MouserChiefList = entriesJSON
   const entryNames = Object.keys(entries);
 
@@ -79,63 +70,64 @@
     },
     setup(props) {
       const {isLoading} = toRefs(props.loading)
-      const data: UnwrapRef<DataRevs> = reactive<DataRevs>({
-        activeKey: '',
-        activeEntry: computed<MouserChiefDetails>(() => {
-          if (!!entries && data.activeKey in entries) {
-            return entries[data.activeKey];
+
+      const activeKey = ref<string>('')
+      const activeEntry = computed<MouserChiefDetails | null>(() => {
+          if (!!entries && activeKey.value in entries) {
+            return entries[activeKey.value];
           }
 
           return null;
-        }),
-        positionInList: computed<number>(() => entryNames.indexOf(data.activeKey)),
-        numberOfEntries: computed<number>(() => entryNames.length),
-        isFirstEntry: computed<boolean>(() => data.positionInList === 0),
-        isLastEntry: computed<boolean>(() => data.positionInList === entryNames.length - 1),
-      });
+      })
+      const positionInList = computed<number>(() => entryNames.indexOf(activeKey.value))
+      const numberOfEntries = computed<number>(() => entryNames.length)
+      const isFirstEntry = computed<boolean>(() => positionInList.value === 0)
+      const isLastEntry = computed<boolean>(() => positionInList.value === entryNames.length - 1)
 
       function handleEntrySelected(value: MouserChiefDetails['Name']): void {
-        data.activeKey = value;
+        activeKey.value = value;
       }
 
       function handlePrevClick(): void {
-        if (data.isFirstEntry) {
+        if (isFirstEntry.value) {
           return;
         }
 
-        const prevIndex = data.positionInList - 1;
+        const prevIndex = positionInList.value - 1;
         const newKey = entryNames[prevIndex];
 
-        data.activeKey = newKey;
+        activeKey.value = newKey;
       }
 
       function handleNextClick(): void {
-        if (data.isLastEntry) {
+        if (isLastEntry.value) {
           return;
         }
 
-        const nextIndex = data.positionInList + 1;
+        const nextIndex = positionInList.value + 1;
         const newKey = entryNames[nextIndex];
 
-        data.activeKey = newKey;
-
-        console.log(isLoading)
+        activeKey.value = newKey;
       }
 
       watchEffect(() => {
-        if (data.activeKey === '' || data.activeEntry === null) {
+        if (activeKey.value === '' || activeEntry.value === null) {
           router.push({ path: '/' });
 
           return;
         }
 
-        router.push({ path: `/cat/${data.activeKey}` });
+        router.push({ path: `/cat/${activeKey.value}` });
       });
 
       return {
         entries,
-        data,
         entryNames,
+        numberOfEntries,
+        activeEntry,
+        isFirstEntry,
+        isLastEntry,
+        positionInList,
         handleEntrySelected,
         handlePrevClick,
         handleNextClick,

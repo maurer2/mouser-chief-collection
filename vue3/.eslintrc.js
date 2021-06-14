@@ -29,6 +29,7 @@ module.exports = {
     'vue/component-name-in-template-casing': 'error',
     'newline-before-return': 'error',
     'import/no-extraneous-dependencies': 'off', // vite alias fix
+    'vue/no-v-for-template-key': 'off'
   },
   parserOptions: {
     parser: '@typescript-eslint/parser',
