@@ -1,34 +1,34 @@
 <template>
   <form @submit.prevent="handleSubmit" @reset.prevent="handleReset">
     <h2 class="title">Navigation</h2>
-    <template v-if="!data.isDefaultSelection">
+    <template v-if="!isDefaultSelection">
       <p class="output">
         <span>Selected entry: </span>
         <output for="select" class="font-bold">
-          {{ data.selectedEntry }}
+          {{ selectedEntry }}
         </output>
       </p>
     </template>
     <div class="row">
-      <select id="select" v-model="data.selectedEntry" class="select">
+      <select id="select" v-model="selectedEntry" class="select">
         <option value="" disabled>Entries</option>
-        <option v-for="value in data.entries" :key="value" :value="value">
+        <option v-for="value in entries" :key="value" :value="value">
           {{ value }}
         </option>
       </select>
       <button
         type="reset"
         class="button button--reset"
-        :class="{ 'button--is-disabled': data.isDefaultSelection }"
-        :disabled="data.isDefaultSelection"
+        :class="{ 'button--is-disabled': isDefaultSelection }"
+        :disabled="isDefaultSelection"
       >
         X
       </button>
       <button
         type="submit"
         class="button button--submit"
-        :class="{ 'button--is-disabled': data.isDefaultSelection }"
-        :disabled="data.isDefaultSelection"
+        :class="{ 'button--is-disabled': isDefaultSelection }"
+        :disabled="isDefaultSelection"
       >
         Select entry
       </button>
@@ -41,23 +41,11 @@
     defineComponent,
     reactive,
     computed,
-    ComputedRef,
-    WritableComputedRef,
     UnwrapRef,
+    toRefs,
+    PropType
   } from 'vue';
   import type { MouserChiefDetails } from '../../types/index'
-
-  type SelectboxProps = {
-    entryNames: MouserChiefDetails['Name'][];
-    activeEntry: MouserChiefDetails;
-    [x: string]: any; // allow new values
-  };
-
-  type DataRevs = {
-    entries: MouserChiefDetails['Name'][];
-    isDefaultSelection: ComputedRef<boolean>;
-    selectedEntry: WritableComputedRef<MouserChiefDetails['Name']>;
-  };
 
   enum EmitValues {
     EntrySelected = 'entry-selected',
@@ -67,36 +55,37 @@
     name: 'Selectbox',
     props: {
       entryNames: {
-        type: Array,
+        type: Array as PropType<MouserChiefDetails['Name'][]>,
         required: true,
         default: () => [],
       },
       activeEntry: {
-        type: Object,
+        type: Object as PropType<MouserChiefDetails>,
         default: null,
       },
     },
     emits: [EmitValues.EntrySelected],
-    setup(props: SelectboxProps, context) {
-      const data: UnwrapRef<DataRevs> = reactive<DataRevs>({
-        entries: props.entryNames,
-        selectedEntry: computed({
-          get: () => (props.activeEntry === null ? '' : props.activeEntry.Name),
-          set: (name) => context.emit(EmitValues.EntrySelected, name),
-        }),
-        isDefaultSelection: computed(() => data.selectedEntry === ''),
-      });
+    setup(props, context) {
+      const {entryNames, activeEntry} = toRefs(props)
+
+      const selectedEntry = computed<MouserChiefDetails['Name']>({
+        get: () => (activeEntry.value === null ? '' : activeEntry.value.Name),
+        set: (name) => context.emit(EmitValues.EntrySelected, name),
+      })
+      const isDefaultSelection = computed<boolean>(() => selectedEntry.value === '')
 
       function handleSubmit(): void {
-        context.emit(EmitValues.EntrySelected, data.selectedEntry);
+        context.emit(EmitValues.EntrySelected, selectedEntry.value);
       }
 
       function handleReset(): void {
-        data.selectedEntry = '';
+        selectedEntry.value = '';
       }
 
       return {
-        data,
+        entries: entryNames,
+        isDefaultSelection,
+        selectedEntry,
         handleSubmit,
         handleReset,
       };
