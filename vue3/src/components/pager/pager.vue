@@ -3,19 +3,19 @@
     type="button"
     class="button"
     :class="{
-      'button--is-disabled': props.isDisabled,
-      'button-prev': props.isPrevButton,
-      'button-next': !props.isPrevButton,
+      'button--is-disabled': isDisabledButton,
+      'button-prev': isPrevButton,
+      'button-next': !isPrevButton,
     }"
-    :disabled="props.isDisabled"
+    :disabled="isDisabledButton"
     @click="handleClick"
   >
-    {{ props.isPrevButton ? 'Previous' : 'Next' }}
+    {{ isPrevButton ? 'Previous' : 'Next' }}
   </button>
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
+  import { defineComponent, PropType, toRefs } from 'vue';
 
   enum EmitValues {
     PagerClicked = 'pager-clicked',
@@ -29,13 +29,16 @@
     },
     emits: [EmitValues.PagerClicked],
     setup(props, context) {
+      const {isPrevButton, isDisabled} = toRefs(props)
+
       function handleClick(): void {
-        context.emit(EmitValues.PagerClicked, props.isPrevButton);
+        context.emit(EmitValues.PagerClicked, isPrevButton);
       }
 
       return {
         handleClick,
-        props,
+        isPreviousButton: isPrevButton,
+        isDisabledButton: isDisabled,
       };
     },
   });

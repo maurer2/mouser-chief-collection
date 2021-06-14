@@ -39,9 +39,7 @@
 <script lang="ts">
   import {
     defineComponent,
-    reactive,
     computed,
-    UnwrapRef,
     toRefs,
     PropType
   } from 'vue';
