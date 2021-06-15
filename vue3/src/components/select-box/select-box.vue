@@ -12,7 +12,7 @@
     <div class="row">
       <select id="select" v-model="selectedEntry" class="select">
         <option value="" disabled>Entries</option>
-        <option v-for="value in entries" :key="value" :value="value">
+        <option v-for="value in entryNames" :key="value" :value="value">
           {{ value }}
         </option>
       </select>
@@ -81,7 +81,8 @@
       }
 
       return {
-        entries: entryNames,
+        // eslint-disable-next-line vue/no-dupe-keys
+        entryNames,
         isDefaultSelection,
         selectedEntry,
         handleSubmit,

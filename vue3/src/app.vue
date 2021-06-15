@@ -69,7 +69,7 @@
       }
     },
     setup(props) {
-      const {isLoading} = toRefs(props.loading)
+      const {loading} = toRefs(props)
 
       const activeKey = ref<string>('')
       const activeEntry = computed<MouserChiefDetails | null>(() => {
@@ -83,6 +83,7 @@
       const numberOfEntries = computed<number>(() => entryNames.length)
       const isFirstEntry = computed<boolean>(() => positionInList.value === 0)
       const isLastEntry = computed<boolean>(() => positionInList.value === entryNames.length - 1)
+      const isLoading = computed(() => (loading !== null) ? loading.value.isLoading : true)
 
       function handleEntrySelected(value: MouserChiefDetails['Name']): void {
         activeKey.value = value;
@@ -131,7 +132,7 @@
         handleEntrySelected,
         handlePrevClick,
         handleNextClick,
-        isLoading: (isLoading !== null) ? isLoading: true,
+        isLoading
       };
     },
   });

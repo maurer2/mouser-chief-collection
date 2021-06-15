@@ -3,11 +3,11 @@
     type="button"
     class="button"
     :class="{
-      'button--is-disabled': isDisabledButton,
+      'button--is-disabled': isDisabled,
       'button-prev': isPrevButton,
       'button-next': !isPrevButton,
     }"
-    :disabled="isDisabledButton"
+    :disabled="isDisabled"
     @click="handleClick"
   >
     {{ isPrevButton ? 'Previous' : 'Next' }}
@@ -37,8 +37,10 @@
 
       return {
         handleClick,
-        isPreviousButton: isPrevButton,
-        isDisabledButton: isDisabled,
+        // eslint-disable-next-line vue/no-dupe-keys
+        isPrevButton,
+        // eslint-disable-next-line vue/no-dupe-keys
+        isDisabled,
       };
     },
   });
