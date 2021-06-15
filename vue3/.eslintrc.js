@@ -4,12 +4,11 @@ module.exports = {
     node: true,
   },
   extends: [
+    'plugin:vue/base',
     'eslint:recommended',
     'plugin:vue/vue3-essential',
     'plugin:vue/vue3-recommended',
     'plugin:vue/vue3-strongly-recommended',
-    '@vue/airbnb',
-    '@vue/typescript',
     '@vue/typescript/recommended',
     'prettier/@typescript-eslint',
     'prettier/babel',

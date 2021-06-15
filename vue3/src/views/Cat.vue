@@ -14,7 +14,7 @@
     components: {
       Entry,
     },
-    setup(props, context) {
+    setup() {
       const route = useRoute();
       const entry = computed(() => route.params.entry || '');
       const activeEntry = computed(() => entries[entry.value] || '');
