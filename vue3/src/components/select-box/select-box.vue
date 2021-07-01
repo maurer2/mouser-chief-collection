@@ -64,7 +64,7 @@
     },
     emits: [EmitValues.EntrySelected],
     setup(props, context) {
-      const {entryNames, activeEntry} = toRefs(props)
+      const {activeEntry} = toRefs(props)
 
       const selectedEntry = computed<MouserChiefDetails['Name']>({
         get: () => (activeEntry.value === null ? '' : activeEntry.value.Name),
@@ -81,8 +81,6 @@
       }
 
       return {
-        // eslint-disable-next-line vue/no-dupe-keys
-        entryNames,
         isDefaultSelection,
         selectedEntry,
         handleSubmit,

@@ -51,8 +51,6 @@
 
       return {
         positionInListFormatted,
-        // eslint-disable-next-line vue/no-dupe-keys
-        numEntries,
         progressInPercent,
       };
     },
