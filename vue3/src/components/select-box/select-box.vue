@@ -2,20 +2,19 @@
   <form
     ref="formElement"
     @submit.prevent="handleSubmit"
-    @requestSubmit.prevent="handleRequestSubmit"
     @reset.prevent="handleReset"
   >
     <div class="row">
-      <select id="select" v-model="currentActiveEntry" class="select" required @change="handleChange">
+      <select id="select" :value="currentActiveEntry" class="select" required @change="handleChange">
         <option value="" disabled>Names</option>
         <option v-for="value in entryNames" :key="value" :value="value">
           {{ value }}
         </option>
       </select>
-      <button type="reset" class="button button--reset">
+      <button type="button" class="button button--reset" @click="handleReset()">
         X
       </button>
-      <button type="submit" class="button button--submit">
+      <button type="button" class="button button--submit" @click="handleClick()">
         Select entry
       </button>
     </div>
@@ -36,7 +35,6 @@
     computed,
     PropType,
     ref,
-    watch
   } from 'vue';
   import type { MouserChiefDetails } from '../../types/index'
 
@@ -59,14 +57,9 @@
     },
     emits: [EmitValues.EntrySelected],
     setup(props, context) {
-      const currentActiveEntry = ref<MouserChiefDetails['Name']>(props.activeEntry?.Name ?? '');
+      const currentActiveEntry = computed<MouserChiefDetails['Name']>(() => props.activeEntry?.Name ?? '');
       const isDefaultSelection = computed<boolean>(() => currentActiveEntry.value === '');
       const formElement = ref<HTMLFormElement | null>();
-
-      function handleRequestSubmit(): void {
-        const formIsValid = formElement.value?.reportValidity();
-        console.log(formIsValid);
-      }
 
       function handleSubmit(): void {
         context.emit(EmitValues.EntrySelected, currentActiveEntry.value);
@@ -76,13 +69,17 @@
         context.emit(EmitValues.EntrySelected, '');
       }
 
-      function handleChange(): void {
-        formElement.value?.requestSubmit();
+      function handleClick(): void {
+        const formIsValid = formElement.value?.reportValidity();
+
+        if (formIsValid) {
+          formElement.value?.requestSubmit();
+        }
       }
 
-      watch(() => props.activeEntry, (newValue: MouserChiefDetails) => {
-        currentActiveEntry.value = newValue?.Name ?? '';
-      });
+      function handleChange(event: { target: HTMLSelectElement }): void {
+        context.emit(EmitValues.EntrySelected, event.target.value);
+      }
 
       return {
         isDefaultSelection,
@@ -90,8 +87,9 @@
         formElement,
         handleChange,
         handleSubmit,
-        handleRequestSubmit,
         handleReset,
+        handleClick,
+        props,
       };
     },
   });

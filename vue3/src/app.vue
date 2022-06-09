@@ -69,16 +69,10 @@
       }
     },
     setup(props) {
-      const {loading} = toRefs(props)
+      const {loading} = toRefs(props);
 
-      const activeKey = ref<string>('')
-      const activeEntry = computed<MouserChiefDetails | null>(() => {
-          if (!!entries && activeKey.value in entries) {
-            return entries[activeKey.value];
-          }
-
-          return null;
-      })
+      const activeKey = ref<string>('');
+      const activeEntry = computed<MouserChiefDetails | null>(() => entries?.[activeKey?.value] ?? null)
       const positionInList = computed<number>(() => entryNames.indexOf(activeKey.value))
       const numberOfEntries = computed<number>(() => entryNames.length)
       const isFirstEntry = computed<boolean>(() => positionInList.value === 0)
