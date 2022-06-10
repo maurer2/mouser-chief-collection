@@ -1,10 +1,6 @@
-/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: {
-    // enabled: true,
-    content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}']
-  },
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   // important: false,
   theme: {
     screens: {
@@ -14,8 +10,15 @@ module.exports = {
       xl: '1280px',
     },
     fontFamily: {
-      body: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue',
-        'Arial', 'Noto Sans', 'sans-serif'
+      body: [
+        '-apple-system',
+        'BlinkMacSystemFont',
+        'Segoe UI',
+        'Roboto',
+        'Helvetica Neue',
+        'Arial',
+        'Noto Sans',
+        'sans-serif',
       ],
     },
     extend: {
@@ -28,10 +31,6 @@ module.exports = {
       },
     },
   },
-  variants: {},
   plugins: [],
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
+  future: {},
 };

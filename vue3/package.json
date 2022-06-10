@@ -1,18 +1,18 @@
 {
   "private": true,
+  "license": "MIT",
   "scripts": {
-    "serve": "yarpm run dev",
     "build": "vite build",
     "build:run": "yarpm run build && yarpm run http-server /dist",
-    "cleanup": "sort-package-json",
     "debug:autoprefixer": "yarpm run autoprefixer --info",
     "dev": "vite",
     "dev:https": "vite --https",
     "dev:verbose": "vite --debug",
     "format": "prettier --write '**/*.{vue, ts, js, json, md, mdx}';",
-    "lint:js": "vue-cli-service lint --no-fix",
+    "lint:scripts": "vue-cli-service lint --no-fix",
     "lint:styles": "stylelint '**/*.{vue, css, scss}'; exit 0",
-    "lint:styles:fix": "stylelint --fix '**/*.{vue, css, scss}'; exit 0"
+    "lint:styles:fix": "stylelint --fix '**/*.{vue, css, scss}'; exit 0",
+    "serve": "yarpm run dev"
   },
   "dependencies": {
     "vite": "^2.9.12",
@@ -20,6 +20,11 @@
     "vue-router": "4.0.16"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.2",
+    "@tailwindcss/line-clamp": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.2",
+    "@tsconfig/node16": "^1.0.2",
     "@types/tailwindcss": "^3.0.10",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
@@ -40,16 +45,15 @@
     "postcss": "^8.4.14",
     "postcss-import": "^14.1.0",
     "postcss-nested": "^5.0.6",
+    "postcss-nesting": "^10.1.8",
     "postcss-preset-env": "^7.7.1",
     "postcss-scss": "^4.0.4",
     "prettier": "^2.6.2",
-    "sort-package-json": "^1.57.0",
     "stylelint": "^14.9.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^26.0.0",
     "tailwindcss": "^3.1.2",
     "typescript": "^4.7.3",
     "yarpm": "^1.1.1"
-  },
-  "license": "MIT"
+  }
 }

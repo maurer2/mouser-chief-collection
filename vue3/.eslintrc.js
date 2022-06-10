@@ -10,9 +10,7 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'plugin:vue/vue3-strongly-recommended',
     '@vue/typescript/recommended',
-    'prettier/@typescript-eslint',
-    'prettier/babel',
-    'prettier/vue',
+    'prettier',
     'eslint-config-prettier',
   ],
   rules: {
@@ -28,7 +26,7 @@ module.exports = {
     'vue/component-name-in-template-casing': 'error',
     'newline-before-return': 'error',
     'import/no-extraneous-dependencies': 'off', // vite alias fix
-    'vue/no-v-for-template-key': 'off'
+    'vue/no-v-for-template-key': 'off',
   },
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -40,9 +38,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
       alias: {
-        map: [
-          ['@data', './../data/'],
-        ],
+        map: [['@data', './../data/']],
       },
     },
   },

@@ -49,7 +49,8 @@
       bg-pink-2
       text-white
       rounded
-      select-none;
+      select-none
+      self-start;
 
     &:hover {
       @apply bg-pink-1;
@@ -70,10 +71,10 @@
 
     @apply mr-2;
 
-    /* @screen md {
+    @screen md {
       @apply mr-4
         mb-auto;
-    } */
+    }
   }
 
   .button-next {
@@ -81,9 +82,9 @@
 
     @apply ml-2;
 
-    /* @screen md {
+    @screen md {
       @apply mb-auto
         ml-4;
-    } */
+    }
   }
 </style>
