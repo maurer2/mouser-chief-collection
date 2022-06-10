@@ -46,10 +46,10 @@
     @apply // pl-5
       list-none;
 
-    @supports selector(li::marker) {
+    /* @supports selector(li::marker) {
       @apply list-disc
         list-inside;
-    }
+    } */
   }
 
   .list-entry {
@@ -70,7 +70,7 @@
       font-size: 1.7rem;
     }
 
-    @supports selector(li::marker) {
+    /* @supports selector(li::marker) {
       display: list-item;
 
       &::before {
@@ -80,6 +80,6 @@
       &::marker {
         @apply text-pink-1;
       }
-    }
+    } */
   }
 </style>

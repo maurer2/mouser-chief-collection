@@ -5,12 +5,22 @@ const cssnano = require('cssnano');
 const postcssNested = require('postcss-nested'); // needed for unwrapping media queries
 const postcssImport = require('postcss-import');
 
+let postcss = require('postcss');
+
 module.exports = {
   syntax: 'postcss-scss',
   plugins: [
-    postcssImport,
-    tailwindcss,
-    postcssNested,
+    {
+      postcssPlugin: 'grouped',
+      Once(root, { result }) {
+        return postcss([
+          require('postcss-import'),
+          require('postcss-nested'),
+          require('tailwindcss'),
+        ]).process(root, result.opts);
+      },
+    },
+    // tailwindcss,
     autoprefixer,
     cssnano,
   ],

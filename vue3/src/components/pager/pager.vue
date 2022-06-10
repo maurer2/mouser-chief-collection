@@ -70,10 +70,10 @@
 
     @apply mr-2;
 
-    @screen md {
+    /* @screen md {
       @apply mr-4
         mb-auto;
-    }
+    } */
   }
 
   .button-next {
@@ -81,9 +81,9 @@
 
     @apply ml-2;
 
-    @screen md {
+    /* @screen md {
       @apply mb-auto
         ml-4;
-    }
+    } */
   }
 </style>
