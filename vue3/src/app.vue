@@ -72,12 +72,12 @@
       const {loading} = toRefs(props);
 
       const activeKey = ref<string>('');
-      const activeEntry = computed<MouserChiefDetails | null>(() => entries?.[activeKey?.value] ?? null)
-      const positionInList = computed<number>(() => entryNames.indexOf(activeKey.value))
-      const numberOfEntries = computed<number>(() => entryNames.length)
-      const isFirstEntry = computed<boolean>(() => positionInList.value === 0)
-      const isLastEntry = computed<boolean>(() => positionInList.value === entryNames.length - 1)
-      const isLoading = computed(() => (loading !== null) ? loading.value.isLoading : true)
+      const activeEntry = computed<MouserChiefDetails | null>(() => entries?.[activeKey.value] ?? null);
+      const positionInList = computed<number>(() => entryNames.indexOf(activeKey.value));
+      const numberOfEntries = computed<number>(() => entryNames.length);
+      const isFirstEntry = computed<boolean>(() => positionInList.value === 0);
+      const isLastEntry = computed<boolean>(() => positionInList.value === entryNames.length - 1);
+      const isLoading = computed(() => loading.value?.isLoading ?? true);
 
       function handleEntrySelected(value: MouserChiefDetails['Name']): void {
         activeKey.value = value;

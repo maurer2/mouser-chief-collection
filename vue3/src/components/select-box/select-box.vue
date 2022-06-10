@@ -11,10 +11,10 @@
           {{ value }}
         </option>
       </select>
-      <button type="button" class="button button--reset" @click="handleReset()">
+      <button type="reset" class="button button--reset" @click="handleReset()">
         X
       </button>
-      <button type="button" class="button button--submit" @click="handleClick()">
+      <button type="submit" class="button button--submit" @click.prevent="handleClick()">
         Select entry
       </button>
     </div>
@@ -70,11 +70,7 @@
       }
 
       function handleClick(): void {
-        const formIsValid = formElement.value?.reportValidity();
-
-        if (formIsValid) {
-          formElement.value?.requestSubmit();
-        }
+        formElement.value?.requestSubmit();
       }
 
       function handleChange(event: { target: HTMLSelectElement }): void {
@@ -89,7 +85,6 @@
         handleSubmit,
         handleReset,
         handleClick,
-        props,
       };
     },
   });
