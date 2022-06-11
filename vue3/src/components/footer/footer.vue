@@ -64,9 +64,10 @@
       text-center
       text-white
       bg-gray
-      bg-no-repeat;
+      bg-no-repeat
+      bg-gradient-to-tr
+      from-pink-2 to-pink-2;
 
-    background-image: linear-gradient(to right, #ff299c 0%, #ff299c 100%);
     background-size: 0;
     /* stylelint-disable-next-line */
     background-size: calc(v-bind(progressInPercent) * 1%) 100%;

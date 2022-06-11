@@ -43,7 +43,7 @@
 
 <style scoped lang="postcss">
   .list {
-    @apply pl-5
+    @apply pl-0
       list-none;
 
     @supports selector(li::marker) {
@@ -71,10 +71,10 @@
     }
 
     @supports selector(li::marker) {
-      display: list-item;
+      @apply list-item;
 
       &::before {
-        content: none;
+        @apply content-none;
       }
 
       &::marker {

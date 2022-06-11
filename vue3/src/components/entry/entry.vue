@@ -32,7 +32,7 @@
       },
     },
     setup(props) {
-      const title = computed(() => (props.activeEntry !== null ? props.activeEntry.Name : ''));
+      const title = computed(() => (props?.activeEntry?.Name ?? ''));
 
       return {
         title,
@@ -43,13 +43,15 @@
 
 <style scoped lang="postcss">
   .entry {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: min-content repeat(8, max-content);
+    @apply grid
+      grid-cols-1
+      auto-rows-[min-content_max-content]
+      gap-x-4
+      gap-y-2;
 
     @screen sm {
-      grid-template-columns: max-content 1fr;
-      grid-template-rows: min-content repeat(4, minmax(50px, max-content));
+      @apply grid-cols-[max-content_1fr]
+        auto-rows-[minmax(50px,max-content)];
     }
 
     @apply p-4
@@ -58,27 +60,33 @@
   }
 
   .title {
-    grid-column: span 2;
-
     @apply mb-4
+      col-span-full
       text-xl;
   }
 
   .list {
-    display: contents;
+    @apply contents;
   }
 
   .list-key {
-    @apply mr-5
+    @apply col-start-1
+      col-span-1
       font-bold;
 
-    grid-column: span 2;
-
     @screen sm {
-      grid-column: auto;
+      @apply col-start-1
+        col-span-1;
     }
   }
 
   .list-value {
+    @apply col-start-1
+      col-span-1;
+
+    @screen sm {
+      @apply col-start-2
+        col-span-1;
+    }
   }
 </style>
