@@ -39,14 +39,14 @@
   "Peter II": {
     "Name": "Peter II",
     "Began tenure": "1946",
-    "Ended tenure": "",
+    "Ended tenure": "1947",
     "Prime Minister(s)": [
       "Clement Attlee"
     ]
   },
   "Peter III": {
     "Name": "Peter III",
-    "Began tenure": "1946",
+    "Began tenure": "1947",
     "Ended tenure": "1964",
     "Prime Minister(s)": [
       "Clement Attlee",
@@ -110,7 +110,8 @@
     "Prime Minister(s)": [
       "David Cameron",
       "Theresa May",
-      "Boris Johnson"
+      "Boris Johnson",
+      "Liz Truss"
     ]
   }
 }
