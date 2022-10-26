@@ -53,7 +53,7 @@
     emits: [EmitValues.EntrySelected],
     setup(props, context) {
       const currentActiveEntry = computed<MouserChiefDetails['name']>(
-        () => props.activeEntry?.Name ?? '',
+        () => props.activeEntry?.name ?? '',
       );
       const isDefaultSelection = computed<boolean>(() => currentActiveEntry.value === '');
       const formElement = ref<HTMLFormElement | null>();
@@ -126,14 +126,14 @@
       bg-pink-2
       text-white;
 
-    &--is-disabled {
-      @apply opacity-50
-        cursor-not-allowed;
-    }
-
     &:hover {
       @apply bg-pink-1;
     }
+  }
+
+  .button--is-disabled {
+    @apply opacity-50
+      cursor-not-allowed;
   }
 
   .button--reset {

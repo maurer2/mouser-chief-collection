@@ -55,15 +55,15 @@
     &:hover {
       @apply bg-pink-1;
     }
+  }
 
-    &--is-disabled {
-      &:hover {
-        @apply bg-pink-2;
-      }
-
-      @apply opacity-50
-        cursor-not-allowed;
+  .button--is-disabled {
+    &:hover {
+      @apply bg-pink-2;
     }
+
+    @apply opacity-50
+      cursor-not-allowed;
   }
 
   .button-prev {
