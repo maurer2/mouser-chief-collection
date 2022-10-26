@@ -3,7 +3,7 @@
     <h2 class="title">{{ title }}</h2>
     <template v-for="(fieldValue, fieldKey) in activeEntry" :key="fieldKey">
       <dl class="list">
-        <dt class="list-key">{{ fieldKey }}:</dt>
+        <dt class="list-key">{{ titleKeyMap[fieldKey] }}:</dt>
         <dd class="list-value">
           <Subentry :field-value="fieldValue" />
         </dd>
@@ -15,7 +15,7 @@
 <script lang="ts">
   import { defineComponent, computed, PropType } from 'vue';
   import Subentry from '../subentry/subentry.vue';
-  import type { MouserChiefDetails } from '../../types/index'
+  import type { MouserChiefDetails, MouserChiefDetailsMap } from '../../types/index';
 
   export default defineComponent({
     name: 'Entry',
@@ -32,10 +32,18 @@
       },
     },
     setup(props) {
-      const title = computed(() => (props?.activeEntry?.Name ?? ''));
+      const title = computed(() => props?.activeEntry?.name ?? '');
+
+      const titleKeyMap: MouserChiefDetailsMap = {
+        name: 'Name',
+        beganTenure: 'Start of tenure',
+        endedTenure: 'End of tenure',
+        primeMinisters: 'Prime ministers',
+      };
 
       return {
         title,
+        titleKeyMap,
       };
     },
   });

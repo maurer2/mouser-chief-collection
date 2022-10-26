@@ -28,7 +28,7 @@
       const positionInListOneBased = computed<number>(() => positionInList.value + 1);
       const progressInPercent = computed<number>(() => {
         if (numEntries.value === 0) {
-          return 0
+          return 0;
         }
 
         const percentsExact = (100 * positionInListOneBased.value) / numEntries.value;

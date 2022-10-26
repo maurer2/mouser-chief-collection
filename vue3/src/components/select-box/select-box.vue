@@ -1,19 +1,19 @@
 <template>
-  <form
-    ref="formElement"
-    @submit.prevent="handleSubmit"
-    @reset.prevent="handleReset"
-  >
+  <form ref="formElement" @submit.prevent="handleSubmit" @reset.prevent="handleReset">
     <div class="row">
-      <select id="select" :value="currentActiveEntry" class="select" required @change="handleChange">
+      <select
+        id="select"
+        :value="currentActiveEntry"
+        class="select"
+        required
+        @change="handleChange"
+      >
         <option value="" disabled>Names</option>
         <option v-for="value in entryNames" :key="value" :value="value">
           {{ value }}
         </option>
       </select>
-      <button type="reset" class="button button--reset" @click="handleReset()">
-        X
-      </button>
+      <button type="reset" class="button button--reset" @click="handleReset()">X</button>
       <button type="submit" class="button button--submit" @click.prevent="handleClick()">
         Select entry
       </button>
@@ -30,13 +30,8 @@
 </template>
 
 <script lang="ts">
-  import {
-    defineComponent,
-    computed,
-    PropType,
-    ref,
-  } from 'vue';
-  import type { MouserChiefDetails } from '../../types/index'
+  import { defineComponent, computed, PropType, ref } from 'vue';
+  import type { MouserChiefDetails } from '../../types/index';
 
   enum EmitValues {
     EntrySelected = 'entry-selected',
@@ -46,7 +41,7 @@
     name: 'Selectbox',
     props: {
       entryNames: {
-        type: Array as PropType<MouserChiefDetails['Name'][]>,
+        type: Array as PropType<MouserChiefDetails['name'][]>,
         required: true,
         default: () => [],
       },
@@ -57,7 +52,9 @@
     },
     emits: [EmitValues.EntrySelected],
     setup(props, context) {
-      const currentActiveEntry = computed<MouserChiefDetails['Name']>(() => props.activeEntry?.Name ?? '');
+      const currentActiveEntry = computed<MouserChiefDetails['name']>(
+        () => props.activeEntry?.Name ?? '',
+      );
       const isDefaultSelection = computed<boolean>(() => currentActiveEntry.value === '');
       const formElement = ref<HTMLFormElement | null>();
 
@@ -96,10 +93,8 @@
   }
 
   .row {
-    @apply
-      flex
-      items-stretch
-    ;
+    @apply flex
+      items-stretch;
   }
 
   .output {

@@ -5,7 +5,7 @@
 <script lang="ts">
   import { defineComponent, computed } from 'vue';
   import { useRoute } from 'vue-router';
-    // eslint-disable-next-line
+
   import entries from '@data/data_flattened.json';
   import Entry from '../components/entry/entry.vue';
 

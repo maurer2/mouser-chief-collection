@@ -39,9 +39,8 @@
 <script lang="ts">
   import { defineComponent, computed, watchEffect, PropType, toRefs, ref } from 'vue';
   import { RouterView, RouterLink } from 'vue-router';
-  import type { MouserChiefDetails, MouserChiefList , LoadingType } from './types/index'
+  import type { MouserChiefDetails, MouserChiefList, LoadingType } from './types/index';
 
-  // eslint-disable-next-line
   import entriesJSON from '@data/data_flattened.json';
   import { router } from './router';
 
@@ -49,7 +48,7 @@
   import Pager from './components/pager/pager.vue';
   import Footer from './components/footer/footer.vue';
 
-  const entries: MouserChiefList = entriesJSON
+  const entries: MouserChiefList = entriesJSON;
   const entryNames = Object.keys(entries);
 
   export default defineComponent({
@@ -64,22 +63,26 @@
     props: {
       loading: {
         type: Object as PropType<LoadingType>,
-        default: () => { /* */},
+        default: () => {
+          /* */
+        },
         required: true,
-      }
+      },
     },
     setup(props) {
-      const {loading} = toRefs(props);
+      const { loading } = toRefs(props);
 
       const activeKey = ref<string>('');
-      const activeEntry = computed<MouserChiefDetails | null>(() => entries?.[activeKey.value] ?? null);
+      const activeEntry = computed<MouserChiefDetails | null>(
+        () => entries?.[activeKey.value] ?? null,
+      );
       const positionInList = computed<number>(() => entryNames.indexOf(activeKey.value));
       const numberOfEntries = computed<number>(() => entryNames.length);
       const isFirstEntry = computed<boolean>(() => positionInList.value === 0);
       const isLastEntry = computed<boolean>(() => positionInList.value === entryNames.length - 1);
       const isLoading = computed(() => loading.value?.isLoading ?? true);
 
-      function handleEntrySelected(value: MouserChiefDetails['Name']): void {
+      function handleEntrySelected(value: MouserChiefDetails['name']): void {
         activeKey.value = value;
       }
 
@@ -126,7 +129,7 @@
         handleEntrySelected,
         handlePrevClick,
         handleNextClick,
-        isLoading
+        isLoading,
       };
     },
   });

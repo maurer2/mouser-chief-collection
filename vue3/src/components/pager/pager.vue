@@ -29,7 +29,7 @@
     },
     emits: [EmitValues.PagerClicked],
     setup(props, context) {
-      const {isPrevButton} = toRefs(props)
+      const { isPrevButton } = toRefs(props);
 
       function handleClick(): void {
         context.emit(EmitValues.PagerClicked, isPrevButton);

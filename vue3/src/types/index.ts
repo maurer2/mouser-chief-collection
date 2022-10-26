@@ -1,8 +1,8 @@
 export interface MouserChiefDetails {
-  'Name': string;
-  'Began tenure': string;
-  'Ended tenure': string;
-  'Prime Minister(s)': string[];
+  name: string;
+  beganTenure: string;
+  endedTenure: string;
+  primeMinisters: string[];
 }
 
 export interface MouserChiefList {
@@ -13,4 +13,8 @@ export type LoadingType = {
   isLoading: boolean;
   isLoaded: boolean;
   startDate: Date;
+};
+
+export type MouserChiefDetailsMap = {
+  [K in keyof MouserChiefDetails]: string;
 };

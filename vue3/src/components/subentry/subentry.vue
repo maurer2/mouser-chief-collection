@@ -23,16 +23,13 @@
     name: 'Subentry',
     props: {
       fieldValue: {
-        type: [
-          String,
-          Array
-        ] as PropType<string| any[]>,
+        type: [String, Array] as PropType<string | any[]>,
         required: true,
         default: '',
       },
     },
     setup(props) {
-      const isPrimitive = computed(() => !Array.isArray(props.fieldValue));
+      const isPrimitive = computed<boolean>(() => !Array.isArray(props.fieldValue));
 
       return {
         isPrimitive,
