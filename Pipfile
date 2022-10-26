@@ -12,6 +12,7 @@ requests-html = "*"
 mypy = "*"
 argparse = "*"
 pycodestyle = "*"
+pyhumps = "*"
 
 [requires]
 python_version = "3.7"

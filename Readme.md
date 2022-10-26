@@ -32,6 +32,12 @@ Wikipedia: https://en.wikipedia.org/wiki/Chief_Mouser_to_the_Cabinet_Office
  $ pipenv run parse
 ```
 
+### Flatten json file
+
+```
+ $ pipenv run flatten
+```
+
 ### Format json file
 
 ```

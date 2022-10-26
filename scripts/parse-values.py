@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import re
+import humps
 
 from typing import Any, IO
 
@@ -16,16 +17,17 @@ def get_file_contents(file_name: str) -> str:
 
 
 def get_keys(entries: list) -> list:
-    keys = entries[0]
+    keys: list = entries[0].copy()
 
-    keys_without_refs = keys[:]
-    keys_without_refs.remove("Refs")
+    keys.remove("Refs")
+    keys_formatted = [i.replace("(s)", "s") for i in keys]
+    keys_camel_case = [humps.camelize(i.replace(" ", "-")) for i in keys_formatted]
 
-    return keys_without_refs
+    return keys_camel_case
 
 
 def get_entries(entries: list) -> list:
-    entries_without_keys = entries[:]
+    entries_without_keys = entries.copy()
 
     entries_without_keys.pop(0)
 
@@ -84,7 +86,7 @@ def main() -> None:
 
     write_values_to_file(mapped_entries)
 
-    print(mapped_entries)
+    # print(mapped_entries)
 
 
 if __name__ == "__main__":

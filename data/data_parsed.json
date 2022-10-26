@@ -1,17 +1,17 @@
 [
   {
-    "Name": "Rufus of England (popularly nicknamed \"Treasury Bill\")",
-    "Began tenure": "1924",
-    "Ended tenure": "c.1930",
-    "Prime Minister(s)": [
+    "name": "Rufus of England (popularly nicknamed \"Treasury Bill\")",
+    "beganTenure": "1924",
+    "endedTenure": "c.1930",
+    "primeMinisters": [
       "Ramsay MacDonald"
     ]
   },
   {
-    "Name": "Peter",
-    "Began tenure": "1929",
-    "Ended tenure": "1946",
-    "Prime Minister(s)": [
+    "name": "Peter",
+    "beganTenure": "1929",
+    "endedTenure": "1946",
+    "primeMinisters": [
       "Stanley Baldwin",
       "Ramsay MacDonald",
       "Neville Chamberlain",
@@ -20,35 +20,35 @@
     ]
   },
   {
-    "Name": "Munich Mouser",
-    "Began tenure": "1937–40",
-    "Ended tenure": "1943",
-    "Prime Minister(s)": [
+    "name": "Munich Mouser",
+    "beganTenure": "1937–40",
+    "endedTenure": "1943",
+    "primeMinisters": [
       "Neville Chamberlain",
       "Winston Churchill"
     ]
   },
   {
-    "Name": "Nelson",
-    "Began tenure": "1940s",
-    "Ended tenure": "",
-    "Prime Minister(s)": [
+    "name": "Nelson",
+    "beganTenure": "1940s",
+    "endedTenure": "",
+    "primeMinisters": [
       "Winston Churchill"
     ]
   },
   {
-    "Name": "Peter II",
-    "Began tenure": "1946",
-    "Ended tenure": "1947",
-    "Prime Minister(s)": [
+    "name": "Peter II",
+    "beganTenure": "1946",
+    "endedTenure": "1947",
+    "primeMinisters": [
       "Clement Attlee"
     ]
   },
   {
-    "Name": "Peter III",
-    "Began tenure": "1947",
-    "Ended tenure": "1964",
-    "Prime Minister(s)": [
+    "name": "Peter III",
+    "beganTenure": "1947",
+    "endedTenure": "1964",
+    "primeMinisters": [
       "Clement Attlee",
       "Winston Churchill",
       "Anthony Eden",
@@ -57,20 +57,20 @@
     ]
   },
   {
-    "Name": "Peta",
-    "Began tenure": "1964",
-    "Ended tenure": "c.1976",
-    "Prime Minister(s)": [
+    "name": "Peta",
+    "beganTenure": "1964",
+    "endedTenure": "c.1976",
+    "primeMinisters": [
       "Alec Douglas-Home",
       "Harold Wilson",
       "Edward Heath"
     ]
   },
   {
-    "Name": "Wilberforce",
-    "Began tenure": "1973",
-    "Ended tenure": "1986",
-    "Prime Minister(s)": [
+    "name": "Wilberforce",
+    "beganTenure": "1973",
+    "endedTenure": "1986",
+    "primeMinisters": [
       "Edward Heath",
       "Harold Wilson",
       "Jim Callaghan",
@@ -78,36 +78,36 @@
     ]
   },
   {
-    "Name": "Humphrey",
-    "Began tenure": "1989",
-    "Ended tenure": "1997",
-    "Prime Minister(s)": [
+    "name": "Humphrey",
+    "beganTenure": "1989",
+    "endedTenure": "1997",
+    "primeMinisters": [
       "Margaret Thatcher",
       "John Major",
       "Tony Blair"
     ]
   },
   {
-    "Name": "Sybil",
-    "Began tenure": "2007",
-    "Ended tenure": "2009",
-    "Prime Minister(s)": [
+    "name": "Sybil",
+    "beganTenure": "2007",
+    "endedTenure": "2009",
+    "primeMinisters": [
       "Gordon Brown"
     ]
   },
   {
-    "Name": "Freya",
-    "Began tenure": "2012",
-    "Ended tenure": "2014",
-    "Prime Minister(s)": [
+    "name": "Freya",
+    "beganTenure": "2012",
+    "endedTenure": "2014",
+    "primeMinisters": [
       "David Cameron"
     ]
   },
   {
-    "Name": "Larry",
-    "Began tenure": "2011",
-    "Ended tenure": "current",
-    "Prime Minister(s)": [
+    "name": "Larry",
+    "beganTenure": "2011",
+    "endedTenure": "current",
+    "primeMinisters": [
       "David Cameron",
       "Theresa May",
       "Boris Johnson",

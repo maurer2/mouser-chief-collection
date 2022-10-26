@@ -30,7 +30,7 @@ def main() -> None:
     file_parsed: str = json.loads(file_content)
 
     keyed_entries: dict = {
-        get_entry_with_key("Name", item): item for item in file_parsed
+        get_entry_with_key("name", item): item for item in file_parsed
     }
 
     write_values_to_file(keyed_entries)
