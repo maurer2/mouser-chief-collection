@@ -53,7 +53,7 @@
     emits: [EmitValues.EntrySelected],
     setup(props, context) {
       const currentActiveEntry = computed<MouserChiefDetails['name']>(
-        () => props.activeEntry?.Name ?? '',
+        () => props.activeEntry?.name ?? '',
       );
       const isDefaultSelection = computed<boolean>(() => currentActiveEntry.value === '');
       const formElement = ref<HTMLFormElement | null>();
@@ -70,8 +70,14 @@
         formElement.value?.requestSubmit();
       }
 
-      function handleChange(event: { target: HTMLSelectElement }): void {
-        context.emit(EmitValues.EntrySelected, event.target.value);
+      function handleChange($event: Event): void {
+        const target = $event.target as HTMLInputElement | null;
+
+        if (!target) {
+          return
+        }
+
+        context.emit(EmitValues.EntrySelected, target.value);
       }
 
       return {
