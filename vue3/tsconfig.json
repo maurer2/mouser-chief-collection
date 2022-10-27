@@ -16,6 +16,7 @@
     "noEmit": true,
     "noImplicitAny": true,
     "baseUrl": ".",
+    "jsx": "preserve",
     "paths": {
       "@data/*": ["../data/*"] // https://github.com/vitejs/vite/issues/637
     },

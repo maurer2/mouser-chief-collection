@@ -12,7 +12,8 @@
     "lint:scripts": "vue-cli-service lint --no-fix",
     "lint:styles": "stylelint '**/*.{vue, css, scss}'; exit 0",
     "lint:styles:fix": "stylelint --fix '**/*.{vue, css, scss}'; exit 0",
-    "serve": "yarpm run dev"
+    "serve": "yarpm run dev",
+    "test:components": "playwright test -c playwright-components.config.ts"
   },
   "dependencies": {
     "vite": "^2.9.12",
@@ -20,11 +21,12 @@
     "vue-router": "4.0.16"
   },
   "devDependencies": {
+    "@playwright/experimental-ct-vue": "^1.27.1",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/line-clamp": "^0.4.0",
-    "@tailwindcss/typography": "^0.5.2",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "@tailwindcss/typography": "^0.5.2",
     "@tsconfig/node16": "^1.0.2",
     "@types/tailwindcss": "^3.0.10",
     "@typescript-eslint/eslint-plugin": "^5.27.1",

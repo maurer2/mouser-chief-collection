@@ -56,7 +56,7 @@
     &::before {
       @apply block
         relative
-      text-pink-1;
+        text-pink-1;
 
       content: '\2022';
       top: 0.125rem;

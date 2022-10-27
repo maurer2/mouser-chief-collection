@@ -117,3 +117,8 @@ node_modules
 
 # pycharm
 .idea
+
+# Playwright
+*/test-results/
+*/playwright-report/
+*/playwright/.cache/
