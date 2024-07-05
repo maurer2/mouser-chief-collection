@@ -34,7 +34,7 @@ def get_entries(entries: list) -> list:
     return entries_without_keys
 
 
-def clean_entries(entries) -> list:
+def clean_entries(entries: list) -> list:
     # remove [x]
     cleaned_entries: list = [(re.sub(r"\[.*?\]", "", entry)) for entry in entries]
 
@@ -54,6 +54,15 @@ def clean_entries(entries) -> list:
     ]
 
     return cleaned_entries
+
+
+def move_incumbent_to_end_of_list(entries: list) -> list:
+    entries_without_incumbent = [entry for entry in entries if entry[2] != "current"]
+    entry_of_incumbent = [entry for entry in entries if entry[2] == "current"]
+
+    ordered_list = entries_without_incumbent + entry_of_incumbent
+
+    return ordered_list
 
 
 def get_entries_mapped_with_keys(keys: list, entries: list) -> Any:
@@ -80,8 +89,10 @@ def main() -> None:
 
     cleaned_entries = [clean_entries(entry) for entry in entries]
 
+    ordered_entries = move_incumbent_to_end_of_list(cleaned_entries);
+
     mapped_entries = [
-        get_entries_mapped_with_keys(keys, entry) for entry in cleaned_entries
+        get_entries_mapped_with_keys(keys, entry) for entry in ordered_entries
     ]
 
     write_values_to_file(mapped_entries)
