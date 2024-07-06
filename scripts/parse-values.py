@@ -4,23 +4,24 @@ import json
 import re
 import humps
 
-from typing import IO, NamedTuple, TypeAlias, TypedDict
+from typing import IO, NamedTuple, TypeAlias, TypedDict, cast
 
-MouserChiefListEntry = NamedTuple(
+MouserChief = NamedTuple(
+    "MouserChief",
+    [
+        ("name", str),
+        ("beganTenure", str),
+        ("endedTenure", str),
+        ("primeMinisters", list[str]),
+        ("rubbish", str),
+    ],
+)
+
+MouserChiefListEntry = TypedDict(
     "MouserChiefListEntry",
-    name=str,
-    beganTenure=str,
-    endTenure=str,
-    primeMinisters=list[str],
-    rubbish=str,
+    {"name": str, "beganTenure": str, "endedTenure": str, "primeMinisters": list[str]},
 )
-MouserChiefList: TypeAlias = list[MouserChiefListEntry]
-
-MouserChiefListEntryType = TypedDict(
-    "MouserChiefListEntryType",
-    {"name": int, "beganTenure": str, "endTenure": str, "primeMinisters": list[str]},
-)
-MouserChiefListObject: TypeAlias = list[dict[str, MouserChiefListEntryType]]
+MouserChiefList: TypeAlias = list[dict[str, MouserChiefListEntry]]
 
 
 def get_file_contents(file_name: str) -> str:
@@ -32,7 +33,7 @@ def get_file_contents(file_name: str) -> str:
     return file_contents
 
 
-def get_keys(entries: list[str]) -> list[str]:
+def get_keys(entries: list[list[str]]) -> list[str]:
     keys: list = entries[0].copy()
 
     keys.remove("Refs")
@@ -42,14 +43,14 @@ def get_keys(entries: list[str]) -> list[str]:
     return keys_camel_case
 
 
-def get_entries(entries: list[str]) -> list[str]:
+def get_entries(entries: list[list[str]]) -> list[list[str]]:
     entries_without_keys = entries.copy()
     entries_without_keys.pop(0)
 
     return entries_without_keys
 
 
-def clean_entry(entries: list[str]) -> MouserChiefListEntry:
+def clean_entry(entries: list[str]) -> list[str]:
     # remove [x]
     cleaned_entries = [(re.sub(r"\[.*?\]", "", entry)) for entry in entries]
 
@@ -59,18 +60,10 @@ def clean_entry(entries: list[str]) -> MouserChiefListEntry:
     # normalize commas for next step
     cleaned_entries = [entry.replace(", ", ",") for entry in cleaned_entries]
 
-    # convert comma separated entries if prime ministers to list of strings
-    cleaned_entries_as_tuple = tuple(
-        [
-            entry.split(",") if cleaned_entries.index(entry) == 3 else entry
-            for entry in cleaned_entries
-        ]
-    )
-
-    return cleaned_entries_as_tuple
+    return cleaned_entries
 
 
-def move_incumbent_to_end_of_list(entries: MouserChiefList) -> MouserChiefList:
+def move_incumbent_to_end_of_list(entries: list[list[str]]) -> list[list[str]]:
     entries_without_incumbent = [entry for entry in entries if entry[2] != "current"]
     entry_of_incumbent = [entry for entry in entries if entry[2] == "current"]
 
@@ -80,11 +73,23 @@ def move_incumbent_to_end_of_list(entries: MouserChiefList) -> MouserChiefList:
 
 
 def get_values_mapped_with_keys(
-    keys: list[str], entry: MouserChiefListEntry
-) -> MouserChiefListObject:
-    mapped_key_value = dict(zip(keys, entry))
+    keys: list[str], entry: list[str]
+) -> MouserChiefListEntry:
 
-    return mapped_key_value
+    exploded_entry = tuple(
+        [field.split(",") if entry.index(field) == 3 else field for field in entry]
+    )
+
+    mapped_key_value = dict(zip(keys, exploded_entry))
+
+    mapped_entry: MouserChiefListEntry = {
+        "name": str(mapped_key_value["name"]),
+        "beganTenure": str(mapped_key_value["beganTenure"]),
+        "endedTenure": str(mapped_key_value["endedTenure"]),
+        "primeMinisters": list(mapped_key_value["primeMinisters"]),
+    }
+
+    return mapped_entry
 
 
 def write_values_to_file(entries: list) -> None:
@@ -103,13 +108,13 @@ def main() -> None:
     keys: list[str] = get_keys(entries_all)
     entries: list[list[str]] = get_entries(entries_all)
 
-    cleaned_entries: MouserChiefList = [clean_entry(entry) for entry in entries]
+    cleaned_entries: list[list[str]] = [clean_entry(entry) for entry in entries]
+    ordered_entries: list[list[str]] = move_incumbent_to_end_of_list(cleaned_entries)
 
-    ordered_entries: MouserChiefList = move_incumbent_to_end_of_list(cleaned_entries)
-
-    mapped_entries = [
-        get_values_mapped_with_keys(keys, entry) for entry in ordered_entries
-    ]
+    mapped_entries: MouserChiefList = cast(
+        MouserChiefList,
+        [get_values_mapped_with_keys(keys, entry) for entry in ordered_entries],
+    )
 
     write_values_to_file(mapped_entries)
 
