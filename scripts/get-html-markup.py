@@ -3,15 +3,14 @@ import sys
 import argparse
 
 
-from typing import Any, IO
-from requests_html import HTMLSession
+from typing import IO
+import httpx
 
 
-def get_markup(link: str) -> str:
-    session: Any = HTMLSession()
-    url_response: Any = session.get(link)
+def get_markup(url: str) -> str:
+    response = httpx.get(url)
 
-    return url_response.text
+    return response.text
 
 
 def write_file(text: str) -> None:

@@ -8,12 +8,12 @@ verify_ssl = true
 [packages]
 beautifulsoup4 = "*"
 black = "*"
-requests-html = "*"
 mypy = "*"
 argparse = "*"
 pycodestyle = "*"
 pyhumps = "*"
 lxml-html-clean = "*"
+httpx = "*"
 
 [requires]
 python_version = "3.11"
