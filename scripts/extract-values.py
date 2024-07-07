@@ -4,7 +4,7 @@ import json
 
 
 from typing import Any, IO
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag, PageElement, ResultSet
 
 
 def get_file_contents(file_name: str) -> str:
@@ -16,21 +16,23 @@ def get_file_contents(file_name: str) -> str:
     return file_contents
 
 
-def get_table(markup: str) -> str:
+def get_table(markup: str) -> Tag | None:
     parsed_content = BeautifulSoup(markup, "html.parser")
 
-    table: str = parsed_content.select_one("#bodyContent table.wikitable")
+    table: Tag | None = parsed_content.select_one("#bodyContent table.wikitable")
 
     return table
 
 
-def get_rows(table: Any) -> list:
-    rows: list = table.find_all("tr")
+def get_rows(table: Tag) -> list[Tag]:
+    rows_untyped: ResultSet[PageElement] = table.find_all("tr")
+
+    rows = [row for row in rows_untyped if isinstance(row, Tag)]
 
     return rows
 
 
-def get_values(row: Any) -> list:
+def get_values(row: Tag) -> list[str]:
     columns: list = row.find_all(["th", "td"])
 
     values: list = []
@@ -46,25 +48,20 @@ def get_values(row: Any) -> list:
     return values
 
 
-def get_entries(values_raw: Any) -> list:
+def get_entries(values_raw: list[Tag]) -> list[list[str]]:
     entries: list = [get_values(value) for value in values_raw]
 
     return entries
 
 
-def get_json(values: Any) -> str:
-    values_stringified: str = json.dumps(values, indent=2)
-
-    return values_stringified
-
-
 def print_debug_info(entries: Any) -> None:
-    stringified_entries: str = get_json(entries)
+    stringified_entries = json.dumps(entries)
 
     print(stringified_entries)
 
 
-def write_values_to_file(entries: list) -> None:
+def write_values_to_file(entries: list[list[str]]) -> None:
+
     nested_values = {}
 
     nested_values["entries"] = entries
@@ -77,10 +74,13 @@ def main() -> None:
     file_name: str = "../data/raw.html"
     file_content: str = get_file_contents(file_name)
 
-    table: str = get_table(file_content)
-    table_rows: list = get_rows(table)
+    table: Tag | None = get_table(file_content)
+    if table is None:
+        print("table can't be found")
+        sys.exit(1)
+    table_rows: list[Tag] = get_rows(table)
 
-    parsed_entries: list = get_entries(table_rows)
+    parsed_entries: list[list[str]] = get_entries(table_rows)
 
     write_values_to_file(parsed_entries)
     # print_debug_info(parsed_entries)
