@@ -1,8 +1,6 @@
 import os
 import sys
 import json
-
-
 from typing import Any, IO
 from bs4 import BeautifulSoup, Tag, PageElement, ResultSet
 
@@ -61,9 +59,7 @@ def print_debug_info(entries: Any) -> None:
 
 
 def write_values_to_file(entries: list[list[str]]) -> None:
-
     nested_values = {}
-
     nested_values["entries"] = entries
 
     with open("./data/data_unparsed.json", "w+", encoding="utf-8") as file:

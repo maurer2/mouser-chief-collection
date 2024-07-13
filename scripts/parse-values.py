@@ -3,7 +3,6 @@ import sys
 import json
 import re
 import humps
-
 from typing import IO, NamedTuple, TypeAlias, TypedDict, cast
 
 MouserChief = NamedTuple(
@@ -51,14 +50,21 @@ def get_entries(entries: list[list[str]]) -> list[list[str]]:
 
 
 def clean_entry(entries: list[str]) -> list[str]:
-    # remove [x]
-    cleaned_entries = [(re.sub(r"\[.*?\]", "", entry)) for entry in entries]
+    cleaned_entries: list[str] = []
 
-    # trim
-    cleaned_entries = [entry.strip() for entry in cleaned_entries]
+    for entry in entries:
+        clean_entry = entry
+        # remove [x]
+        clean_entry = re.sub(r"\[.*?\]", "", clean_entry)
+        # trim
+        clean_entry = clean_entry.strip()
+        # normalize commas for next step
+        clean_entry = clean_entry.replace(", ", ",")
 
-    # normalize commas for next step
-    cleaned_entries = [entry.replace(", ", ",") for entry in cleaned_entries]
+        cleaned_entries.append(clean_entry)
+
+    # Remove rubbish column
+    cleaned_entries.pop()
 
     return cleaned_entries
 
