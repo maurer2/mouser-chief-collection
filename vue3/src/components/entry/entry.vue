@@ -1,13 +1,16 @@
 <template>
   <section class="entry">
-    <h2 class="title">{{ title }}</h2>
-    <template v-for="(fieldValue, fieldKey) in activeEntry" :key="fieldKey">
-      <dl class="list">
-        <dt class="list-key">{{ titleKeyMap[fieldKey] }}:</dt>
-        <dd class="list-value">
-          <Subentry :field-value="fieldValue" />
-        </dd>
-      </dl>
+    <h2 class="title">{{ name }}</h2>
+    <template v-for="(tenure, tenureIndex) in tenures" :key="tenureIndex">
+      <h3 v-if="hasMultipleTenures" class="subtitle">Term {{ tenureIndex + 1 }}</h3>
+      <template v-for="(fieldValue, fieldKey) in tenure" :key="`${tenureIndex}-${fieldKey}`">
+        <dl class="list">
+          <dt class="list-key">{{ titleKeyMap[fieldKey] }}:</dt>
+          <dd class="list-value">
+            <Subentry :field-value="fieldValue" />
+          </dd>
+        </dl>
+      </template>
     </template>
   </section>
 </template>
@@ -23,19 +26,21 @@
       Subentry,
     },
     props: {
-      activeEntry: {
-        type: Object as PropType<MouserChiefDetails>,
+      name: {
+        type: String as PropType<string>,
         required: true,
-        default: () => {
-          /**/
-        },
+        default: '',
+      },
+      tenures: {
+        type: Array as PropType<MouserChiefDetails[]>,
+        required: true,
+        default: () => [],
       },
     },
     setup(props) {
-      const title = computed(() => props?.activeEntry?.name ?? '');
+      const hasMultipleTenures = computed<boolean>(() => props.tenures.length > 1);
 
       const titleKeyMap: MouserChiefDetailsMap = {
-        name: 'Name',
         beganTenure: 'Start of tenure',
         endedTenure: 'End of tenure',
         timeInOffice: 'Time in office',
@@ -43,7 +48,7 @@
       };
 
       return {
-        title,
+        hasMultipleTenures,
         titleKeyMap,
       };
     },
@@ -72,6 +77,12 @@
     @apply mb-4
       col-span-full
       text-xl;
+  }
+
+  .subtitle {
+    @apply mt-2
+      col-span-full
+      font-bold;
   }
 
   .list {

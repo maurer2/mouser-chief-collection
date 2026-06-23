@@ -3,13 +3,13 @@
     <header class="header">
       <h1 class="title">
         <RouterLink to="/" class="title-link"> Mouser-Chief-Collection </RouterLink>
-        <small>{{ isLoading ? '[Loading]' : '' }}</small>
+        <span>{{ isLoading ? '[Loading]' : '' }}</span>
       </h1>
     </header>
     <nav class="nav">
       <SelectBox
         :entry-names="entryNames"
-        :active-entry="activeEntry"
+        :active-entry-name="activeKey"
         @entry-selected="handleEntrySelected"
       />
     </nav>
@@ -39,16 +39,16 @@
 <script lang="ts">
   import { defineComponent, computed, watchEffect, PropType, toRefs, ref } from 'vue';
   import { RouterView, RouterLink } from 'vue-router';
-  import type { MouserChiefDetails, MouserChiefList, LoadingType } from './types/index';
+  import type { MouserChiefDetails, MouserChiefMap, LoadingType } from './types/index';
 
-  import entriesJSON from '@data/data_flattened.json';
+  import entriesJSON from '@data/data_normalized.json';
   import { router } from './router';
 
   import SelectBox from './components/select-box/select-box.vue';
   import Pager from './components/pager/pager.vue';
   import Footer from './components/footer/footer.vue';
 
-  const entries: MouserChiefList = entriesJSON;
+  const entries: MouserChiefMap = entriesJSON;
   const entryNames = Object.keys(entries);
 
   export default defineComponent({
@@ -73,7 +73,7 @@
       const { loading } = toRefs(props);
 
       const activeKey = ref<string>('');
-      const activeEntry = computed<MouserChiefDetails | null>(
+      const activeEntry = computed<MouserChiefDetails[] | null>(
         () => entries?.[activeKey.value] ?? null,
       );
       const positionInList = computed<number>(() => entryNames.indexOf(activeKey.value));
@@ -82,7 +82,7 @@
       const isLastEntry = computed<boolean>(() => positionInList.value === entryNames.length - 1);
       const isLoading = computed(() => loading.value?.isLoading ?? true);
 
-      function handleEntrySelected(value: MouserChiefDetails['name']): void {
+      function handleEntrySelected(value: string): void {
         activeKey.value = value;
       }
 
@@ -121,6 +121,7 @@
       return {
         entries,
         entryNames,
+        activeKey,
         numberOfEntries,
         activeEntry,
         isFirstEntry,

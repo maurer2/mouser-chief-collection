@@ -1,12 +1,12 @@
 export interface MouserChiefDetails {
-  name: string;
   beganTenure: string;
   endedTenure: string;
+  timeInOffice: string;
   primeMinisters: string[];
 }
 
-export interface MouserChiefList {
-  [name: string]: MouserChiefDetails;
+export interface MouserChiefMap {
+  [name: string]: MouserChiefDetails[];
 }
 
 export type LoadingType = {

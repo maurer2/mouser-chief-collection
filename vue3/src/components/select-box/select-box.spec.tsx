@@ -1,19 +1,12 @@
 import { test, expect } from '@playwright/experimental-ct-vue';
 import Selectbox from './select-box.vue';
 
-import type { MouserChiefDetails } from '../../types/index';
-
 test.use({ viewport: { width: 1280, height: 1024 } });
 
 test.describe('<SelectBox>', (): void => {
   const props = {
-    entryNames: ['Mittens', 'Socks', 'Liz Lemon'] as MouserChiefDetails['name'][],
-    activeEntry: {
-      name: 'Mittens',
-      beganTenure: '2000',
-      endedTenure: '2020',
-      primeMinisters: ['Tony Blair'],
-    } as MouserChiefDetails,
+    entryNames: ['Mittens', 'Socks', 'Tiddles'],
+    activeEntryName: 'Mittens',
   };
 
   test('should have selectbox and buttons', async ({ mount }) => {

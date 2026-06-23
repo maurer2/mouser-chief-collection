@@ -31,7 +31,6 @@
 
 <script lang="ts">
   import { defineComponent, computed, PropType, ref } from 'vue';
-  import type { MouserChiefDetails } from '../../types/index';
 
   enum EmitValues {
     EntrySelected = 'entry-selected',
@@ -41,20 +40,18 @@
     name: 'Selectbox',
     props: {
       entryNames: {
-        type: Array as PropType<MouserChiefDetails['name'][]>,
+        type: Array as PropType<string[]>,
         required: true,
         default: () => [],
       },
-      activeEntry: {
-        type: Object as PropType<MouserChiefDetails>,
-        default: null,
+      activeEntryName: {
+        type: String as PropType<string>,
+        default: '',
       },
     },
     emits: [EmitValues.EntrySelected],
     setup(props, context) {
-      const currentActiveEntry = computed<MouserChiefDetails['name']>(
-        () => props.activeEntry?.name ?? '',
-      );
+      const currentActiveEntry = computed<string>(() => props.activeEntryName ?? '');
       const isDefaultSelection = computed<boolean>(() => currentActiveEntry.value === '');
       const formElement = ref<HTMLFormElement | null>();
 
