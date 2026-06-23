@@ -38,6 +38,7 @@
         name: 'Name',
         beganTenure: 'Start of tenure',
         endedTenure: 'End of tenure',
+        timeInOffice: 'Time in office',
         primeMinisters: 'Prime ministers',
       };
 

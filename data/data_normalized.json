@@ -1,0 +1,151 @@
+{
+  "Rufus(popularly nicknamed \"Treasury Bill\")": [
+    {
+      "beganTenure": "1924",
+      "endedTenure": "1924",
+      "timeInOffice": "287 days",
+      "primeMinisters": [
+        "Ramsay MacDonald"
+      ]
+    },
+    {
+      "beganTenure": "1929",
+      "endedTenure": "c.1930",
+      "timeInOffice": "c.1 year",
+      "primeMinisters": [
+        "Ramsay MacDonald"
+      ]
+    }
+  ],
+  "Peter": [
+    {
+      "beganTenure": "1929",
+      "endedTenure": "1946",
+      "timeInOffice": "c.17 years",
+      "primeMinisters": [
+        "Ramsay MacDonald",
+        "Stanley Baldwin",
+        "Neville Chamberlain",
+        "Winston Churchill",
+        "Clement Attlee"
+      ]
+    }
+  ],
+  "Bob(later nicknamed \"Munich Mouser\" by Churchill)": [
+    {
+      "beganTenure": "1937",
+      "endedTenure": "1943",
+      "timeInOffice": "6 years 68 days",
+      "primeMinisters": [
+        "Neville Chamberlain",
+        "Winston Churchill"
+      ]
+    }
+  ],
+  "Nelson": [
+    {
+      "beganTenure": "1940",
+      "endedTenure": "c.1944",
+      "timeInOffice": "c.3 years 10 months",
+      "primeMinisters": [
+        "Winston Churchill"
+      ]
+    }
+  ],
+  "Peter II": [
+    {
+      "beganTenure": "1946",
+      "endedTenure": "1947",
+      "timeInOffice": "6 months",
+      "primeMinisters": [
+        "Clement Attlee"
+      ]
+    }
+  ],
+  "Peter III": [
+    {
+      "beganTenure": "1947",
+      "endedTenure": "1964",
+      "timeInOffice": "16 years 195 days",
+      "primeMinisters": [
+        "Clement Attlee",
+        "Winston Churchill",
+        "Anthony Eden",
+        "Harold Macmillan",
+        "Alec Douglas-Home"
+      ]
+    }
+  ],
+  "Peta": [
+    {
+      "beganTenure": "1964",
+      "endedTenure": "c.1976",
+      "timeInOffice": "c.12 years",
+      "primeMinisters": [
+        "Alec Douglas-Home",
+        "Harold Wilson",
+        "Edward Heath"
+      ]
+    }
+  ],
+  "Wilberforce": [
+    {
+      "beganTenure": "1973",
+      "endedTenure": "1987",
+      "timeInOffice": "c.14 years",
+      "primeMinisters": [
+        "Edward Heath",
+        "Harold Wilson",
+        "Jim Callaghan",
+        "Margaret Thatcher"
+      ]
+    }
+  ],
+  "Humphrey": [
+    {
+      "beganTenure": "1989",
+      "endedTenure": "1997",
+      "timeInOffice": "c.8 years",
+      "primeMinisters": [
+        "Margaret Thatcher",
+        "John Major",
+        "Tony Blair"
+      ]
+    }
+  ],
+  "Sybil": [
+    {
+      "beganTenure": "2007",
+      "endedTenure": "2008",
+      "timeInOffice": "c.6 months",
+      "primeMinisters": [
+        "Gordon Brown"
+      ]
+    }
+  ],
+  "Freya": [
+    {
+      "beganTenure": "2012",
+      "endedTenure": "2014",
+      "timeInOffice": "c.2 years",
+      "primeMinisters": [
+        "David Cameron"
+      ]
+    }
+  ],
+  "Larry": [
+    {
+      "beganTenure": "2011",
+      "endedTenure": "current",
+      "timeInOffice": "c.15 years",
+      "primeMinisters": [
+        "David Cameron",
+        "Theresa May",
+        "Boris Johnson",
+        "Liz Truss",
+        "Rishi Sunak",
+        "Keir Starmer"
+      ]
+    }
+  ]
+}

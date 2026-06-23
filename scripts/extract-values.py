@@ -2,7 +2,7 @@ import os
 import sys
 import json
 from typing import Any, IO
-from bs4 import BeautifulSoup, Tag, PageElement, ResultSet
+from bs4 import BeautifulSoup, Tag, ResultSet
 
 
 def get_file_contents(file_name: str) -> str:
@@ -23,7 +23,7 @@ def get_table(markup: str) -> Tag | None:
 
 
 def get_rows(table: Tag) -> list[Tag]:
-    rows_untyped: ResultSet[PageElement] = table.find_all("tr")
+    rows_untyped: ResultSet[Tag] = table.find_all("tr")
 
     rows = [row for row in rows_untyped if isinstance(row, Tag)]
 
@@ -39,9 +39,8 @@ def get_values(row: Tag) -> list[str]:
         column_span: int = int(column.get("colspan") or 1)
         column_content: str = column.get_text(strip=True).strip()
 
-        values.append(column_content)
-
-        values.extend(["" for i in range(column_span - 1)])
+        # Copy values of first column in colspan to other columns in colspan
+        values.extend([column_content] * column_span)
 
     return values
 

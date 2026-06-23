@@ -9,17 +9,12 @@ verify_ssl = true
 beautifulsoup4 = "*"
 black = "*"
 mypy = "*"
-argparse = "*"
 pycodestyle = "*"
 pyhumps = "*"
-lxml-html-clean = "*"
 httpx = "*"
 
 [requires]
-python_version = "3.11"
-
-[pipenv]
-allow_prereleases = true
+python_version = "3.14"
 
 [scripts]
 # pipenv run ....
@@ -29,5 +24,6 @@ lint-types = "mypy './scripts/'"
 dump    = "python './scripts/get-html-markup.py' --url='https://en.wikipedia.org/wiki/Chief_Mouser_to_the_Cabinet_Office'"
 extract = "python './scripts/extract-values.py'"
 parse   = "python './scripts/parse-values.py'"
-flatten = "python './scripts/flatten-json.py'"
+normalize = "python './scripts/normalize-json.py'"
 format  = "black './scripts'"
+build = "bash -c 'pipenv run dump && pipenv run extract && pipenv run parse && pipenv run normalize'"

@@ -8,7 +8,8 @@ import httpx
 
 
 def get_markup(url: str) -> str:
-    response = httpx.get(url)
+    response = httpx.get(url, headers={"User-Agent": "larry"}, follow_redirects=True)
+    response.raise_for_status()
 
     return response.text
 

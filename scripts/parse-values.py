@@ -5,12 +5,15 @@ import re
 import humps
 from typing import IO, NamedTuple, TypeAlias, TypedDict, cast
 
+Row: TypeAlias = list[str]
+
 MouserChief = NamedTuple(
     "MouserChief",
     [
         ("name", str),
         ("beganTenure", str),
         ("endedTenure", str),
+        ("timeInOffice", str),
         ("primeMinisters", list[str]),
         ("rubbish", str),
     ],
@@ -18,7 +21,13 @@ MouserChief = NamedTuple(
 
 MouserChiefListEntry = TypedDict(
     "MouserChiefListEntry",
-    {"name": str, "beganTenure": str, "endedTenure": str, "primeMinisters": list[str]},
+    {
+        "name": str,
+        "beganTenure": str,
+        "endedTenure": str,
+        "timeInOffice": str,
+        "primeMinisters": list[str],
+    },
 )
 MouserChiefList: TypeAlias = list[dict[str, MouserChiefListEntry]]
 
@@ -47,6 +56,37 @@ def get_entries(entries: list[list[str]]) -> list[list[str]]:
     entries_without_keys.pop(0)
 
     return entries_without_keys
+
+
+def expand_rowspan_rows(entries: list[list[str]]) -> list[list[str]]:
+    if not entries:
+        return []
+
+    # first row (thead) has all the keys
+    number_of_columns = len(entries[0])
+    rows: list[Row] = []
+    last_full_row: Row | None = None
+
+    for entry in entries:
+        # Full row -> no rowspan
+        if len(entry) == number_of_columns:
+            # Store as parent/target for follow up rows that might have rowspan
+            last_full_row = entry
+            rows.append(entry)
+
+            continue
+
+        if last_full_row is None:
+            rows.append(entry)
+            continue
+
+        row_with_rowspan_removed = last_full_row.copy()
+        # Overwrite columns after "name"
+        for index, value in enumerate(entry, 1):
+            row_with_rowspan_removed[index] = value
+        rows.append(row_with_rowspan_removed)
+
+    return rows
 
 
 def clean_entry(entries: list[str]) -> list[str]:
@@ -78,21 +118,15 @@ def move_incumbent_to_end_of_list(entries: list[list[str]]) -> list[list[str]]:
     return ordered_list
 
 
-def get_values_mapped_with_keys(
-    keys: list[str], entry: list[str]
-) -> MouserChiefListEntry:
-
-    exploded_entry = tuple(
-        [field.split(",") if entry.index(field) == 3 else field for field in entry]
-    )
-
-    mapped_key_value = dict(zip(keys, exploded_entry))
+def get_values_mapped_with_keys(keys: list[str], entry: list[str]) -> MouserChiefListEntry:
+    key_value_map = dict(zip(keys, entry))
 
     mapped_entry: MouserChiefListEntry = {
-        "name": str(mapped_key_value["name"]),
-        "beganTenure": str(mapped_key_value["beganTenure"]),
-        "endedTenure": str(mapped_key_value["endedTenure"]),
-        "primeMinisters": list(mapped_key_value["primeMinisters"]),
+        "name": key_value_map["name"],
+        "beganTenure": key_value_map["beganTenure"],
+        "endedTenure": key_value_map["endedTenure"],
+        "timeInOffice": key_value_map["timeInOffice"],
+        "primeMinisters": key_value_map["primeMinisters"].split(","),
     }
 
     return mapped_entry
@@ -109,7 +143,8 @@ def main() -> None:
 
     parsed_values: dict = json.loads(file_content)
 
-    entries_all: list[list[str]] = parsed_values["entries"]
+    entries_with_rowspans: list[list[str]] = parsed_values["entries"]
+    entries_all: list[list[str]] = expand_rowspan_rows(entries_with_rowspans)
 
     keys: list[str] = get_keys(entries_all)
     entries: list[list[str]] = get_entries(entries_all)
