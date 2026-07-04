@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, PropType } from 'vue';
+  import { defineComponent, computed, type PropType } from 'vue';
   import Subentry from '../subentry/subentry.vue';
   import type { MouserChiefDetails, MouserChiefDetailsMap } from '../../types/index';
 

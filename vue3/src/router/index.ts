@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 
 import Root from '../views/Root.vue';
 import Cat from '../views/Cat.vue';
@@ -14,12 +14,12 @@ const routes = [
     component: Cat,
   },
   {
-    path: '/*',
+    path: '/:pathMatch(.*)*',
     component: NotFound,
   },
-];
+] satisfies RouteRecordRaw[];
 
 export const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });

@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, PropType, ref } from 'vue';
+  import { defineComponent, computed, type PropType, ref } from 'vue';
 
   enum EmitValues {
     EntrySelected = 'entry-selected',

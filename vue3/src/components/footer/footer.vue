@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, toRefs, PropType } from 'vue';
+  import { defineComponent, computed, toRefs, type PropType } from 'vue';
 
   export default defineComponent({
     name: 'Footer',

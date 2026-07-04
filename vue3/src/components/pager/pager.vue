@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType, toRefs } from 'vue';
+  import { defineComponent, type PropType, toRefs } from 'vue';
 
   enum EmitValues {
     PagerClicked = 'pager-clicked',

@@ -1,14 +1,17 @@
-import * as path from 'path';
-import type { UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import { fileURLToPath, URL } from 'node:url';
+import { defineConfig } from 'vite';
 
-const config: UserConfig = {
-  resolve: {
-    alias: {
-      '@data': path.resolve(__dirname, './../data/'),
+export default defineConfig(({ mode }) => {
+  const isProd = mode === 'production';
+
+  return {
+    base: isProd ? '/mouser-chief-collection/' : '/',
+    resolve: {
+      alias: {
+        '@data': fileURLToPath(new URL('../data', import.meta.url)),
+      },
     },
-  },
-  plugins: [vue()],
-};
-
-export default config;
+    plugins: [vue()],
+  };
+});

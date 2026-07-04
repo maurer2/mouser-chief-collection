@@ -15,7 +15,7 @@ test.describe('<Subentry>', (): void => {
   });
 
   test('should render multiple entries', async ({ mount }) => {
-    const component = await mount(<Subentry filedValue={['test1', 'test2']} />);
+    const component = await mount(<Subentry fieldValue={['test1', 'test2']} />);
 
     await expect(component.getByText('test1')).toBeDefined();
     await expect(component.getByText('test2')).toBeDefined();

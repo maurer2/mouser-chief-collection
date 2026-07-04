@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, watchEffect, PropType, toRefs, ref } from 'vue';
+  import { defineComponent, computed, watchEffect, type PropType, toRefs, ref } from 'vue';
   import { RouterView, RouterLink } from 'vue-router';
   import type { MouserChiefDetails, MouserChiefMap, LoadingType } from './types/index';
 
