@@ -18,7 +18,7 @@
 <script setup lang="ts">
   import { computed } from 'vue';
   import Subentry from '../subentry/subentry.vue';
-  import type { MouserChiefDetails, MouserChiefDetailsMap } from '../../types/index';
+  import type { MouserChiefDetails } from '../../types/index';
 
   defineOptions({ name: 'Entry' });
 
@@ -31,7 +31,7 @@
 
   const hasMultipleTenures = computed<boolean>(() => tenures.length > 1);
 
-  const titleKeyMap: MouserChiefDetailsMap = {
+  const titleKeyMap: Record<keyof MouserChiefDetails, string> = {
     beganTenure: 'Start of tenure',
     endedTenure: 'End of tenure',
     timeInOffice: 'Time in office',

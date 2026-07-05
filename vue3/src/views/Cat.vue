@@ -6,18 +6,16 @@
   import { computed } from 'vue';
   import { useRoute } from 'vue-router';
 
-  import entriesJSON from '@data/data_normalized.json';
-  import type { MouserChiefDetails, MouserChiefMap } from '../types/index';
+  import { useMouserChiefs } from '../loaders/mouser-chiefs';
   import Entry from '../components/entry/entry.vue';
 
   defineOptions({ name: 'Cat' });
 
-  const entries: MouserChiefMap = entriesJSON;
-
   const route = useRoute();
+  const { data: entries } = useMouserChiefs();
 
   const name = computed<string>(() =>
     typeof route.params.entry === 'string' ? route.params.entry : '',
   );
-  const tenures = computed<MouserChiefDetails[]>(() => entries[name.value] ?? []);
+  const tenures = computed(() => entries.value?.[name.value] ?? []);
 </script>

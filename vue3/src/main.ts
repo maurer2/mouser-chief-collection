@@ -1,21 +1,15 @@
-import { createApp, reactive } from 'vue';
+import { createApp } from 'vue';
+import { DataLoaderPlugin } from 'vue-router/experimental';
+
 import App from './app.vue';
 import { router } from './router/index';
-import type { LoadingType } from './types';
 
 import './global.css';
 
-const loading = reactive<LoadingType>({
-  isLoading: true,
-  isLoaded: false,
-  startDate: new Date(),
-});
+const app = createApp(App);
+app.use(DataLoaderPlugin, { router });
+app.use(router);
 
-window.setTimeout(() => {
-  loading.isLoading = false;
-  loading.isLoaded = true;
-}, 2500);
+await router.isReady();
 
-const vueApp = createApp(App, { loading });
-
-vueApp.use(router).mount('#root');
+app.mount('#root');

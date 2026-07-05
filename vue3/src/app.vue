@@ -3,7 +3,6 @@
     <header class="header">
       <h1 class="title">
         <RouterLink to="/" class="title-link"> Mouser-Chief-Collection </RouterLink>
-        <span>{{ isLoading ? '[Loading]' : '' }}</span>
       </h1>
     </header>
     <nav class="nav">
@@ -20,15 +19,15 @@
           :is-disabled="isFirstEntry"
           @pager-clicked="handlePrevClick"
         />
-        <div class="content">
-          <RouterView />
-        </div>
         <Pager
           :is-prev-button="false"
           :is-disabled="isLastEntry"
           @pager-clicked="handleNextClick"
         />
       </template>
+      <div class="content">
+        <RouterView />
+      </div>
     </main>
     <div class="footer">
       <Footer :num-entries="numberOfEntries" :position-in-list="positionInList" />
@@ -37,11 +36,11 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, watchEffect } from 'vue';
+  import { computed } from 'vue';
+  import { useRoute, useRouter } from 'vue-router';
 
-  import entriesJSON from '@data/data_normalized.json';
-  import type { MouserChiefDetails, MouserChiefMap, LoadingType } from './types/index';
-  import { router } from './router';
+  import type { MouserChiefDetails } from './types/index';
+  import { useMouserChiefs } from './loaders/mouser-chiefs';
 
   import SelectBox from './components/select-box/select-box.vue';
   import Pager from './components/pager/pager.vue';
@@ -49,27 +48,24 @@
 
   defineOptions({ name: 'App' });
 
-  type AppProps = {
-    loading: LoadingType;
-  };
+  const route = useRoute();
+  const router = useRouter();
+  const { data: entries } = useMouserChiefs();
 
-  const { loading } = defineProps<AppProps>();
-
-  const entries: MouserChiefMap = entriesJSON;
-  const entryNames = Object.keys(entries);
-
-  const activeKey = ref<string>('');
-  const activeEntry = computed<MouserChiefDetails[] | null>(
-    () => entries?.[activeKey.value] ?? null,
+  const entryNames = computed<string[]>(() => Object.keys(entries.value ?? {}));
+  const activeKey = computed<string>(() =>
+    typeof route.params.entry === 'string' ? route.params.entry : '',
   );
-  const positionInList = computed<number>(() => entryNames.indexOf(activeKey.value));
-  const numberOfEntries = computed<number>(() => entryNames.length);
+  const activeEntry = computed<MouserChiefDetails[] | null>(
+    () => entries.value?.[activeKey.value] ?? null,
+  );
+  const positionInList = computed<number>(() => entryNames.value.indexOf(activeKey.value));
+  const numberOfEntries = computed<number>(() => entryNames.value.length);
   const isFirstEntry = computed<boolean>(() => positionInList.value === 0);
-  const isLastEntry = computed<boolean>(() => positionInList.value === entryNames.length - 1);
-  const isLoading = computed<boolean>(() => loading?.isLoading ?? true);
+  const isLastEntry = computed<boolean>(() => positionInList.value === entryNames.value.length - 1);
 
   function handleEntrySelected(value: string): void {
-    activeKey.value = value;
+    router.push(`/cat/${value}`);
   }
 
   function handlePrevClick(): void {
@@ -77,9 +73,9 @@
       return;
     }
 
-    const prevIndex = positionInList.value - 1;
+    const prevKey = entryNames.value[positionInList.value - 1];
 
-    activeKey.value = entryNames[prevIndex];
+    router.push(`/cat/${prevKey}`);
   }
 
   function handleNextClick(): void {
@@ -87,20 +83,10 @@
       return;
     }
 
-    const nextIndex = positionInList.value + 1;
+    const nextKey = entryNames.value[positionInList.value + 1];
 
-    activeKey.value = entryNames[nextIndex];
+    router.push(`/cat/${nextKey}`);
   }
-
-  watchEffect(() => {
-    if (activeKey.value === '' || activeEntry.value === null) {
-      router.push({ path: '/' });
-
-      return;
-    }
-
-    router.push({ path: `/cat/${activeKey.value}` });
-  });
 </script>
 
 <style scoped lang="postcss">
