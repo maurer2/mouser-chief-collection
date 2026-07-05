@@ -56,7 +56,7 @@
   const activeKey = computed<string>(() =>
     typeof route.params.entry === 'string' ? route.params.entry : '',
   );
-  const activeEntry = computed<MouserChiefDetails[] | null>(
+  const activeEntry = computed(
     () => entries.value?.[activeKey.value] ?? null,
   );
   const positionInList = computed<number>(() => entryNames.value.indexOf(activeKey.value));

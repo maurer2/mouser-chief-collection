@@ -6,5 +6,10 @@ export type MouserChiefDetails = {
 };
 
 export type MouserChiefMap = {
-  [name: string]: MouserChiefDetails[];
+  [key: string]: string;
 };
+
+// todo: use
+// export type MouserChiefMap = {
+//   [K in keyof MouserChiefDetails]: string;
+// };
