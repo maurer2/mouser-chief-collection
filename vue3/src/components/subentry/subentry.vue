@@ -16,26 +16,18 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent, computed, type PropType } from 'vue';
+<script setup lang="ts">
+  import { computed } from 'vue';
 
-  export default defineComponent({
-    name: 'Subentry',
-    props: {
-      fieldValue: {
-        type: [String, Array] as PropType<string | any[]>,
-        required: true,
-        default: '',
-      },
-    },
-    setup(props) {
-      const isPrimitive = computed<boolean>(() => !Array.isArray(props.fieldValue));
+  defineOptions({ name: 'Subentry' });
 
-      return {
-        isPrimitive,
-      };
-    },
-  });
+  type SubEntryProps = {
+    fieldValue: string | string[];
+  };
+
+  const { fieldValue } = defineProps<SubEntryProps>();
+
+  const isPrimitive = computed<boolean>(() => !Array.isArray(fieldValue));
 </script>
 
 <style scoped lang="postcss">

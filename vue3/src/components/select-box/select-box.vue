@@ -1,13 +1,7 @@
 <template>
   <form ref="formElement" @submit.prevent="handleSubmit" @reset.prevent="handleReset">
     <div class="row">
-      <select
-        id="select"
-        :value="currentActiveEntry"
-        class="select"
-        required
-        @change="handleChange"
-      >
+      <select id="select" :value="activeEntryName" class="select" required @change="handleChange">
         <option value="" disabled>Names</option>
         <option v-for="value in entryNames" :key="value" :value="value">
           {{ value }}
@@ -22,72 +16,53 @@
       <p class="output">
         <span>Selected entry: </span>
         <output for="select" class="font-bold">
-          {{ currentActiveEntry }}
+          {{ activeEntryName }}
         </output>
       </p>
     </template>
   </form>
 </template>
 
-<script lang="ts">
-  import { defineComponent, computed, type PropType, ref } from 'vue';
+<script setup lang="ts">
+  import { computed, useTemplateRef } from 'vue';
 
-  enum EmitValues {
-    EntrySelected = 'entry-selected',
+  defineOptions({ name: 'Selectbox' });
+
+  type SelectBoxProps = {
+    entryNames: string[];
+    activeEntryName?: string;
+  };
+
+  const { activeEntryName = '' } = defineProps<SelectBoxProps>();
+
+  const emit = defineEmits<{
+    'entry-selected': [value: string];
+  }>();
+
+  const isDefaultSelection = computed<boolean>(() => activeEntryName === '');
+  const formElement = useTemplateRef('formElement');
+
+  function handleSubmit(): void {
+    emit('entry-selected', activeEntryName);
   }
 
-  export default defineComponent({
-    name: 'Selectbox',
-    props: {
-      entryNames: {
-        type: Array as PropType<string[]>,
-        required: true,
-        default: () => [],
-      },
-      activeEntryName: {
-        type: String as PropType<string>,
-        default: '',
-      },
-    },
-    emits: [EmitValues.EntrySelected],
-    setup(props, context) {
-      const currentActiveEntry = computed<string>(() => props.activeEntryName ?? '');
-      const isDefaultSelection = computed<boolean>(() => currentActiveEntry.value === '');
-      const formElement = ref<HTMLFormElement | null>();
+  function handleReset(): void {
+    emit('entry-selected', '');
+  }
 
-      function handleSubmit(): void {
-        context.emit(EmitValues.EntrySelected, currentActiveEntry.value);
-      }
+  function handleClick(): void {
+    formElement.value?.requestSubmit();
+  }
 
-      function handleReset(): void {
-        context.emit(EmitValues.EntrySelected, '');
-      }
+  function handleChange($event: Event): void {
+    const target = $event.target as HTMLInputElement | null;
 
-      function handleClick(): void {
-        formElement.value?.requestSubmit();
-      }
+    if (!target) {
+      return;
+    }
 
-      function handleChange($event: Event): void {
-        const target = $event.target as HTMLInputElement | null;
-
-        if (!target) {
-          return
-        }
-
-        context.emit(EmitValues.EntrySelected, target.value);
-      }
-
-      return {
-        isDefaultSelection,
-        currentActiveEntry,
-        formElement,
-        handleChange,
-        handleSubmit,
-        handleReset,
-        handleClick,
-      };
-    },
-  });
+    emit('entry-selected', target.value);
+  }
 </script>
 
 <style scoped lang="postcss">

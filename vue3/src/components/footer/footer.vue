@@ -4,56 +4,37 @@
   </section>
 </template>
 
-<script lang="ts">
-  import { defineComponent, computed, toRefs, type PropType } from 'vue';
+<script setup lang="ts">
+  import { computed } from 'vue';
 
-  export default defineComponent({
-    name: 'Footer',
-    components: {},
-    props: {
-      numEntries: {
-        type: Number as PropType<number>,
-        required: true,
-        default: 0,
-      },
-      positionInList: {
-        type: Number as PropType<number>,
-        required: true,
-        default: 0,
-      },
-    },
-    setup(props) {
-      const { positionInList, numEntries } = toRefs(props);
+  defineOptions({ name: 'Footer' });
 
-      const positionInListOneBased = computed<number>(() => positionInList.value + 1);
-      const progressInPercent = computed<number>(() => {
-        if (numEntries.value === 0) {
-          return 0;
-        }
+  type FooterProps = {
+    numEntries: number;
+    positionInList: number;
+  };
 
-        const percentsExact = (100 * positionInListOneBased.value) / numEntries.value;
+  const { positionInList, numEntries } = defineProps<FooterProps>();
 
-        return Math.floor(percentsExact);
-      });
+  const positionInListOneBased = computed<number>(() => positionInList + 1);
 
-      const positionInListFormatted = computed<string>(() => {
-        const positionInListAsString = String(positionInListOneBased.value);
-        const numEntriesAsString = String(numEntries.value);
+  const progressInPercent = computed<number>(() => {
+    if (numEntries === 0) {
+      return 0;
+    }
 
-        if (!String.prototype.padStart) {
-          return positionInListAsString;
-        }
+    const percentsExact = (100 * positionInListOneBased.value) / numEntries;
 
-        return positionInListAsString === '0'
-          ? positionInListAsString
-          : positionInListAsString.padStart(numEntriesAsString.length, '0');
-      });
+    return Math.floor(percentsExact);
+  });
 
-      return {
-        positionInListFormatted,
-        progressInPercent,
-      };
-    },
+  const positionInListFormatted = computed<string>(() => {
+    const positionInListAsString = String(positionInListOneBased.value);
+    const numEntriesAsString = String(numEntries);
+
+    return positionInListAsString === '0'
+      ? positionInListAsString
+      : positionInListAsString.padStart(numEntriesAsString.length, '0');
   });
 </script>
 

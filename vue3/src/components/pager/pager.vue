@@ -14,32 +14,23 @@
   </button>
 </template>
 
-<script lang="ts">
-  import { defineComponent, type PropType, toRefs } from 'vue';
+<script setup lang="ts">
+  defineOptions({ name: 'Pager' });
 
-  enum EmitValues {
-    PagerClicked = 'pager-clicked',
+  type PagerProps = {
+    isPrevButton?: boolean;
+    isDisabled?: boolean;
+  };
+
+  const { isPrevButton = false, isDisabled = false } = defineProps<PagerProps>();
+
+  const emit = defineEmits<{
+    'pager-clicked': [];
+  }>();
+
+  function handleClick(): void {
+    emit('pager-clicked');
   }
-
-  export default defineComponent({
-    name: 'Pager',
-    props: {
-      isPrevButton: Boolean as PropType<boolean>,
-      isDisabled: Boolean as PropType<boolean>,
-    },
-    emits: [EmitValues.PagerClicked],
-    setup(props, context) {
-      const { isPrevButton } = toRefs(props);
-
-      function handleClick(): void {
-        context.emit(EmitValues.PagerClicked, isPrevButton);
-      }
-
-      return {
-        handleClick,
-      };
-    },
-  });
 </script>
 
 <style scoped lang="postcss">

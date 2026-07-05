@@ -15,44 +15,28 @@
   </section>
 </template>
 
-<script lang="ts">
-  import { defineComponent, computed, type PropType } from 'vue';
+<script setup lang="ts">
+  import { computed } from 'vue';
   import Subentry from '../subentry/subentry.vue';
   import type { MouserChiefDetails, MouserChiefDetailsMap } from '../../types/index';
 
-  export default defineComponent({
-    name: 'Entry',
-    components: {
-      Subentry,
-    },
-    props: {
-      name: {
-        type: String as PropType<string>,
-        required: true,
-        default: '',
-      },
-      tenures: {
-        type: Array as PropType<MouserChiefDetails[]>,
-        required: true,
-        default: () => [],
-      },
-    },
-    setup(props) {
-      const hasMultipleTenures = computed<boolean>(() => props.tenures.length > 1);
+  defineOptions({ name: 'Entry' });
 
-      const titleKeyMap: MouserChiefDetailsMap = {
-        beganTenure: 'Start of tenure',
-        endedTenure: 'End of tenure',
-        timeInOffice: 'Time in office',
-        primeMinisters: 'Prime ministers',
-      };
+  type EntryProps = {
+    name: string;
+    tenures: MouserChiefDetails[];
+  };
 
-      return {
-        hasMultipleTenures,
-        titleKeyMap,
-      };
-    },
-  });
+  const { tenures } = defineProps<EntryProps>();
+
+  const hasMultipleTenures = computed<boolean>(() => tenures.length > 1);
+
+  const titleKeyMap: MouserChiefDetailsMap = {
+    beganTenure: 'Start of tenure',
+    endedTenure: 'End of tenure',
+    timeInOffice: 'Time in office',
+    primeMinisters: 'Prime ministers',
+  };
 </script>
 
 <style scoped lang="postcss">

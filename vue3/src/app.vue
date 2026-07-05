@@ -36,103 +36,70 @@
   </article>
 </template>
 
-<script lang="ts">
-  import { defineComponent, computed, watchEffect, type PropType, toRefs, ref } from 'vue';
-  import { RouterView, RouterLink } from 'vue-router';
-  import type { MouserChiefDetails, MouserChiefMap, LoadingType } from './types/index';
+<script setup lang="ts">
+  import { computed, ref, watchEffect } from 'vue';
 
   import entriesJSON from '@data/data_normalized.json';
+  import type { MouserChiefDetails, MouserChiefMap, LoadingType } from './types/index';
   import { router } from './router';
 
   import SelectBox from './components/select-box/select-box.vue';
   import Pager from './components/pager/pager.vue';
   import Footer from './components/footer/footer.vue';
 
+  defineOptions({ name: 'App' });
+
+  type AppProps = {
+    loading: LoadingType;
+  };
+
+  const { loading } = defineProps<AppProps>();
+
   const entries: MouserChiefMap = entriesJSON;
   const entryNames = Object.keys(entries);
 
-  export default defineComponent({
-    name: 'App',
-    components: {
-      SelectBox,
-      Pager,
-      Footer,
-      RouterView,
-      RouterLink,
-    },
-    props: {
-      loading: {
-        type: Object as PropType<LoadingType>,
-        default: () => {
-          /* */
-        },
-        required: true,
-      },
-    },
-    setup(props) {
-      const { loading } = toRefs(props);
+  const activeKey = ref<string>('');
+  const activeEntry = computed<MouserChiefDetails[] | null>(
+    () => entries?.[activeKey.value] ?? null,
+  );
+  const positionInList = computed<number>(() => entryNames.indexOf(activeKey.value));
+  const numberOfEntries = computed<number>(() => entryNames.length);
+  const isFirstEntry = computed<boolean>(() => positionInList.value === 0);
+  const isLastEntry = computed<boolean>(() => positionInList.value === entryNames.length - 1);
+  const isLoading = computed<boolean>(() => loading?.isLoading ?? true);
 
-      const activeKey = ref<string>('');
-      const activeEntry = computed<MouserChiefDetails[] | null>(
-        () => entries?.[activeKey.value] ?? null,
-      );
-      const positionInList = computed<number>(() => entryNames.indexOf(activeKey.value));
-      const numberOfEntries = computed<number>(() => entryNames.length);
-      const isFirstEntry = computed<boolean>(() => positionInList.value === 0);
-      const isLastEntry = computed<boolean>(() => positionInList.value === entryNames.length - 1);
-      const isLoading = computed(() => loading.value?.isLoading ?? true);
+  function handleEntrySelected(value: string): void {
+    activeKey.value = value;
+  }
 
-      function handleEntrySelected(value: string): void {
-        activeKey.value = value;
-      }
+  function handlePrevClick(): void {
+    if (isFirstEntry.value) {
+      return;
+    }
 
-      function handlePrevClick(): void {
-        if (isFirstEntry.value) {
-          return;
-        }
+    const prevIndex = positionInList.value - 1;
 
-        const prevIndex = positionInList.value - 1;
-        const newKey = entryNames[prevIndex];
+    activeKey.value = entryNames[prevIndex];
+  }
 
-        activeKey.value = newKey;
-      }
+  function handleNextClick(): void {
+    if (isLastEntry.value) {
+      return;
+    }
 
-      function handleNextClick(): void {
-        if (isLastEntry.value) {
-          return;
-        }
+    const nextIndex = positionInList.value + 1;
 
-        const nextIndex = positionInList.value + 1;
-        const newKey = entryNames[nextIndex];
+    activeKey.value = entryNames[nextIndex];
+  }
 
-        activeKey.value = newKey;
-      }
+  watchEffect(() => {
+    if (activeKey.value === '' || activeEntry.value === null) {
+      router.push({ path: '/' });
 
-      watchEffect(() => {
-        if (activeKey.value === '' || activeEntry.value === null) {
-          router.push({ path: '/' });
+      return;
+    }
 
-          return;
-        }
-
-        router.push({ path: `/cat/${activeKey.value}` });
-      });
-
-      return {
-        entries,
-        entryNames,
-        activeKey,
-        numberOfEntries,
-        activeEntry,
-        isFirstEntry,
-        isLastEntry,
-        positionInList,
-        handleEntrySelected,
-        handlePrevClick,
-        handleNextClick,
-        isLoading,
-      };
-    },
+    router.push({ path: `/cat/${activeKey.value}` });
   });
 </script>
 
