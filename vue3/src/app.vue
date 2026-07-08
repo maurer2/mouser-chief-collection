@@ -39,7 +39,6 @@
   import { computed } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
 
-  import type { MouserChiefDetails } from './types/index';
   import { useMouserChiefs } from './loaders/mouser-chiefs';
 
   import SelectBox from './components/select-box/select-box.vue';
@@ -56,15 +55,19 @@
   const activeKey = computed<string>(() =>
     typeof route.params.entry === 'string' ? route.params.entry : '',
   );
-  const activeEntry = computed(
-    () => entries.value?.[activeKey.value] ?? null,
-  );
+  const activeEntry = computed(() => entries.value?.[activeKey.value] ?? null);
   const positionInList = computed<number>(() => entryNames.value.indexOf(activeKey.value));
   const numberOfEntries = computed<number>(() => entryNames.value.length);
   const isFirstEntry = computed<boolean>(() => positionInList.value === 0);
   const isLastEntry = computed<boolean>(() => positionInList.value === entryNames.value.length - 1);
 
   function handleEntrySelected(value: string): void {
+    if (value === '') {
+      router.push('/');
+
+      return;
+    }
+
     router.push(`/cat/${value}`);
   }
 
@@ -89,7 +92,9 @@
   }
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
+  @reference "./global.css";
+
   .wrapper {
     @apply contents;
   }
@@ -125,8 +130,6 @@
   .view {
     @apply p-4
       text-center;
-
-    background: lightgreen;
   }
 
   .main {
@@ -140,7 +143,7 @@
       minmax(50px, auto);
     grid-template-columns: 1fr 1fr;
 
-    @screen md {
+    @variant md {
       grid-template-areas: 'sidebar-left content sidebar-right';
       grid-template-rows: 1fr;
       grid-template-columns: minmax(150px, auto) 1fr minmax(150px, auto);

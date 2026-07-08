@@ -65,7 +65,9 @@
   }
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
+  @reference "../../global.css";
+
   .title {
     @apply sr-only;
   }
@@ -100,24 +102,24 @@
       pl-4
       pr-4
       flex-initial
-      rounded
+      rounded-sm
       bg-pink-2
       text-white;
-
-    &--is-disabled {
-      @apply opacity-50
-        cursor-not-allowed;
-    }
 
     &:hover {
       @apply bg-pink-1;
     }
   }
 
+  .button--is-disabled {
+    @apply opacity-50
+      cursor-not-allowed;
+  }
+
   .button--reset {
     @apply hidden;
 
-    @screen sm {
+    @variant sm {
       display: unset;
     }
   }

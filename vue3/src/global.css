@@ -1,28 +1,40 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss';
 
-html {
-  min-height: 100%;
-  font-size: 16px;
+@theme {
+  --color-gray-light: var(--color-neutral-300);
+  --color-gray: var(--color-neutral-400);
+  --color-gray-dark: var(--color-neutral-500);
+  --color-pink-1: var(--color-pink-600);
+  --color-pink-2: var(--color-pink-500);
 }
 
-body {
-  min-height: 100vh;
+@layer base {
+  body {
+    min-height: 100dvh;
+    font-family: var(--font-sans);
+  }
+
+  /* restore cursor:pointer on active buttons */
+  button:not(:disabled, [aria-disabled='true']),
+  [role='button']:not(:disabled, [aria-disabled='true']) {
+    cursor: pointer;
+  }
 }
 
-.root {
-  display: grid;
-  min-height: inherit;
-  grid-template-areas:
-    "header"
-    "nav"
-    "main"
-    "footer";
-  grid-template-rows:
-    auto
-    auto
-    1fr
-    auto;
-  grid-template-columns: 1fr;
+@layer components {
+  .root {
+    display: grid;
+    min-height: inherit;
+    grid-template-areas:
+      'header'
+      'nav'
+      'main'
+      'footer';
+    grid-template-rows:
+      auto
+      auto
+      1fr
+      auto;
+    grid-template-columns: 1fr;
+  }
 }

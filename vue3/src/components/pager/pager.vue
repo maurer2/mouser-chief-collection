@@ -33,27 +33,29 @@
   }
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
+  @reference "../../global.css";
+
   .button {
     @apply m-4
       p-2
       bg-pink-2
       text-white
-      rounded
+      rounded-sm
       select-none
       self-start;
 
     &:hover {
       @apply bg-pink-1;
     }
+  }
 
-    &--is-disabled {
-      &:hover {
-        @apply bg-pink-2;
-      }
+  .button--is-disabled {
+    @apply opacity-50
+      cursor-not-allowed;
 
-      @apply opacity-50
-        cursor-not-allowed;
+    &:hover {
+      @apply bg-pink-2;
     }
   }
 
@@ -62,7 +64,7 @@
 
     @apply mr-2;
 
-    @screen md {
+    @variant md {
       @apply mr-4
         mb-auto;
     }
@@ -73,7 +75,7 @@
 
     @apply ml-2;
 
-    @screen md {
+    @variant md {
       @apply mb-auto
         ml-4;
     }

@@ -39,7 +39,9 @@
   };
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
+  @reference "../../global.css";
+
   .entry {
     @apply grid
       grid-cols-1
@@ -47,7 +49,7 @@
       gap-x-4
       gap-y-2;
 
-    @screen sm {
+    @variant sm {
       @apply grid-cols-[max-content_1fr]
         auto-rows-[minmax(50px,max-content)];
     }
@@ -78,7 +80,7 @@
       col-span-1
       font-bold;
 
-    @screen sm {
+    @variant sm {
       @apply col-start-1
         col-span-1;
     }
@@ -88,7 +90,7 @@
     @apply col-start-1
       col-span-1;
 
-    @screen sm {
+    @variant sm {
       @apply col-start-2
         col-span-1;
     }

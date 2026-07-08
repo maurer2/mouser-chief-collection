@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
@@ -12,6 +13,6 @@ export default defineConfig(({ mode }) => {
         '@data': fileURLToPath(new URL('../data', import.meta.url)),
       },
     },
-    plugins: [vue()],
+    plugins: [vue(), tailwindcss()],
   };
 });

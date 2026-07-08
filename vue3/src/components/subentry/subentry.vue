@@ -30,7 +30,9 @@
   const isPrimitive = computed<boolean>(() => !Array.isArray(fieldValue));
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
+  @reference "../../global.css";
+
   .list {
     @apply pl-0
       list-none;

@@ -38,7 +38,9 @@
   });
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
+  @reference "../../global.css";
+
   .pagination {
     @apply p-4
       leading-none
@@ -46,7 +48,7 @@
       text-white
       bg-gray
       bg-no-repeat
-      bg-gradient-to-tr
+      bg-linear-to-tr
       from-pink-2 to-pink-2;
 
     background-size: 0;
