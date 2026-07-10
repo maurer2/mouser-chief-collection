@@ -1,2 +1,2 @@
 # Exclude html from language statistics
-data/raw.html -linguist-documentation
+data/raw.html linguist-vendored
