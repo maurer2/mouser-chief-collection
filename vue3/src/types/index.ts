@@ -1,15 +1,6 @@
-export type MouserChiefDetails = {
-  beganTenure: string;
-  endedTenure: string;
-  timeInOffice: string;
-  primeMinisters: string[];
-};
+import type { z } from 'zod';
 
-export type MouserChiefMap = {
-  [key: string]: MouserChiefDetails[];
-};
+import type { MouserChiefMapSchema } from '../schemas/mouser-chiefs';
 
-// todo: use
-// export type MouserChiefMap = {
-//   [K in keyof MouserChiefDetails]: string;
-// };
+export type MouserChiefMap = z.infer<typeof MouserChiefMapSchema>;
+export type MouserChiefDetails = MouserChiefMap[string][number];

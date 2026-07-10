@@ -11,12 +11,14 @@
     "lint:styles:fix": "stylelint --fix '**/*.{vue, css, scss}'; exit 0",
     "preview": "vite preview",
     "test:components": "playwright test -c playwright-components.config.ts",
+    "test:schema": "vitest './src/schemas'",
     "test:types": "tsgo -p tsconfig.node.json --noEmit && vue-tsc -p tsconfig.app.json --noEmit",
     "test:sfc": "vue-tsc -p tsconfig.app.json --noEmit"
   },
   "dependencies": {
     "vue": "3.5.39",
-    "vue-router": "5.1.0"
+    "vue-router": "5.1.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@playwright/experimental-ct-vue": "^1.27.1",
@@ -29,6 +31,7 @@
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/cli-plugin-eslint": "~5.0.4",
     "@vue/cli-service": "~5.0.4",
+    "@vue/compiler-dom": "3.5.39",
     "@vue/eslint-config-typescript": "10.0.0",
     "@vue/tsconfig": "^0.9.1",
     "babel-eslint": "^10.1.0",
@@ -37,6 +40,7 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^9.1.0",
+    "jsdom": "^29.1.1",
     "prettier": "^2.6.2",
     "stylelint": "^14.9.0",
     "stylelint-config-rational-order": "^0.1.2",
@@ -44,6 +48,7 @@
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",
     "vite": "^8.1.0",
+    "vitest": "^4.1.9",
     "vue-tsc": "^3.3.5"
   }
 }

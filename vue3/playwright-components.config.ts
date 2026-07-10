@@ -1,11 +1,12 @@
-import type { PlaywrightTestConfig } from '@playwright/experimental-ct-vue';
-import { devices } from '@playwright/experimental-ct-vue';
+import { defineConfig, devices } from '@playwright/experimental-ct-vue';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config: PlaywrightTestConfig = {
+export default defineConfig({
   testDir: './',
+  /* use .spec.ts for Vitest. */
+  testMatch: '**/*.spec.tsx',
   /* The base directory, relative to the config file, for snapshot files created with toMatchSnapshot and toHaveScreenshot. */
   snapshotDir: './__snapshots__',
   /* Maximum time one test can run for. */
@@ -50,6 +51,4 @@ const config: PlaywrightTestConfig = {
     //   },
     // },
   ],
-};
-
-export default config;
+});
