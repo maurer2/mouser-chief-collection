@@ -1,25 +1,28 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 
 import { useMouserChiefs } from '../loaders/mouser-chiefs';
+import DefaultLayout from '../layouts/DefaultLayout.vue';
 import Root from '../views/Root.vue';
 import Cat from '../views/Cat.vue';
-import NotFound from '../views/not-found.vue';
+import NotFound from '../views/NotFound.vue';
+import ServerError from '../views/ServerError.vue';
 
 const routes = [
   {
     path: '/',
-    component: Root,
+    component: DefaultLayout,
     meta: { loaders: [useMouserChiefs] },
+    children: [
+      { path: '', name: 'home', component: Root },
+      { path: 'cat/:entry', name: 'cat', component: Cat },
+      { path: ':pathMatch(.*)*', name: 'not-found', component: NotFound },
+    ],
   },
+  // loaded when zod parsing fails
   {
-    path: '/cat/:entry',
-    component: Cat,
-    meta: { loaders: [useMouserChiefs] },
-  },
-  {
-    path: '/:pathMatch(.*)*',
-    component: NotFound,
-    meta: { loaders: [useMouserChiefs] },
+    path: '/500',
+    name: 'server-error',
+    component: ServerError,
   },
 ] satisfies RouteRecordRaw[];
 

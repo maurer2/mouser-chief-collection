@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const MouserChiefMapSchema = z
+export const mouserChiefMapSchema = z
   .record(
     z.string(),
     z.array(
@@ -16,7 +16,7 @@ export const MouserChiefMapSchema = z
     message: 'Map must contain at least one entry',
   });
 
-export type MouserChiefMap = z.output<typeof MouserChiefMapSchema>;
+export type MouserChiefMap = z.output<typeof mouserChiefMapSchema>;
 
 // export const MouserChiefMapSchema2 = z
 //   .record(

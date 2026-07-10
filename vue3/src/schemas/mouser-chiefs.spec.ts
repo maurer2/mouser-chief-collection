@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { MouserChiefMapSchema } from './mouser-chiefs';
+import { mouserChiefMapSchema } from './mouser-chiefs';
 
 const validList = {
   Larry: [
@@ -15,13 +15,13 @@ const validList = {
 
 describe('MouserChiefMapSchema', () => {
   it('parses a valid entry entry correctly', () => {
-    const result = MouserChiefMapSchema.safeParse(validList);
+    const result = mouserChiefMapSchema.safeParse(validList);
 
     expect(result.success).toBe(true);
   });
 
   it('does not parse an empty record', () => {
-    expect(MouserChiefMapSchema.safeParse({}).success).toBe(false);
+    expect(mouserChiefMapSchema.safeParse({}).success).toBe(false);
   });
 
   it.each(['beganTenure', 'endedTenure', 'timeInOffice', 'primeMinisters'] as const)(
@@ -30,7 +30,7 @@ describe('MouserChiefMapSchema', () => {
       const invalidList = structuredClone(validList);
       delete invalidList['Larry'][0][field];
 
-      const result = MouserChiefMapSchema.safeParse(invalidList);
+      const result = mouserChiefMapSchema.safeParse(invalidList);
 
       expect(result.success).toBe(false);
     },
@@ -40,7 +40,7 @@ describe('MouserChiefMapSchema', () => {
     const invalidList = structuredClone(validList);
     invalidList['Larry'][0]['primeMinisters'] = [];
 
-    const result = MouserChiefMapSchema.safeParse(invalidList);
+    const result = mouserChiefMapSchema.safeParse(invalidList);
 
     expect(result.success).toBe(false);
   });

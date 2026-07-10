@@ -1,6 +1,6 @@
 import type { z } from 'zod';
 
-import type { MouserChiefMapSchema } from '../schemas/mouser-chiefs';
+import type { mouserChiefMapSchema } from '../schemas/mouser-chiefs';
 
-export type MouserChiefMap = z.infer<typeof MouserChiefMapSchema>;
+export type MouserChiefMap = z.infer<typeof mouserChiefMapSchema>;
 export type MouserChiefDetails = MouserChiefMap[string][number];
