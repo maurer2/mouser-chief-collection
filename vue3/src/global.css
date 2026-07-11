@@ -11,7 +11,6 @@
 @layer base {
   body {
     min-height: 100dvh;
-    font-family: var(--font-sans);
   }
 
   /* restore cursor:pointer on active buttons */
@@ -24,17 +23,24 @@
 @layer components {
   .root {
     display: grid;
-    min-height: inherit;
-    grid-template-areas:
-      'header'
-      'nav'
-      'main'
-      'footer';
+     /* pager-start/pager-end row is empty on desktop and auto-height becomes 0 */
     grid-template-rows:
+      [header-start]
       auto
+      [header-end nav-start]
       auto
+      [nav-end content-start]
       1fr
-      auto;
-    grid-template-columns: 1fr;
+      [content-end pager-start]
+      auto
+      [pager-end footer-start]
+      auto
+      [footer-end];
+    grid-template-columns: [left-column-start] 1fr [left-column-end right-column-start] 1fr [right-column-end];
+    min-height: inherit;
+
+    @variant md {
+      grid-template-columns: [left-column-start] minmax(150px, auto) [left-column-end content-start] 1fr [content-end right-column-start] minmax(150px, auto) [right-column-end];
+    }
   }
 }

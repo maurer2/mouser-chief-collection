@@ -13,21 +13,21 @@
       />
     </nav>
     <main class="main">
-      <template v-if="activeEntry">
-        <Pager
-          :is-prev-button="true"
-          :is-disabled="isFirstEntry"
-          @pager-clicked="handlePrevClick"
-        />
-        <Pager
-          :is-prev-button="false"
-          :is-disabled="isLastEntry"
-          @pager-clicked="handleNextClick"
-        />
-      </template>
+      <Pager
+        class="pager-prev"
+        :is-prev-button="true"
+        :is-disabled="isFirstEntry || !activeEntry"
+        @pager-clicked="handlePrevClick"
+      />
       <div class="content">
         <RouterView />
       </div>
+      <Pager
+        class="pager-next"
+        :is-prev-button="false"
+        :is-disabled="isLastEntry || !activeEntry"
+        @pager-clicked="handleNextClick"
+      />
     </main>
     <div class="footer">
       <Footer :num-entries="numberOfEntries" :position-in-list="positionInList" />
@@ -113,7 +113,7 @@
   }
 
   .header {
-    grid-area: header;
+    grid-column: left-column-start / right-column-end;
 
     @apply p-4
       text-center
@@ -121,42 +121,50 @@
   }
 
   .nav {
-    grid-area: nav;
+    grid-column: left-column-start / right-column-end;
 
     @apply p-4
       bg-gray;
   }
 
-  .view {
-    @apply p-4
-      text-center;
-  }
-
   .main {
     display: grid;
-    grid-area: main;
-    grid-template-areas:
-      'content content'
-      'sidebar-left sidebar-right';
-    grid-template-rows:
-      1fr
-      minmax(50px, auto);
-    grid-template-columns: 1fr 1fr;
-
-    @variant md {
-      grid-template-areas: 'sidebar-left content sidebar-right';
-      grid-template-rows: 1fr;
-      grid-template-columns: minmax(150px, auto) 1fr minmax(150px, auto);
-    }
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    grid-column: left-column-start / right-column-end;
+    grid-row: content-start / pager-end;
 
     @apply bg-gray-dark;
   }
 
   .content {
-    grid-area: content;
+    grid-column: left-column-start / right-column-end;
+    grid-row: content-start / content-end;
+
+    @variant md {
+      grid-column: content-start / content-end;
+    }
+  }
+
+  .pager-prev {
+    grid-column: left-column-start / left-column-end;
+    grid-row: pager-start / pager-end;
+
+    @variant md {
+      grid-row: content-start / content-end;
+    }
+  }
+
+  .pager-next {
+    grid-column: right-column-start / right-column-end;
+    grid-row: pager-start / pager-end;
+
+    @variant md {
+      grid-row: content-start / content-end;
+    }
   }
 
   .footer {
-    grid-area: footer;
+    grid-column: left-column-start / right-column-end;
   }
 </style>

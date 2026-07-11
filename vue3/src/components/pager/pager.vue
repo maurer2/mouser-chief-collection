@@ -60,8 +60,6 @@
   }
 
   .button-prev {
-    grid-area: sidebar-left;
-
     @apply mr-2;
 
     @variant md {
@@ -71,8 +69,6 @@
   }
 
   .button-next {
-    grid-area: sidebar-right;
-
     @apply ml-2;
 
     @variant md {
