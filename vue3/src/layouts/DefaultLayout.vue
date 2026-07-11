@@ -107,64 +107,67 @@
   }
 
   .title-link {
-    color: inherit;
+    @apply no-underline
+      text-inherit;
 
-    @apply no-underline;
+    &:is(:hover, :focus-visible) {
+      @apply text-black
+        underline;
+    }
   }
 
   .header {
-    grid-column: left-column-start / right-column-end;
-
-    @apply p-4
+    @apply col-[left-column/right-column]
+      p-4
       text-center
       bg-pink-2;
   }
 
   .nav {
-    grid-column: left-column-start / right-column-end;
-
-    @apply p-4
+    @apply col-[left-column/right-column]
+      p-4
       bg-gray;
   }
 
   .main {
-    display: grid;
-    grid-template-columns: subgrid;
-    grid-template-rows: subgrid;
-    grid-column: left-column-start / right-column-end;
-    grid-row: content-start / pager-end;
-
-    @apply bg-gray-dark;
+    @apply grid
+      grid-cols-subgrid
+      grid-rows-subgrid
+      col-[left-column/right-column]
+      row-[content/pager]
+      bg-gray-dark;
   }
 
   .content {
-    grid-column: left-column-start / right-column-end;
-    grid-row: content-start / content-end;
+    @apply col-[left-column/right-column]
+      row-[content];
 
     @variant md {
-      grid-column: content-start / content-end;
+      @apply col-[content];
     }
   }
 
   .pager-prev {
-    grid-column: left-column-start / left-column-end;
-    grid-row: pager-start / pager-end;
+    /* grid-column: left-column-start / left-column-end; -> can be written as grid-column: left-column but only for -start/-end */
+    @apply col-[left-column]
+      row-[pager];
 
     @variant md {
-      grid-row: content-start / content-end;
+      @apply row-[content];
     }
   }
 
   .pager-next {
-    grid-column: right-column-start / right-column-end;
-    grid-row: pager-start / pager-end;
+    /* grid-column: right-column-start / right-column-end; -> can be written as grid-column: right-column but only for -start/-end */
+    @apply col-[right-column]
+      row-[pager];
 
     @variant md {
-      grid-row: content-start / content-end;
+      @apply row-[content];
     }
   }
 
   .footer {
-    grid-column: left-column-start / right-column-end;
+    @apply col-[left-column/right-column];
   }
 </style>

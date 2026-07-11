@@ -23,7 +23,7 @@
 @layer components {
   .root {
     display: grid;
-     /* pager-start/pager-end row is empty on desktop and auto-height becomes 0 */
+    /* pager-start/pager-end row is empty on desktop and auto-height becomes 0 */
     grid-template-rows:
       [header-start]
       auto
@@ -36,11 +36,12 @@
       [pager-end footer-start]
       auto
       [footer-end];
+    /* grid-column: x-start / x-end; -> can be written as grid-column: x but only when using -start/-end */
     grid-template-columns: [left-column-start] 1fr [left-column-end right-column-start] 1fr [right-column-end];
     min-height: inherit;
 
     @variant md {
-      grid-template-columns: [left-column-start] minmax(150px, auto) [left-column-end content-start] 1fr [content-end right-column-start] minmax(150px, auto) [right-column-end];
+      grid-template-columns: [left-column-start] minmax(150px, auto) [left-column-end content-start] 1fr [content-end right-column-start] minmax(150px,auto) [right-column-end];
     }
   }
 }
