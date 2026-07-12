@@ -6,7 +6,6 @@ import type { MouserChiefDetails } from '../../types/index';
 test.use({ viewport: { width: 1280, height: 1024 } });
 
 test.describe('<Entry>', (): void => {
-  const name = 'Mittens';
   const tenures: MouserChiefDetails[] = [
     {
       beganTenure: '2000',
@@ -16,14 +15,8 @@ test.describe('<Entry>', (): void => {
     },
   ];
 
-  test('should have title with name of cat', async ({ mount }) => {
-    const component = await mount(<Entry name={name} tenures={tenures} />);
-
-    await expect(component.getByRole('heading', { level: 2 })).toContainText('Mittens');
-  });
-
   test('should have all MouserChiefDetails keys', async ({ mount }) => {
-    const component = await mount(<Entry name={name} tenures={tenures} />);
+    const component = await mount(<Entry tenures={tenures} />);
 
     await expect(component).toContainText('Start of tenure');
     await expect(component).toContainText('End of tenure');
@@ -32,9 +25,8 @@ test.describe('<Entry>', (): void => {
   });
 
   test('should have all MouserChiefDetails values', async ({ mount }) => {
-    const component = await mount(<Entry name={name} tenures={tenures} />);
+    const component = await mount(<Entry tenures={tenures} />);
 
-    await expect(component).toContainText('Mittens');
     await expect(component).toContainText('2000');
     await expect(component).toContainText('2020');
     await expect(component).toContainText('Tony Blair');

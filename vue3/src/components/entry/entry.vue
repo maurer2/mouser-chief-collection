@@ -1,6 +1,5 @@
 <template>
-  <section class="entry">
-    <h2 class="title">{{ name }}</h2>
+  <div class="entry">
     <template v-for="(tenure, tenureIndex) in tenures" :key="tenureIndex">
       <h3 v-if="hasMultipleTenures" class="subtitle">Term {{ tenureIndex + 1 }}</h3>
       <template v-for="(fieldValue, fieldKey) in tenure" :key="`${tenureIndex}-${fieldKey}`">
@@ -12,7 +11,7 @@
         </dl>
       </template>
     </template>
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -23,7 +22,6 @@
   defineOptions({ name: 'Entry' });
 
   type EntryProps = {
-    name: string;
     tenures: MouserChiefDetails[];
   };
 
@@ -53,16 +51,6 @@
       @apply grid-cols-[max-content_1fr]
         auto-rows-[minmax(50px,max-content)];
     }
-
-    @apply p-4
-      min-h-full
-      bg-gray-light;
-  }
-
-  .title {
-    @apply mb-4
-      col-span-full
-      text-xl;
   }
 
   .subtitle {

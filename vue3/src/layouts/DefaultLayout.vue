@@ -140,7 +140,9 @@
 
   .content {
     @apply col-[left-column/right-column]
-      row-[content];
+      row-[content]
+      p-4
+      bg-gray-light;
 
     @variant md {
       @apply col-[content];

@@ -1,19 +1,9 @@
 <template>
-  <div class="entry">
-    <h1>500</h1>
-  </div>
+  <ContentLayout title="500" />
 </template>
 
 <script setup lang="ts">
+  import ContentLayout from '../layouts/ContentLayout.vue';
+
   defineOptions({ name: 'ServerError' });
 </script>
-
-<style scoped>
-  @reference "../global.css";
-
-  .entry {
-    @apply p-4
-      min-h-full
-      bg-gray-light;
-  }
-</style>

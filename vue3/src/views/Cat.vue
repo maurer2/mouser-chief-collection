@@ -1,5 +1,7 @@
 <template>
-  <Entry :name="name" :tenures="tenures" />
+  <ContentLayout :title="name">
+    <Entry :tenures="tenures" />
+  </ContentLayout>
 </template>
 
 <script setup lang="ts">
@@ -7,6 +9,7 @@
   import { useRoute } from 'vue-router';
 
   import { useMouserChiefs } from '../loaders/mouser-chiefs';
+  import ContentLayout from '../layouts/ContentLayout.vue';
   import Entry from '../components/entry/entry.vue';
 
   defineOptions({ name: 'Cat' });

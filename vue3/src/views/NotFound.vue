@@ -1,19 +1,9 @@
 <template>
-  <div class="entry">
-    <h1>404</h1>
-  </div>
+  <ContentLayout title="404" />
 </template>
 
 <script setup lang="ts">
+  import ContentLayout from '../layouts/ContentLayout.vue';
+
   defineOptions({ name: 'NotFound' });
 </script>
-
-<style scoped>
-  @reference "../global.css";
-
-  .entry {
-    @apply p-4
-      min-h-full
-      bg-gray-light;
-  }
-</style>
